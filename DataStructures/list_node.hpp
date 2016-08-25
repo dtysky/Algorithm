@@ -35,7 +35,6 @@ namespace data_structures {
         };
     };
     
-    
     void testListNode();
     
 }

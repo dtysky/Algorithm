@@ -45,9 +45,15 @@ namespace data_structures {
     
     template <class T>
     ListNode<T>* LinkedList<T>::find(const T& element){
-        ListNode<T>* _current = _header;
-        while (!isTail(_current) && _current->element != element) {
-            _current = _current->next;
+        if (isEmpty()) {
+            return nullptr;
+        }
+        ListNode<T>* _current = _header->next();
+        while (_current != nullptr) {
+            if (_current->element == element) {
+                break;
+            }
+            _current = _current->next();
         }
         return _current;
     };
@@ -62,11 +68,17 @@ namespace data_structures {
     
     template <class T>
     ListNode<T>* LinkedList<T>::findPrevious(const T& element){
-        ListNode<T>* _current = _header;
-        while (!isTail(_current) && _current->next->element != element) {
-            _current = _current->next;
+        if (isEmpty()) {
+            return nullptr;
         }
-        return _current;
+        ListNode<T>* _current = _header->next();
+        while (!isTail(_current)) {
+            if (_current->next()->element == element) {
+                return _current;
+            }
+            _current = _current->next();
+        }
+        return nullptr;
     };
     
     template <class T>
@@ -97,10 +109,23 @@ namespace data_structures {
     
     
     void testLinkedList(){
-        LinkedList<int>* list;
+        LinkedList<int>* list = new LinkedList<int>();
         list->insertToTail(new ListNode<int>(1))
-            ->insertToTail(new ListNode<int>(2));
+            ->insertToTail(new ListNode<int>(2))
+            ->insertToTail(new ListNode<int>(3))
+            ->insertToTail(new ListNode<int>(4))
+            ->insertToTail(new ListNode<int>(5))
+            ->insertToTail(new ListNode<int>(6))
+            ->insertToTail(new ListNode<int>(7))
+            ->insertToTail(new ListNode<int>(8))
+            ->insertToTail(new ListNode<int>(9))
+            ->insertToTail(new ListNode<int>(10));
         cout << *list << "\n";
+        cout << list->find(4) << "\n";
+        cout << list->findPrevious(9) << "\n";
+        cout << list->find(0) << "\n";
+        cout << list->findPrevious(1) << "\n";
+        delete list;
     }
 
 }
