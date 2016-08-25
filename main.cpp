@@ -8,9 +8,8 @@
 
 #include "main.hpp"
 
-#define test_data_structure_list_node
-#include "list_node.hpp"
+#include "linked_list.hpp"
 
 int main(int argc, const char * argv[]) {
-    data_structures::test();
+    data_structures::testLinkedList();
 }

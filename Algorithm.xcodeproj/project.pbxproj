@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		983C79211D6ADB3C00A370AF /* list_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983C791F1D6ADB3C00A370AF /* list_node.cpp */; };
+		983C79241D6D3E1B00A370AF /* linked_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983C79221D6D3E1B00A370AF /* linked_list.cpp */; };
 		985B29BF1D6A987800FFABB5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 985B29BD1D6A987800FFABB5 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		983C791F1D6ADB3C00A370AF /* list_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = list_node.cpp; path = DataStructures/list_node.cpp; sourceTree = "<group>"; };
 		983C79201D6ADB3C00A370AF /* list_node.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = list_node.hpp; path = DataStructures/list_node.hpp; sourceTree = "<group>"; };
+		983C79221D6D3E1B00A370AF /* linked_list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = linked_list.cpp; path = DataStructures/linked_list.cpp; sourceTree = "<group>"; };
+		983C79231D6D3E1B00A370AF /* linked_list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = linked_list.hpp; path = DataStructures/linked_list.hpp; sourceTree = "<group>"; };
 		985B29B21D6A981A00FFABB5 /* Algorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		985B29BD1D6A987800FFABB5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		985B29BE1D6A987800FFABB5 /* main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 			children = (
 				983C791F1D6ADB3C00A370AF /* list_node.cpp */,
 				983C79201D6ADB3C00A370AF /* list_node.hpp */,
+				983C79221D6D3E1B00A370AF /* linked_list.cpp */,
+				983C79231D6D3E1B00A370AF /* linked_list.hpp */,
 			);
 			name = DataStructures;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983C79241D6D3E1B00A370AF /* linked_list.cpp in Sources */,
 				985B29BF1D6A987800FFABB5 /* main.cpp in Sources */,
 				983C79211D6ADB3C00A370AF /* list_node.cpp in Sources */,
 			);

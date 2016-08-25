@@ -11,59 +11,56 @@
 namespace data_structures {
     template <class T>
     ListNode<T>::ListNode(){
-//        data = NULL;
-//        next = nullptr;
+        element = NULL;
+        _next = nullptr;
     }
     
     template <class T>
-    ListNode<T>::ListNode(const T& data, ListNode<T>* next_node){
-        this->data = data;
-        next = next_node;
+    ListNode<T>::ListNode(const T& element, ListNode<T>* next_node){
+        this->element = element;
+        _next = next_node;
+    }
+    
+    template <class T>
+    ListNode<T>::ListNode(const ListNode<T>* node){
+        this->element = node->element;
+        _next = node->_next;
     }
     
     template <class T>
     void ListNode<T>::insertAfter(ListNode<T>* node){
-        node->next = next;
-        next = node;
+        node->_next = _next;
+        _next = node;
     }
     
     template <class T>
     ListNode<T>* ListNode<T>::deleteAfter(){
-        ListNode<T>* temp_node = next;
-        if (next != nullptr) {
-            next = next->next;
+        ListNode<T>* temp_node = _next;
+        if (_next != nullptr) {
+            _next = _next->_next;
         }
         return temp_node;
     }
     
     template <class T>
-    void ListNode<T>::setData(T data){
-        this->data = data;
+    ListNode<T>* ListNode<T>::next() const {
+        return _next;
     }
     
-    template <class T>
-    T ListNode<T>::getData(){
-        return data;
-    }
-    
-    template <class T>
-    ListNode<T>* ListNode<T>::nextNode(){
-        return next;
-    }
-    
-    
-    
-    void test(){
+    void testListNode(){
         ListNode<int> node;
-        ListNode<int> next_node = *new ListNode<int>(1000);
+        ListNode<int> next_node = *new ListNode<int>(1000, &node);
+        ListNode<int> copy_node = *new ListNode<int>(&next_node);
         cout << "node:\n" << node << "\n\n";
         cout << "next_node:\n" << next_node << "\n\n";
+        cout << "copy_node:\n" << copy_node << "\n\n";
         
         node.insertAfter(&next_node);
-        node.setData(next_node.getData());
-        cout << "insertAfter, setData, getData:\n" << node << "\n\n";
+        node.element = next_node.element;
+        cout << "insertAfter, setElement, getElement, getNext:\n" << node << " should equal " << node.next()  << "\n\n";
         
         node.deleteAfter();
         cout << "deleteAfter:\n" << node << "\n";
     }
+
 }

@@ -19,27 +19,24 @@ namespace data_structures {
     class ListNode{
         
     private:
-        ListNode<T>* next;
-        T data;
+        ListNode<T>* _next;
         
     public:
+        T element;
         ListNode();
-        ListNode(const T& data, ListNode<T>* next_node = nullptr);
+        ListNode(const T& element, ListNode<T>* next_node = nullptr);
+        ListNode(const ListNode<T>* node);
         void insertAfter(ListNode<T>* node);
         ListNode<T>* deleteAfter();
-        void setData(T data);
-        T getData();
-        ListNode<T>* nextNode();
+        ListNode<T>* next() const;
         friend ostream& operator<<(ostream& out, const ListNode<T>& node){
-            cout << "Current: " << &node << ", Data: " << node.data << ", Next: " << node.next;
+            cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
             return out;
         };
     };
     
     
-#ifdef test_data_structure_list_node
-    void test();
-#endif
+    void testListNode();
     
 }
 
