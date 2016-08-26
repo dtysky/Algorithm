@@ -88,6 +88,9 @@ namespace data_structures {
     template <class T>
     LinkedList<T>* LinkedList<T>::insert(const T& pre_element, const T& new_element){
         ListNode<T>* _current = find(pre_element);
+        if (_current == nullptr) {
+            throw std::out_of_range("Element is not in this list !");
+        }
         _current->insertAfter(new ListNode<T>(new_element));
         return this;
     }
@@ -110,6 +113,9 @@ namespace data_structures {
             return this;
         }
         ListNode<T>* _previous = _findPrevious(element);
+        if (_previous == nullptr) {
+            throw std::out_of_range("Element is not in this list !");
+        }
         ListNode<T>* _current = _previous->next();
         _previous->deleteAfter();
         delete _current;
@@ -157,9 +163,10 @@ namespace data_structures {
             ->del(10);
         cout << *list << "\n";
         list->insertToHeader(1);
-        list->insert(1, 5)
+        list->insert(4, 5)
             ->insert(9, 10);
         cout << *list << "\n";
+        list->del(11);
         delete list;
         delete copy_list;
     }
