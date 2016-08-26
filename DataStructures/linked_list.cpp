@@ -103,7 +103,12 @@ namespace data_structures {
     
     template <class T>
     LinkedList<T>* LinkedList<T>::insertToTail(const T& element){
-        tail()->insertAfter(new ListNode<T>(element));
+        if (isEmpty()) {
+            _header->insertAfter(new ListNode<T>(element));
+        }
+        else {
+            tail()->insertAfter(new ListNode<T>(element));
+        }
         return this;
     }
     
@@ -129,6 +134,9 @@ namespace data_structures {
     
     template <class T>
     ListNode<T>* LinkedList<T>::tail() {
+        if (isEmpty()) {
+            return nullptr;
+        }
         ListNode<T>* _current = _header;
         while (!_isTail(_current)) {
             _current = _current->next();
@@ -140,6 +148,8 @@ namespace data_structures {
     void testLinkedList(){
         LinkedList<int>* list = new LinkedList<int>();
         cout << list->isEmpty() << "\n";
+        cout << list->header() << "\n";
+        cout << list->tail() << "\n";
         list->insertToTail(1)
             ->insertToTail(2)
             ->insertToTail(3)
@@ -151,6 +161,9 @@ namespace data_structures {
             ->insertToTail(9)
             ->insertToTail(10);
         cout << *list << "\n";
+        cout << list->isEmpty() << "\n";
+        cout << list->header() << "\n";
+        cout << list->tail() << "\n";
         cout << list->find(4) << "\n";
         cout << list->findPrevious(9) << "\n";
         cout << list->find(0) << "\n";
