@@ -38,17 +38,17 @@ namespace data_structures {
     }
     
     template <class T>
-    bool LinkedList<T>::isEmpty() const {
+    bool LinkedList<T>::isEmpty() {
         return _header->next() == nullptr;
     }
     
     template <class T>
-    bool LinkedList<T>::_isTail(ListNode<T>* node) const {
+    bool LinkedList<T>::_isTail(ListNode<T>* node) {
         return node->next() == nullptr;
     }
     
     template <class T>
-    bool LinkedList<T>::isTail(const T& element) const {
+    bool LinkedList<T>::isTail(const T& element) {
         return _isTail(find(element));
     }
     
@@ -117,12 +117,12 @@ namespace data_structures {
     }
     
     template <class T>
-    ListNode<T>* LinkedList<T>::header() const {
+    ListNode<T>* LinkedList<T>::header() {
         return _header->next();
     }
     
     template <class T>
-    ListNode<T>* LinkedList<T>::tail() const{
+    ListNode<T>* LinkedList<T>::tail() {
         ListNode<T>* _current = _header;
         while (!_isTail(_current)) {
             _current = _current->next();
@@ -133,6 +133,7 @@ namespace data_structures {
     
     void testLinkedList(){
         LinkedList<int>* list = new LinkedList<int>();
+        cout << list->isEmpty() << "\n";
         list->insertToTail(1)
             ->insertToTail(2)
             ->insertToTail(3)
@@ -148,6 +149,7 @@ namespace data_structures {
         cout << list->findPrevious(9) << "\n";
         cout << list->find(0) << "\n";
         cout << list->findPrevious(1) << "\n";
+        cout << list->isTail(10) << "\n";
         LinkedList<int>* copy_list = new LinkedList<int>(list);
         cout << *copy_list << "\n";
         list->del(1)
@@ -155,8 +157,8 @@ namespace data_structures {
             ->del(10);
         cout << *list << "\n";
         list->insertToHeader(1);
-        list->insert(4, 5);
-//            ->insert(9, 10);
+        list->insert(1, 5)
+            ->insert(9, 10);
         cout << *list << "\n";
         delete list;
         delete copy_list;
