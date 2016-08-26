@@ -22,7 +22,7 @@ namespace data_structures {
     }
     
     template <class T>
-    ListNode<T>::ListNode(const ListNode<T>* node){
+    ListNode<T>::ListNode(ListNode<T>* node){
         this->element = node->element;
         _next = node->_next;
     }

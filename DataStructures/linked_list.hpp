@@ -20,23 +20,26 @@ namespace data_structures{
 
     private:
         ListNode<T>* _header;
+        bool _isTail(ListNode<T>* node) const;
+        ListNode<T>* _findPrevious(const T& element);
         
     public:
         LinkedList();
         LinkedList(LinkedList<T>* list);
         ~LinkedList();
         bool isEmpty() const;
-        bool isTail(ListNode<T>* node) const;
+        bool isTail(const T& element) const;
         ListNode<T>* find(const T& element);
-        void del(const T& element);
         ListNode<T>* findPrevious(const T& element);
-        void insert(T& element, ListNode<T>* node);
-        LinkedList<T>* insertToTail(ListNode<T>* node);
+        LinkedList<T>* insert(const T& pre_element, const T& new_element);
+        LinkedList<T>* insertToHeader(const T& element);
+        LinkedList<T>* insertToTail(const T& element);
+        LinkedList<T>* del(const T& element);
         ListNode<T>* header() const;
-        ListNode<T>* tail();
+        ListNode<T>* tail() const;
         friend ostream& operator<<(ostream& out, const LinkedList<T>& list){
-            ListNode<T>* _current = list.header();
-            while (!list.isTail(_current)) {
+            ListNode<T>* _current = list._header;
+            while (!list._isTail(_current)) {
                 _current = _current->next();
                 cout << _current->element << ", ";
             }

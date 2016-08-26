@@ -25,7 +25,7 @@ namespace data_structures {
         T element;
         ListNode();
         ListNode(const T& element, ListNode<T>* next_node = nullptr);
-        ListNode(const ListNode<T>* node);
+        ListNode(ListNode<T>* node);
         void insertAfter(ListNode<T>* node);
         ListNode<T>* deleteAfter();
         ListNode<T>* next() const;
