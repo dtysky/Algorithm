@@ -16,9 +16,9 @@ namespace data_structures {
     }
     
     template <class T>
-    LinkedList<T>::LinkedList(LinkedList<T> *list){
+    LinkedList<T>::LinkedList(const LinkedList<T>& list){
         _header = new ListNode<T>();
-        ListNode<T>* _current = list->_header;
+        ListNode<T>* _current = list._header;
         ListNode<T>* _new_current = _header;
         while (!_isTail(_current)) {
             _current = _current->next();
@@ -35,6 +35,23 @@ namespace data_structures {
             delete _current;
         }
         delete _header;
+    }
+    
+    template <class T>
+    void LinkedList<T>::operator=(const LinkedList<T>& list){
+        _header = new ListNode<T>();
+        ListNode<T>* _current = list._header;
+        ListNode<T>* _new_current = _header;
+        while (!_isTail(_current)) {
+            _current = _current->next();
+            _new_current->insertAfter(new ListNode<T>(_current->element));
+            _new_current = _new_current->next();
+        }
+    }
+    
+    template <class T>
+    bool LinkedList<T>::operator==(const LinkedList<T>& list){
+        return _header == list._header;
     }
     
     template <class T>
@@ -104,7 +121,7 @@ namespace data_structures {
     template <class T>
     LinkedList<T>* LinkedList<T>::insertToTail(const T& element){
         if (isEmpty()) {
-            _header->insertAfter(new ListNode<T>(element));
+            insertToHeader(element);
         }
         else {
             tail()->insertAfter(new ListNode<T>(element));
@@ -169,8 +186,11 @@ namespace data_structures {
         cout << list->find(0) << "\n";
         cout << list->findPrevious(1) << "\n";
         cout << list->isTail(10) << "\n";
-        LinkedList<int>* copy_list = new LinkedList<int>(list);
+        LinkedList<int>* copy_list = new LinkedList<int>(*list);
         cout << *copy_list << "\n";
+        LinkedList<int> copy_list2 = *list;
+        cout << copy_list2 << "\n";
+        cout << (*copy_list == copy_list2) << "\n";
         list->del(1)
             ->del(5)
             ->del(10);

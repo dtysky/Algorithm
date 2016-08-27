@@ -25,14 +25,16 @@ namespace data_structures {
         T element;
         ListNode();
         ListNode(const T& element, ListNode<T>* next_node = nullptr);
-        ListNode(ListNode<T>* node);
+        ListNode(const ListNode<T>& node);
         void insertAfter(ListNode<T>* node);
         ListNode<T>* deleteAfter();
-        ListNode<T>* next() const;
+        ListNode<T>* next();
+        void operator=(const ListNode<T>& node);
+        bool operator==(const ListNode<T>& node);
         friend ostream& operator<<(ostream& out, const ListNode<T>& node){
             cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
             return out;
-        };
+        }
     };
     
     void testListNode();

@@ -25,7 +25,7 @@ namespace data_structures{
         
     public:
         LinkedList();
-        LinkedList(LinkedList<T>* list);
+        LinkedList(const LinkedList<T>& list);
         ~LinkedList();
         bool isEmpty();
         bool isTail(const T& element);
@@ -37,6 +37,8 @@ namespace data_structures{
         LinkedList<T>* del(const T& element);
         ListNode<T>* header();
         ListNode<T>* tail();
+        void operator=(const LinkedList<T>& list);
+        bool operator==(const LinkedList<T>& list);
         friend ostream& operator<<(ostream& out, LinkedList<T>& list){
             if (list.isEmpty()) {
                 return out;
