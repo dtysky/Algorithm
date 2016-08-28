@@ -8,8 +8,9 @@
 
 #include "main.hpp"
 
-#include "linked_list.hpp"
+#include "polynomial.test.hpp"
+
 
 int main(int argc, const char * argv[]) {
-    data_structures::testLinkedList();
+    algorithm::testPolynomail();
 }

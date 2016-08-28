@@ -11,11 +11,11 @@
 
 #include <stdio.h>
 #include <iostream>
-using namespace std;
 
 
 namespace data_structures {
-    template <class T>
+    using namespace std;
+    template <typename T>
     class ListNode{
         
     private:
@@ -26,6 +26,7 @@ namespace data_structures {
         ListNode();
         ListNode(const T& element, ListNode<T>* next_node = nullptr);
         ListNode(const ListNode<T>& node);
+        ~ListNode();
         void insertAfter(ListNode<T>* node);
         ListNode<T>* deleteAfter();
         ListNode<T>* next();
@@ -37,7 +38,59 @@ namespace data_structures {
         }
     };
     
-    void testListNode();
+    
+    template <typename T> inline
+    ListNode<T>::ListNode(){
+        _next = nullptr;
+    }
+    
+    template <typename T> inline
+    ListNode<T>::ListNode(const T& element, ListNode<T>* next_node){
+        this->element = element;
+        _next = next_node;
+    }
+    
+    template <typename T> inline
+    ListNode<T>::ListNode(const ListNode<T>& node){
+        this->element = node.element;
+        _next = node._next;
+    }
+    
+    template <typename T> inline
+    ListNode<T>::~ListNode(){
+        _next = nullptr;
+    }
+    
+    template <typename T> inline
+    void ListNode<T>::operator=(const ListNode<T>& node){
+        this->element = node.element;
+        _next = node._next;
+    }
+    
+    template <typename T> inline
+    bool ListNode<T>::operator==(const ListNode<T>& node){
+        return (this->element == node.element) && (_next == node._next);
+    }
+    
+    template <typename T> inline
+    void ListNode<T>::insertAfter(ListNode<T>* node){
+        node->_next = _next;
+        _next = node;
+    }
+    
+    template <typename T> inline
+    ListNode<T>* ListNode<T>::deleteAfter(){
+        ListNode<T>* temp_node = _next;
+        if (_next != nullptr) {
+            _next = _next->_next;
+        }
+        return temp_node;
+    }
+    
+    template <typename T> inline
+    ListNode<T>* ListNode<T>::next() {
+        return _next;
+    }
     
 }
 

@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/list_node.hpp"
-            timestampString = "493790857.687092"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "class ListNode"
             landmarkType = "3">
          </BreakpointContent>
@@ -102,7 +102,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/list_node.hpp"
-            timestampString = "493725746.487639"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -166,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/linked_list.cpp"
-            timestampString = "493963578.152313"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "testLinkedList()"
             landmarkType = "7">
          </BreakpointContent>
@@ -182,11 +182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/linked_list.cpp"
-            timestampString = "493963578.152313"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "testLinkedList()"
             landmarkType = "7">
          </BreakpointContent>
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/linked_list.cpp"
-            timestampString = "493963623.235572"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "testLinkedList()"
             landmarkType = "7">
          </BreakpointContent>
@@ -214,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/list_node.hpp"
-            timestampString = "493962978.650624"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "operator&lt;&lt;(ostream&amp; out, const ListNode&lt;T&gt;&amp; node)"
             landmarkType = "5">
          </BreakpointContent>
@@ -229,13 +229,77 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataStructures/linked_list.cpp"
-            timestampString = "493963272.565343"
+            filePath = "Algorithm/polynomial.hpp"
+            timestampString = "494080859.435811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "operator=(const LinkedList&lt;T&gt;&amp; list)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "operator&lt;&lt;(ostream&amp; out, Polynomail&amp; py)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Algorithm/polynomial.hpp"
+            timestampString = "494080859.435811"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "operator&lt;&lt;(ostream&amp; out, Polynomail&amp; py)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Algorithm/polynomial.hpp"
+            timestampString = "494080859.435811"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "operator&lt;&lt;(ostream&amp; out, Polynomail&amp; py)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DataStructures/list_node.hpp"
+            timestampString = "494076030.951704"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "class ListNode"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tests/linked_list.test.hpp"
+            timestampString = "494083162.03763"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "testLinkedList()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		983C79211D6ADB3C00A370AF /* list_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983C791F1D6ADB3C00A370AF /* list_node.cpp */; };
-		983C79241D6D3E1B00A370AF /* linked_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983C79221D6D3E1B00A370AF /* linked_list.cpp */; };
 		985B29BF1D6A987800FFABB5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 985B29BD1D6A987800FFABB5 /* main.cpp */; };
+		989980391D731A4E009E1145 /* polynomial.test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 989980361D731A4E009E1145 /* polynomial.test.hpp */; };
+		9899803A1D731A4E009E1145 /* list_node.test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 989980371D731A4E009E1145 /* list_node.test.hpp */; };
+		9899803B1D731A4E009E1145 /* linked_list.test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 989980381D731A4E009E1145 /* linked_list.test.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,13 +26,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		983C791F1D6ADB3C00A370AF /* list_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = list_node.cpp; path = DataStructures/list_node.cpp; sourceTree = "<group>"; };
 		983C79201D6ADB3C00A370AF /* list_node.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = list_node.hpp; path = DataStructures/list_node.hpp; sourceTree = "<group>"; };
-		983C79221D6D3E1B00A370AF /* linked_list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = linked_list.cpp; path = DataStructures/linked_list.cpp; sourceTree = "<group>"; };
 		983C79231D6D3E1B00A370AF /* linked_list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = linked_list.hpp; path = DataStructures/linked_list.hpp; sourceTree = "<group>"; };
 		985B29B21D6A981A00FFABB5 /* Algorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		985B29BD1D6A987800FFABB5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		985B29BE1D6A987800FFABB5 /* main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
+		989980301D72BF01009E1145 /* polynomial.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polynomial.hpp; sourceTree = "<group>"; };
+		989980331D72EC20009E1145 /* polynomial_unit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = polynomial_unit.hpp; path = DataStructures/polynomial_unit.hpp; sourceTree = "<group>"; };
+		989980361D731A4E009E1145 /* polynomial.test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = polynomial.test.hpp; path = Tests/polynomial.test.hpp; sourceTree = "<group>"; };
+		989980371D731A4E009E1145 /* list_node.test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = list_node.test.hpp; path = Tests/list_node.test.hpp; sourceTree = "<group>"; };
+		989980381D731A4E009E1145 /* linked_list.test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = linked_list.test.hpp; path = Tests/linked_list.test.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 				985B29BC1D6A983C00FFABB5 /* DataStructures */,
 				985B29B41D6A981A00FFABB5 /* Algorithm */,
 				985B29B31D6A981A00FFABB5 /* Products */,
+				989980351D7319E5009E1145 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +72,7 @@
 		985B29B41D6A981A00FFABB5 /* Algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				989980301D72BF01009E1145 /* polynomial.hpp */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -74,12 +80,21 @@
 		985B29BC1D6A983C00FFABB5 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
-				983C791F1D6ADB3C00A370AF /* list_node.cpp */,
 				983C79201D6ADB3C00A370AF /* list_node.hpp */,
-				983C79221D6D3E1B00A370AF /* linked_list.cpp */,
 				983C79231D6D3E1B00A370AF /* linked_list.hpp */,
+				989980331D72EC20009E1145 /* polynomial_unit.hpp */,
 			);
 			name = DataStructures;
+			sourceTree = "<group>";
+		};
+		989980351D7319E5009E1145 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				989980361D731A4E009E1145 /* polynomial.test.hpp */,
+				989980371D731A4E009E1145 /* list_node.test.hpp */,
+				989980381D731A4E009E1145 /* linked_list.test.hpp */,
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				983C79241D6D3E1B00A370AF /* linked_list.cpp in Sources */,
 				985B29BF1D6A987800FFABB5 /* main.cpp in Sources */,
-				983C79211D6ADB3C00A370AF /* list_node.cpp in Sources */,
+				989980391D731A4E009E1145 /* polynomial.test.hpp in Sources */,
+				9899803B1D731A4E009E1145 /* linked_list.test.hpp in Sources */,
+				9899803A1D731A4E009E1145 /* list_node.test.hpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
