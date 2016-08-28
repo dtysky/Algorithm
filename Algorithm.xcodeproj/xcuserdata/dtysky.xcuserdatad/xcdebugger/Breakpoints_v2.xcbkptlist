@@ -134,11 +134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/linked_list.hpp"
-            timestampString = "493963578.152313"
+            timestampString = "494094006.516534"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "operator&lt;&lt;(ostream&amp; out, LinkedList&lt;T&gt;&amp; list)"
             landmarkType = "5">
          </BreakpointContent>
@@ -150,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/linked_list.hpp"
-            timestampString = "493963578.152313"
+            timestampString = "494094006.516534"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "operator&lt;&lt;(ostream&amp; out, LinkedList&lt;T&gt;&amp; list)"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,60 +214,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/list_node.hpp"
-            timestampString = "494080859.435811"
+            timestampString = "494092584.568147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "operator&lt;&lt;(ostream&amp; out, const ListNode&lt;T&gt;&amp; node)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Algorithm/polynomial.hpp"
-            timestampString = "494080859.435811"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "operator&lt;&lt;(ostream&amp; out, Polynomail&amp; py)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Algorithm/polynomial.hpp"
-            timestampString = "494080859.435811"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "operator&lt;&lt;(ostream&amp; out, Polynomail&amp; py)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Algorithm/polynomial.hpp"
-            timestampString = "494080859.435811"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "operator&lt;&lt;(ostream&amp; out, Polynomail&amp; py)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

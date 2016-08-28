@@ -21,6 +21,7 @@ namespace data_structures{
         };
     };
     
+    
     ostream& operator<<(ostream& out, const PolynomailUnit& py){
         cout << py.coefficient << "x^" << py.exponent;
         return out;

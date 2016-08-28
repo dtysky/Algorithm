@@ -32,6 +32,8 @@ namespace data_structures {
         ListNode<T>* next();
         void operator=(const ListNode<T>& node);
         bool operator==(const ListNode<T>& node);
+        bool operator!=(const ListNode<T>& node);
+        ListNode<T>* operator++();
         friend ostream& operator<<(ostream& out, const ListNode<T>& node){
             cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
             return out;
@@ -70,6 +72,16 @@ namespace data_structures {
     template <typename T> inline
     bool ListNode<T>::operator==(const ListNode<T>& node){
         return (this->element == node.element) && (_next == node._next);
+    }
+    
+    template <typename T> inline
+    bool ListNode<T>::operator!=(const ListNode<T>& node){
+        return (this->element != node.element) || (_next != node._next);
+    }
+    
+    template <typename T> inline
+    ListNode<T>* ListNode<T>::operator++(){
+        return _next;
     }
     
     template <typename T> inline

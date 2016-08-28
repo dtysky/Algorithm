@@ -10,6 +10,7 @@
 #define linked_list_hpp
 
 #include <stdio.h>
+#include <iterator>
 #include "list_node.hpp"
 
 
@@ -39,6 +40,7 @@ namespace data_structures{
         ListNode<T>* tail();
         void operator=(const LinkedList<T>& list);
         bool operator==(const LinkedList<T>& list);
+        bool operator!=(const LinkedList<T>& list);
         friend ostream& operator<<(ostream& out, LinkedList<T>& list){
             if (list.isEmpty()) {
                 return out;
@@ -98,6 +100,11 @@ namespace data_structures{
     template <typename T> inline
     bool LinkedList<T>::operator==(const LinkedList<T>& list){
         return _header == list._header;
+    }
+    
+    template <typename T> inline
+    bool LinkedList<T>::operator!=(const LinkedList<T>& list){
+        return _header != list._header;
     }
     
     template <typename T> inline

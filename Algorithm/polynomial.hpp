@@ -20,47 +20,61 @@ namespace algorithm {
     using namespace data_structures;
 
     
-    template <typename Units>
+    template <typename Unit>
     class Polynomail {
         
     private:
-        LinkedList<Units>* _list;
+        LinkedList<Unit>* _list;
         
     public:
         Polynomail();
-        Polynomail(const vector<Units>& units);
+        Polynomail(const vector<Unit>& units);
         ~Polynomail();
+        Polynomail<Unit> operator+(const Polynomail<Unit>& py);
+        Polynomail<Unit> operator-(const Polynomail<Unit>& py);
+        Polynomail<Unit> operator*(const Polynomail<Unit>& py);
         friend ostream& operator<<(ostream& out, Polynomail& py){
-            if (py._list->isEmpty()) {
-                return out;
+            auto tail = py._list->tail();
+            for(auto node = py._list->header(); node <= tail; node ++) {
+                cout << node->element << " + ";
             }
-            ListNode<Units>* _current = py._list->header();
-            while (!py._list->isTail(_current)) {
-                cout << _current->element << " + ";
-                _current = _current->next();
-            }
-            cout << _current->element;
+            cout << tail->element;
             return out;
         };
     };
 
-    template <typename Units> inline
-    Polynomail<Units>::Polynomail() {
-        _list = new LinkedList<Units>();
+    template <typename Unit> inline
+    Polynomail<Unit>::Polynomail() {
+        _list = new LinkedList<Unit>();
     }
     
     
-    template <typename Units> inline
-    Polynomail<Units>::Polynomail(const vector<Units>& units) {
-        _list = new LinkedList<Units>();
-        for (const Units& unit: units) {
+    template <typename Unit> inline
+    Polynomail<Unit>::Polynomail(const vector<Unit>& units) {
+        _list = new LinkedList<Unit>();
+        for (const Unit& unit: units) {
             _list->insertToTail(unit);
         }
     }
     
-    template <typename Units> inline
-    Polynomail<Units>::~Polynomail() {
+    template <typename Unit> inline
+    Polynomail<Unit>::~Polynomail() {
         delete _list;
+    }
+    
+    template <typename Unit> inline
+    Polynomail<Unit> Polynomail<Unit>::operator+(const Polynomail<Unit>& py) {
+        
+    }
+    
+    template <typename Unit> inline
+    Polynomail<Unit> Polynomail<Unit>::operator-(const Polynomail<Unit>& py) {
+        
+    }
+    
+    template <typename Unit> inline
+    Polynomail<Unit> Polynomail<Unit>::operator*(const Polynomail<Unit>& py) {
+        
     }
 }
 
