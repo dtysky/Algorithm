@@ -12,5 +12,5 @@
 
 
 int main(int argc, const char * argv[]) {
-    algorithm::testPolynomail();
+    data_structures::testPolynomail();
 }

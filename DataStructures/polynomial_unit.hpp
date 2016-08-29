@@ -19,11 +19,14 @@ namespace data_structures{
         bool operator==(const PolynomailUnit& unit) {
             return exponent == unit.exponent && coefficient == unit.coefficient;
         };
+        bool operator!=(const PolynomailUnit& unit) {
+            return exponent != unit.exponent || coefficient != unit.coefficient;
+        };
     };
     
     
-    ostream& operator<<(ostream& out, const PolynomailUnit& py){
-        cout << py.coefficient << "x^" << py.exponent;
+    ostream& operator<<(ostream& out, const PolynomailUnit& unit){
+        cout << unit.coefficient << "x^" << unit.exponent;
         return out;
     };
 }

@@ -8,16 +8,22 @@
 
 #include "polynomial.hpp"
 
-namespace algorithm {
+namespace data_structures {
     void testPolynomail() {
         
-        Polynomail<PolynomailUnit> py1 = Polynomail<PolynomailUnit>(vector<PolynomailUnit>{
+        auto py1 = Polynomail<PolynomailUnit>(vector<PolynomailUnit>{
             {1000, 4},
             {100, 3},
             {10, 2},
             {1, 1}
         });
-        
-        cout << py1 << endl;
+        auto py2 = Polynomail<PolynomailUnit>(vector<PolynomailUnit>{
+            {10000, 5},
+            {200, 3},
+            {10, 2},
+            {1, 2}
+        });
+        auto py3 = py2 + py1;
+        cout << (py3) << endl;
     }
 }

@@ -31,11 +31,11 @@
 		985B29B21D6A981A00FFABB5 /* Algorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		985B29BD1D6A987800FFABB5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		985B29BE1D6A987800FFABB5 /* main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
-		989980301D72BF01009E1145 /* polynomial.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polynomial.hpp; sourceTree = "<group>"; };
 		989980331D72EC20009E1145 /* polynomial_unit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = polynomial_unit.hpp; path = DataStructures/polynomial_unit.hpp; sourceTree = "<group>"; };
 		989980361D731A4E009E1145 /* polynomial.test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = polynomial.test.hpp; path = Tests/polynomial.test.hpp; sourceTree = "<group>"; };
 		989980371D731A4E009E1145 /* list_node.test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = list_node.test.hpp; path = Tests/list_node.test.hpp; sourceTree = "<group>"; };
 		989980381D731A4E009E1145 /* linked_list.test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = linked_list.test.hpp; path = Tests/linked_list.test.hpp; sourceTree = "<group>"; };
+		9899803C1D744707009E1145 /* polynomial.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = polynomial.hpp; path = DataStructures/polynomial.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,6 @@
 		985B29B41D6A981A00FFABB5 /* Algorithm */ = {
 			isa = PBXGroup;
 			children = (
-				989980301D72BF01009E1145 /* polynomial.hpp */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -83,6 +82,7 @@
 				983C79201D6ADB3C00A370AF /* list_node.hpp */,
 				983C79231D6D3E1B00A370AF /* linked_list.hpp */,
 				989980331D72EC20009E1145 /* polynomial_unit.hpp */,
+				9899803C1D744707009E1145 /* polynomial.hpp */,
 			);
 			name = DataStructures;
 			sourceTree = "<group>";

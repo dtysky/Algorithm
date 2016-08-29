@@ -19,7 +19,7 @@ namespace data_structures{
     template <typename T>
     class LinkedList {
 
-    private:
+    protected:
         ListNode<T>* _header;
         ListNode<T>* _findPrevious(const T& element);
         
@@ -27,21 +27,22 @@ namespace data_structures{
         LinkedList();
         LinkedList(const LinkedList<T>& list);
         ~LinkedList();
-        bool isEmpty();
-        bool isTail(ListNode<T>* node);
-        bool isTail(const T& element);
+        bool isEmpty() const;
+        bool isTail(ListNode<T>* node) const;
+        bool isTail(const T& element) const;
         ListNode<T>* find(const T& element);
         ListNode<T>* findPrevious(const T& element);
         LinkedList<T>* insert(const T& pre_element, const T& new_element);
         LinkedList<T>* insertToHeader(const T& element);
         LinkedList<T>* insertToTail(const T& element);
         LinkedList<T>* del(const T& element);
-        ListNode<T>* header();
-        ListNode<T>* tail();
+        ListNode<T>* header() const;
+        ListNode<T>* tail() const;
+        ListNode<T>* end() const;
         void operator=(const LinkedList<T>& list);
         bool operator==(const LinkedList<T>& list);
         bool operator!=(const LinkedList<T>& list);
-        friend ostream& operator<<(ostream& out, LinkedList<T>& list){
+        friend ostream& operator<<(ostream& out, const LinkedList<T>& list){
             if (list.isEmpty()) {
                 return out;
             }
@@ -108,17 +109,17 @@ namespace data_structures{
     }
     
     template <typename T> inline
-    bool LinkedList<T>::isEmpty() {
+    bool LinkedList<T>::isEmpty() const {
         return _header->next() == nullptr;
     }
     
     template <typename T> inline
-    bool LinkedList<T>::isTail(ListNode<T>* node) {
+    bool LinkedList<T>::isTail(ListNode<T>* node) const {
         return node->next() == nullptr;
     }
     
     template <typename T> inline
-    bool LinkedList<T>::isTail(const T& element) {
+    bool LinkedList<T>::isTail(const T& element) const {
         return isTail(find(element));
     }
     
@@ -198,12 +199,12 @@ namespace data_structures{
     }
     
     template <typename T> inline
-    ListNode<T>* LinkedList<T>::header() {
+    ListNode<T>* LinkedList<T>::header() const {
         return _header->next();
     }
     
     template <typename T> inline
-    ListNode<T>* LinkedList<T>::tail() {
+    ListNode<T>* LinkedList<T>::tail() const {
         if (isEmpty()) {
             return nullptr;
         }
@@ -212,6 +213,11 @@ namespace data_structures{
             _current = _current->next();
         }
         return _current;
+    }
+    
+    template <typename T> inline
+    ListNode<T>* LinkedList<T>::end() const {
+        return nullptr;
     }
 }
 
