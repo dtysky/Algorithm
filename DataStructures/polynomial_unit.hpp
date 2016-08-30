@@ -10,12 +10,19 @@
 #define polynomial_unit_hpp
 
 #include <stdio.h>
+#include <cmath>
 
 namespace data_structures{
     using namespace std;
     struct PolynomailUnit {
         float exponent;
         float coefficient;
+        bool isZero() {
+            return coefficient == 0;
+        }
+        float eval(const float& x) {
+            return coefficient * pow(x, exponent);
+        }
         bool operator==(const PolynomailUnit& unit) {
             return exponent == unit.exponent && coefficient == unit.coefficient;
         };
