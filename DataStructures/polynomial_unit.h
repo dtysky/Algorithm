@@ -2,21 +2,27 @@
 //  polynomial_unit.hpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/28.
+//  Created by dtysky on 16/8/28.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
 #ifndef polynomial_unit_hpp
 #define polynomial_unit_hpp
 
-#include <stdio.h>
+#include <cstdio>
 #include <cmath>
 
 namespace data_structures{
-    using namespace std;
+    using std::cout;
+    using std::ostream;
+    
     struct PolynomailUnit {
         float exponent;
         float coefficient;
+        PolynomailUnit() {
+            exponent = 0;
+            coefficient = 0;
+        }
         bool isZero() {
             return coefficient == 0;
         }

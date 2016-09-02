@@ -2,21 +2,23 @@
 //  polynomial.hpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/28.
+//  Created by dtysky on 16/8/28.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
 #ifndef polynomial_hpp
 #define polynomial_hpp
 
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
-#include "linked_list.hpp"
-#include "polynomial_unit.hpp"
+#include "linked_list.h"
+#include "polynomial_unit.h"
 
 
 namespace data_structures {
-    using namespace std;
+    using std::cout;
+    using std::ostream;
+    using std::vector;
     
     template <typename Unit, typename Value>
     class Polynomail : public LinkedList<Unit> {

@@ -2,11 +2,11 @@
 //  list_node.cpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/22.
+//  Created by dtysky on 16/8/22.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
-#include "list_node.hpp"
+#include "list_node.h"
 
 
 namespace data_structures {

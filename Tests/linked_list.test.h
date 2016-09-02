@@ -2,11 +2,11 @@
 //  linked_list.cpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/24.
+//  Created by dtysky on 16/8/24.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
-#include "linked_list.hpp"
+#include "linked_list.h"
 
 
 namespace data_structures {

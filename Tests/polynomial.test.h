@@ -2,13 +2,15 @@
 //  polynomial.cpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/28.
+//  Created by dtysky on 16/8/28.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
-#include "polynomial.hpp"
+#include "polynomial.h"
 
 namespace data_structures {
+    using std::endl;
+    
     void testPolynomail() {
         auto py1 = Polynomail<PolynomailUnit, float>(vector<PolynomailUnit>{
             {6, 4},

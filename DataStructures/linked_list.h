@@ -2,20 +2,21 @@
 //  linked_list.hpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/24.
+//  Created by dtysky on 16/8/24.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
 #ifndef linked_list_hpp
 #define linked_list_hpp
 
-#include <stdio.h>
-#include <iterator>
-#include "list_node.hpp"
+#include <cstdio>
+#include "list_node.h"
 
 
 namespace data_structures{
-    using namespace std;
+    using std::cout;
+    using std::ostream;
+    
     template <typename T>
     class LinkedList {
 
@@ -26,7 +27,7 @@ namespace data_structures{
     public:
         LinkedList();
         LinkedList(const LinkedList<T>& list);
-        ~LinkedList();
+        virtual ~LinkedList();
         bool isEmpty() const;
         bool isTail(ListNode<T>* node) const;
         bool isTail(const T& element) const;

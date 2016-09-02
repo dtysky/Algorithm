@@ -2,19 +2,21 @@
 //  list_node.hpp
 //  Algorithm
 //
-//  Created by DaiTianyu on 16/8/22.
+//  Created by dtysky on 16/8/22.
 //  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
 //
 
 #ifndef list_node_hpp
 #define list_node_hpp
 
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 
 
 namespace data_structures {
-    using namespace std;
+    using std::cout;
+    using std::ostream;
+    
     template <typename T>
     class ListNode{
         
@@ -26,7 +28,7 @@ namespace data_structures {
         ListNode();
         ListNode(const T& element, ListNode<T>* next_node = nullptr);
         ListNode(const ListNode<T>& node);
-        ~ListNode();
+        virtual ~ListNode();
         void insertAfter(ListNode<T>* node);
         ListNode<T>* deleteAfter();
         ListNode<T>* next();
@@ -77,7 +79,6 @@ namespace data_structures {
     bool ListNode<T>::operator!=(const ListNode<T>& node){
         return (this->element != node.element) || (_next != node._next);
     }
-    
     
     template <typename T> inline
     void ListNode<T>::insertAfter(ListNode<T>* node){
