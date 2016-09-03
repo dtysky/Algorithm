@@ -13,21 +13,23 @@
 #include <vector>
 
 
-namespace algorithm {
+namespace my_algorithm {
     using std::vector;
-    
-    void bucketSort(vector<int>& t_vector, const int t_max, const bool reverse = false) {
-        vector<int> bucket = vector<int>(t_max + 1);
+
+    // time: O(t_size + t_max)
+    // space: O(t_max)
+    void bucketSort(vector<uint32_t>& t_vector, const uint32_t t_max, const bool reverse = false) {
+        auto bucket = vector<uint32_t>(size_t(t_max + 1));
         for (auto t: t_vector) {
             bucket[t] = 1;
         }
-        
-        int index = 0;
+
+        uint32_t index = 0;
         
         if (reverse) {
             for (auto i = bucket.size(); i > 0; i--) {
                 if (bucket[i - 1] == 1) {
-                    t_vector[index] = int(i - 1);
+                    t_vector[index] = uint32_t(i - 1);
                     index++;
                 }
             }
@@ -37,7 +39,7 @@ namespace algorithm {
         
         for (auto i = 0; i < bucket.size(); i++) {
             if (bucket[i] == 1) {
-                t_vector[index] = i;
+                t_vector[index] = uint32_t(i);
                 index++;
             }
         }

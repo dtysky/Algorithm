@@ -11,16 +11,16 @@
 #include "utils.hpp"
 
 
-namespace algorithm {
+namespace my_algorithm {
     using std::cout;
     using std::endl;
     using std::vector;
     
     void testBucketSort(){
-        auto v1 = vector<int>({10, 9, 8, 0});
+        auto v1 = vector<uint32_t>({10, 9, 8, 0});
         bucketSort(v1, 10);
-        printVector<int>(v1);
+        printVector<uint32_t>(v1);
         bucketSort(v1, 10, true);
-        printVector<int>(v1);
+        printVector<uint32_t>(v1);
     }
 }

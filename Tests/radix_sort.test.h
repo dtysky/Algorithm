@@ -11,16 +11,16 @@
 #include "utils.hpp"
 
 
-namespace algorithm {
+namespace my_algorithm {
     using std::cout;
     using std::endl;
     using std::vector;
     
     void testRadixSort(){
-        auto v1 = vector<int>({10, 9, 8, 0});
-        radixSort(v1, 10);
-        printVector<int>(v1);
-        radixSort(v1, 10, true);
-        printVector<int>(v1);
+        auto v1 = vector<uint32_t>({10000, 5694, 998, 233, 47, 9, 0});
+        radixSort(v1, 5, 10);
+        printVector<uint32_t>(v1);
+        radixSort(v1, 5, 10, true);
+        printVector<uint32_t>(v1);
     }
 }

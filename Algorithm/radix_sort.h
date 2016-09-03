@@ -11,15 +11,32 @@
 
 #include <cstdio>
 #include <vector>
+#include <cmath>
 #include "linked_list.h"
 
 
-namespace algorithm {
+namespace my_algorithm {
     using std::vector;
     using data_structures::LinkedList;
-    
-    void radixSort(vector<int>& t_vector, const int t_msb, const bool reverse = false) {
-        
+
+    // time: O(t_msd(t_size + t_size))
+    // space: O(t_size + t_radix)
+    void radixSort(vector<uint32_t>& t_vector, const uint32_t t_msd, const uint32_t t_radix, const bool reverse = false) {
+
+        for (auto dig = 0; dig < t_msd; dig++) {
+            auto counts = vector<LinkedList<uint32_t>>(size_t(t_radix));
+            for (auto t: t_vector) {
+                counts[uint32_t(t / pow(t_radix, dig)) % t_radix].insertToTail(t);
+            }
+            auto position = 0;
+            for (auto count: counts) {
+                for (auto node = count.begin(); node != count.end(); node = node->next()) {
+                    t_vector[position] = node->element;
+                    position++;
+                }
+            }
+        }
+
     }
 }
 

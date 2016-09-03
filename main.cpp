@@ -12,5 +12,5 @@
 
 
 int main(int argc, const char * argv[]) {
-    algorithm::testRadixSort();
+    my_algorithm::testRadixSort();
 }
