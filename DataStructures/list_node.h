@@ -45,6 +45,7 @@ namespace data_structures {
     template <typename T> inline
     ListNode<T>::ListNode(){
         _next = nullptr;
+        element = T();
     }
     
     template <typename T> inline

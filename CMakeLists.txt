@@ -25,6 +25,6 @@ set(SOURCE_FILES
         Tests/radix_sort.test.h
     main.cpp
     main.hpp
-    utils.hpp)
+    utils.hpp DataStructures/stack.h Tests/stack.test.h)
 
 add_executable(Algorithm ${SOURCE_FILES})

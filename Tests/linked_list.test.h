@@ -11,7 +11,7 @@
 
 namespace data_structures {
     void testLinkedList(){
-        LinkedList<int>* list = new LinkedList<int>();
+        LinkedList<uint32_t>* list = new LinkedList<uint32_t>();
         cout << list->isEmpty() << "\n";
         cout << list->header() << "\n";
         cout << list->tail() << "\n";
@@ -34,9 +34,9 @@ namespace data_structures {
         cout << list->find(0) << "\n";
         cout << list->findPrevious(1) << "\n";
         cout << list->isTail(10) << "\n";
-        LinkedList<int>* copy_list = new LinkedList<int>(*list);
+        LinkedList<uint32_t>* copy_list = new LinkedList<uint32_t>(*list);
         cout << *copy_list << "\n";
-        LinkedList<int> copy_list2 = *list;
+        LinkedList<uint32_t> copy_list2 = *list;
         cout << copy_list2 << "\n";
         cout << (*copy_list == copy_list2) << "\n";
         list->del(1)
@@ -47,7 +47,9 @@ namespace data_structures {
         list->insert(4, 5)
             ->insert(9, 10);
         cout << *list << "\n";
-        list->del(11);
+        list->clear();
+        cout << *list << "\n";
+        list->del(1);
         delete list;
         delete copy_list;
     }

@@ -38,6 +38,8 @@ namespace data_structures{
         LinkedList<T>* insertToHeader(const T& element);
         LinkedList<T>* insertToTail(const T& element);
         LinkedList<T>* del(const T& element);
+        LinkedList<T>* deleteFromHeader();
+        LinkedList<T>* clear();
         ListNode<T>* header() const;
         ListNode<T>* tail() const;
         ListNode<T>* begin() const;
@@ -51,7 +53,7 @@ namespace data_structures{
             }
             ListNode<T>* _current = list.header();
             while (!list.isTail(_current)) {
-                cout << _current->element << ", ";
+                cout << _current->element << " ";
                 _current = _current->next();
             }
             cout << _current->element;
@@ -69,41 +71,33 @@ namespace data_structures{
     template <typename T> inline
     LinkedList<T>::LinkedList(const LinkedList<T>& list){
         _header = new ListNode<T>();
+        _tail = _header;
         ListNode<T>* _current = list._header;
-        ListNode<T>* _new_current = _header;
         while (!list.isTail(_current)) {
             _current = _current->next();
-            _new_current->insertAfter(new ListNode<T>(_current->element));
-            _new_current = _new_current->next();
+            insertToTail(_current->element);
         }
-        _tail = _new_current;
     }
     
     template <typename T> inline
     LinkedList<T>::~LinkedList(){
-        ListNode<T>* _current = _header;
-        ListNode<T>* _next;
-        while (!isTail(_current)) {
-            _next = _current->next();
-            delete _current;
-            _current = _next;
+        while (!isEmpty()) {
+            deleteFromHeader();
         }
-        delete _current;
+        delete _header;
         _header = 0;
         _tail = 0;
     }
     
     template <typename T> inline
-    void LinkedList<T>::operator=(const LinkedList<T>& list){
+    void LinkedList<T>::operator=(const LinkedList<T>& list) {
         _header = new ListNode<T>();
+        _tail = _header;
         ListNode<T>* _current = list._header;
-        ListNode<T>* _new_current = _header;
-        while (!isTail(_current)) {
+        while (!list.isTail(_current)) {
             _current = _current->next();
-            _new_current->insertAfter(new ListNode<T>(_current->element));
-            _new_current = _new_current->next();
+            insertToTail(_current->element);
         }
-        _tail = _current;
     }
     
     template <typename T> inline
@@ -210,7 +204,32 @@ namespace data_structures{
         ListNode<T>* _current = _previous->next();
         _previous->deleteAfter();
         delete _current;
-        _tail = _previous;
+        if (_current == _tail) {
+            _tail = _previous;
+        }
+        return this;
+    }
+
+    template <typename T> inline
+    LinkedList<T>* LinkedList<T>::deleteFromHeader(){
+        if (isEmpty()) {
+            return this;
+        }
+        ListNode<T>* _current = _header->next();
+        _header->deleteAfter();
+        delete _current;
+        if (_current == _tail) {
+            _tail = _header;
+        }
+        return this;
+    }
+
+    template <typename T> inline
+    LinkedList<T>* LinkedList<T>::clear(){
+        while (!isEmpty()) {
+            deleteFromHeader();
+        }
+        _tail = _header;
         return this;
     }
     
