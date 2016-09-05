@@ -32,6 +32,7 @@ namespace data_structures {
         cout << stack1 << endl;
         while (!stack.isEmpty()) {
             cout << stack.pop() << endl;
+            cout << stack << endl;
         }
         cout << stack.isEmpty() << endl;
         stack.clear();

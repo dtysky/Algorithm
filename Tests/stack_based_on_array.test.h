@@ -13,7 +13,7 @@
 namespace data_structures {
     using std::endl;
 
-    void testStack() {
+    void testStackBasedOnArray() {
         auto stack = Stack<uint32_t >();
         stack.push(0)
             .push(1)
@@ -32,6 +32,7 @@ namespace data_structures {
         cout << stack1 << endl;
         while (!stack.isEmpty()) {
             cout << stack.pop() << endl;
+            cout << stack << endl;
         }
         cout << stack.isEmpty() << endl;
         stack.clear();
