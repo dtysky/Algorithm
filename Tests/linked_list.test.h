@@ -1,5 +1,5 @@
 //
-//  linked_list.cpp
+//  linked_list
 //  Algorithm
 //
 //  Created by dtysky on 16/8/24.

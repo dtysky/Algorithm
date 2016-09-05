@@ -7,14 +7,14 @@
 //
 
 
-#include "stack_based_on_array.h"
+#include "stack.h"
 
 
 namespace data_structures {
     using std::endl;
 
     void testStack() {
-        auto stack = StackBasedOnArray<uint32_t, 100 >();
+        auto stack = Stack<uint32_t >();
         stack.push(0)
             .push(1)
             .push(2)
@@ -28,7 +28,7 @@ namespace data_structures {
             .push(10);
         cout << stack << endl;
         cout << stack.top() << endl;
-        auto stack1 = StackBasedOnArray<uint32_t, 100>(stack);
+        auto stack1 = Stack<uint32_t>(stack);
         cout << stack1 << endl;
         while (!stack.isEmpty()) {
             cout << stack.pop() << endl;

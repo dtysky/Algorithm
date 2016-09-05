@@ -88,7 +88,7 @@ namespace data_structures {
 
     template <typename T> inline
     T Stack<T>::pop() {
-        if (_list.isEmpty()) {
+        if (isEmpty()) {
             throw std::out_of_range("Noting in this stack !");
         }
         T result = _list.header()->element;
@@ -98,7 +98,7 @@ namespace data_structures {
 
     template <typename T> inline
     T Stack<T>::top() {
-        if (_list.isEmpty()) {
+        if (isEmpty()) {
             throw std::out_of_range("Noting in this stack !");
         }
         return _list.header()->element;

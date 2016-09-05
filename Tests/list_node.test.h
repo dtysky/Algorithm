@@ -1,5 +1,5 @@
 //
-//  list_node.cpp
+//  list_node
 //  Algorithm
 //
 //  Created by dtysky on 16/8/22.
