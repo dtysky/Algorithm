@@ -8,9 +8,9 @@
 
 #include "main.hpp"
 
-#include "stack.test.h"
+#include "symbol_pair_checker.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    data_structures::testStack();
+    my_algorithm::testSymbolPairChecker();
 }

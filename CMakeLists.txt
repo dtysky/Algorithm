@@ -25,6 +25,6 @@ set(SOURCE_FILES
         Tests/radix_sort.test.h
     main.cpp
     main.hpp
-    utils.hpp DataStructures/stack.h Tests/stack.test.h)
+    utils.hpp DataStructures/stack.h Tests/stack.test.h Algorithm/symbol_pair_checker.cpp Algorithm/symbol_pair_checker.h Tests/symbol_pair_checker.test.h)
 
 add_executable(Algorithm ${SOURCE_FILES})
