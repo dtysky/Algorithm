@@ -15,13 +15,11 @@
 
 
 namespace my_algorithm {
-    using std::cout;
-    using std::endl;
 
     void checkWithPrint(SymbolPairChecker& checker, const std::string& str) {
         auto result = checker.check(str);
         auto position = checker.position();
-        cout << result << " " << position << " " << str[position] << endl;
+        std::cout << result << " " << position << " " << str[position] << std::endl;
     }
 
     void testSymbolPairChecker() {

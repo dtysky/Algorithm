@@ -8,9 +8,9 @@
 
 #include "main.hpp"
 
-#include "symbol_pair_checker.test.h"
+#include "postfix_expression_manager.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    my_algorithm::testSymbolPairChecker();
+    my_algorithm::testPostfixExpressionManager();
 }

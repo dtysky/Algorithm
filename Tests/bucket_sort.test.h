@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "bucket_sort.h"
-#include "utils.hpp"
+#include "utils.h"
 
 
 namespace my_algorithm {
