@@ -48,6 +48,7 @@ namespace my_algorithm {
         }
     }
 
+    // online, O(n)
     bool SymbolPairChecker::check(const std::string &str) {
         _cursor = 0;
         _stack.clear();

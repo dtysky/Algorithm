@@ -8,9 +8,9 @@
 
 #include "main.hpp"
 
-#include "postfix_expression_manager.test.h"
+#include "radix_sort.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    my_algorithm::testPostfixExpressionManager();
+    my_algorithm::testRadixSort();
 }

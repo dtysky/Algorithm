@@ -20,7 +20,7 @@ namespace my_algorithm {
     using data_structures::LinkedList;
 
     // time: O(t_msd(t_size + t_size))
-    // space: O(t_size + t_radix)
+    // space: O(t_size * t_radix)
     void radixSort(vector<uint32_t>& t_vector, const uint32_t t_msd, const uint32_t t_radix, const bool reverse = false) {
 
         for (auto dig = 0; dig < t_msd; dig++) {
@@ -34,6 +34,14 @@ namespace my_algorithm {
                     t_vector[position] = node->element;
                     position++;
                 }
+            }
+        }
+
+        if (reverse) {
+            auto tmp = t_vector;
+            auto size = t_vector.size();
+            for (auto i = 0; i < size; i++) {
+                t_vector[i] = tmp[size - 1 - i];
             }
         }
 
