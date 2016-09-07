@@ -72,6 +72,14 @@ namespace my_algorithm {
         };
         printVector<std::string>(expression);
         std::cout << manager.eval(expression) << std::endl;
+
+        expression = {
+            "(", "1", "+", "2", ")", "*", "3", "-", "4", "/", "5", "%", "6", "&", "7", "|", "8", "^", "9", "**", "10"
+        };
+        printVector<std::string>(expression);
+        expression = manager.fromInfixExpression(expression);
+        printVector<std::string>(expression);
+        std::cout << manager.eval(expression) << std::endl;
     }
 }
 

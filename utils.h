@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 template <typename T>
 void printVector(std::vector<T>& a) {
@@ -19,6 +20,16 @@ void printVector(std::vector<T>& a) {
         std::cout << i << " ";
     }
     std::cout << std::endl;
+}
+
+//template <typename T>
+//void findInVector(const std::vector<T>& v, const T& e) {
+//    return std::find(v.begin(), v.end(), e);
+//}
+
+template <typename T>
+bool isInVector(const std::vector<T>& v, const T& e) {
+    return std::find(v.begin(), v.end(), e) != v.end();
 }
 
 #endif /* utils_hpp */
