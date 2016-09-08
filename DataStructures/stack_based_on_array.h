@@ -31,6 +31,7 @@ namespace data_structures {
         StackBasedOnArray(const StackBasedOnArray<T, Size>& stack);
         virtual ~StackBasedOnArray();
         bool isEmpty() const;
+        bool isFull() const;
         StackBasedOnArray<T, Size>& clear();
         StackBasedOnArray<T, Size>& push(const T& element);
         T pop();
@@ -86,6 +87,11 @@ namespace data_structures {
     }
 
     template <typename T, size_t Size> inline
+    bool StackBasedOnArray<T, Size>::isFull() const {
+        return _cursor == Size - 1;
+    }
+
+    template <typename T, size_t Size> inline
     StackBasedOnArray<T, Size>& StackBasedOnArray<T, Size>::clear() {
         _array = std::array<T, Size>();
         _cursor = -1;
@@ -94,11 +100,10 @@ namespace data_structures {
 
     template <typename T, size_t Size> inline
     StackBasedOnArray<T, Size>& StackBasedOnArray<T, Size>::push(const T& element) {
-        if (_cursor == Size - 1) {
+        if (isFull()) {
             throw std::out_of_range("Stack overflow !");
         }
-        _cursor ++;
-        _array[_cursor] = element;
+        _array[++_cursor] = element;
         return *this;
     }
 
@@ -107,9 +112,7 @@ namespace data_structures {
         if (isEmpty()) {
             throw std::out_of_range("Noting in this stack !");
         }
-        T result = _array[_cursor];
-        _cursor--;
-        return result;
+        return _array[--_cursor];
     }
 
     template <typename T, size_t Size> inline

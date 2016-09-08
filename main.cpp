@@ -8,9 +8,9 @@
 
 #include "main.hpp"
 
-#include "radix_sort.test.h"
+#include "queue_based_on_array.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    my_algorithm::testRadixSort();
+    data_structures::testQueueBasedOnArray();
 }
