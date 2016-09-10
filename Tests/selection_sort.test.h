@@ -1,13 +1,13 @@
 //
-//  bucket_sort.hpp
+//  selection_sort
 //  Algorithm
 //
-//  Created by dtysky on 16/8/31.
-//  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
+//  Created by dtysky on 16/9/9.
+//  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
 #include <iostream>
-#include "bucket_sort.h"
+#include "selection_sort.h"
 #include "utils.h"
 
 
@@ -15,13 +15,13 @@ namespace my_algorithm {
     using std::cout;
     using std::endl;
     using std::vector;
-    
-    void testBucketSort(){
+
+    void testSelectionSort(){
         auto v1 = vector<uint32_t>(20);
         fillVectorWithRandomNumbers(v1, 10000);
-        bucketSort(v1, 10);
+        selectionSort(v1);
         printVector<uint32_t>(v1);
-        bucketSort(v1, 10, true);
+        selectionSort(v1, true);
         printVector<uint32_t>(v1);
     }
 }

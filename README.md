@@ -13,6 +13,8 @@ Build with CPP.
 3. Polynomial: polynomial class based on linked list, which supports operators +, - and *.  
 4. Stack: stack based on linked list.  
 5. StackBasedOnArray: stack based on array.
+6. Queue: queue based on linked list.  
+7. QueueBasedOnArray: queue based on array.   
 
 ## Algorithm
 

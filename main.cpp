@@ -8,9 +8,9 @@
 
 #include "main.hpp"
 
-#include "queue_based_on_array.test.h"
+#include "selection_sort.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    data_structures::testQueueBasedOnArray();
+    my_algorithm::testSelectionSort();
 }
