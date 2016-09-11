@@ -8,9 +8,9 @@
 
 #include "main.hpp"
 
-#include "selection_sort.test.h"
+#include "insertion_sort.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    my_algorithm::testSelectionSort();
+    my_algorithm::testInsertionSort();
 }

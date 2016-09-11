@@ -16,8 +16,8 @@
 namespace my_algorithm {
     using std::vector;
 
-    // time: O(t_size + t_max)
-    // space: O(t_max)
+    // time: O(n^2)
+    // space: O(n)
     void selectionSort(vector<uint32_t>& t_vector, const bool reverse = false) {
         size_t cursor_current = 0;
         auto size = t_vector.size();
