@@ -22,4 +22,5 @@ Build with CPP.
 2. RadixSort: radix sort, time-O(num_msd(num_size)), space-O(num_size * num_radix).  
 3. SymbolPairChecker: check the symbol pairs in string, time-online-O(n), space-O(n).  
 4. PostfixExpressionManager: evaluate a postfix expression(time-O(n), space-O(1)) or convert an infix expression to postfix expression(time-O(n), space-O(N)).  
-5. SelectionSort: selection sort, time-O(n^2/2), space-(n).  
+5. SelectionSort: selection sort, time-O(n^2), space-(n).  
+6. insertionSort: insertion sort, time-O(n)~O(n^2), space-(n).  

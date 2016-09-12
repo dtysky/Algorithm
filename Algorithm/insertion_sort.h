@@ -22,30 +22,28 @@ namespace my_algorithm {
 
         auto t_size = t_vector.size();
         size_t end = 0;
+        size_t current = 0;
         auto tmp = t_vector[0];
 
         for (size_t i = 1; i < t_size; i++) {
             end = i;
+            current = end;
+            tmp = t_vector[end];
 
-            for (size_t j = end; j > 0; j--) {
-                if (reverse) {
-                    if (t_vector[j] > t_vector[j - 1]) {
-                        tmp = t_vector[j];
-                        t_vector[j] = t_vector[j - 1];
-                        t_vector[j - 1] = tmp;
-                        continue;
-                    }
-                    break;
+            if (reverse) {
+                while (current > 0 && t_vector[current - 1] < tmp) {
+                    t_vector[current] = t_vector[current - 1];
+                    current--;
                 }
-
-                if (t_vector[j] < t_vector[j - 1]) {
-                    tmp = t_vector[j];
-                    t_vector[j] = t_vector[j - 1];
-                    t_vector[j - 1] = tmp;
-                    continue;
-                }
-                break;
             }
+            else {
+                while (current > 0 && t_vector[current - 1] > tmp) {
+                    t_vector[current] = t_vector[current - 1];
+                    current--;
+                }
+            }
+
+            t_vector[current] = tmp;
         }
     }
 }

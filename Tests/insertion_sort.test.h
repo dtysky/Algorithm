@@ -9,6 +9,7 @@
 #include <iostream>
 #include "insertion_sort.h"
 #include "utils.h"
+#include <ctime>
 
 
 namespace my_algorithm {
@@ -17,11 +18,20 @@ namespace my_algorithm {
     using std::vector;
 
     void testInsertionSort(){
-        auto v1 = vector<uint32_t>(20);
+
+        auto v1 = vector<uint32_t>(10000);
         fillVectorWithRandomNumbers(v1, 10000);
+
+        auto tStart = clock();
         insertionSort(v1);
+        printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
         printVector<uint32_t>(v1);
+
+        tStart = clock();
         insertionSort(v1, true);
+        printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
         printVector<uint32_t>(v1);
     }
 }
