@@ -16,7 +16,7 @@
 namespace my_algorithm {
     using std::vector;
 
-    // time: O(n) ~ O(n^2)
+    // time: ......
     // space: O(n)
     template <typename T>
     void shellSort(vector<T>& t_vector, const vector<uint32_t>& step_queue, const bool reverse = false) {

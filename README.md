@@ -23,4 +23,5 @@ Build with CPP.
 3. SymbolPairChecker: check the symbol pairs in string, time-online-O(n), space-O(n).  
 4. PostfixExpressionManager: evaluate a postfix expression(time-O(n), space-O(1)) or convert an infix expression to postfix expression(time-O(n), space-O(N)).  
 5. SelectionSort: selection sort, time-O(n^2), space-(n).  
-6. insertionSort: insertion sort, time-O(n)~O(n^2), space-(n).  
+6. insertionSort: insertion sort, time-O(n)~O(n^2), space-(n). 
+7. shellSort: shell sort, time-O(......), space-(n). 
