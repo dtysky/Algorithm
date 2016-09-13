@@ -22,13 +22,22 @@ namespace my_algorithm {
         fillVectorWithRandomNumbers(v1, 10000);
 
         auto tStart = clock();
-        selectionSort(v1);
+        selectionSort<uint32_t>(v1);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
 
         tStart = clock();
-        selectionSort(v1, true);
+        selectionSort<uint32_t>(v1, true);
+        printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
+        printVector<uint32_t>(v1);
+
+        v1 = vector<uint32_t>(20000);
+        fillVectorWithRandomNumbers(v1, 20000);
+
+        tStart = clock();
+        selectionSort<uint32_t>(v1);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);

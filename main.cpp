@@ -10,10 +10,21 @@
 
 #include "selection_sort.test.h"
 #include "insertion_sort.test.h"
+#include "bucket_sort.test.h"
+#include "radix_sort.test.h"
+#include "shell_sort.test.h"
 
 
 int main(int argc, const char * argv[]) {
+    printf("shell\n");
+    my_algorithm::testShellSort();
+    printf("\ninsertion\n");
     my_algorithm::testInsertionSort();
+    printf("\nselection\n");
     my_algorithm::testSelectionSort();
+    printf("\nbucket\n");
+    my_algorithm::testBucketSort();
+    printf("\nradix\n");
+    my_algorithm::testRadixSort();
     return 0;
 }

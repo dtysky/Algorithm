@@ -18,7 +18,8 @@ namespace my_algorithm {
 
     // time: O(n^2)
     // space: O(n)
-    void selectionSort(vector<uint32_t>& t_vector, const bool reverse = false) {
+    template <typename T>
+    void selectionSort(vector<T>& t_vector, const bool reverse = false) {
         size_t cursor_current = 0;
         auto size = t_vector.size();
 

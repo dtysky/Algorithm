@@ -1,13 +1,13 @@
 //
-//  insertion_sort
+//  shell_sort
 //  Algorithm
 //
-//  Created by dtysky on 16/9/11.
+//  Created by dtysky on 16/9/13.
 //  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
 #include <iostream>
-#include "insertion_sort.h"
+#include "shell_sort.h"
 #include "utils.h"
 #include <ctime>
 
@@ -17,19 +17,21 @@ namespace my_algorithm {
     using std::endl;
     using std::vector;
 
-    void testInsertionSort(){
+    void testShellSort(){
+
+        vector<uint32_t> step_queue = {4, 3, 2, 1};
 
         auto v1 = vector<uint32_t>(10000);
         fillVectorWithRandomNumbers(v1, 10000);
 
         auto tStart = clock();
-        insertionSort<uint32_t>(v1);
+        shellSort<uint32_t>(v1, step_queue);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
 
         tStart = clock();
-        insertionSort<uint32_t>(v1, true);
+        shellSort<uint32_t>(v1, step_queue, true);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
@@ -38,7 +40,7 @@ namespace my_algorithm {
         fillVectorWithRandomNumbers(v1, 20000);
 
         tStart = clock();
-        insertionSort<uint32_t>(v1);
+        shellSort<uint32_t>(v1, step_queue);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);

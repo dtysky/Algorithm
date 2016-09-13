@@ -9,6 +9,7 @@
 #include <iostream>
 #include "radix_sort.h"
 #include "utils.h"
+#include <ctime>
 
 
 namespace my_algorithm {
@@ -17,11 +18,28 @@ namespace my_algorithm {
     using std::vector;
     
     void testRadixSort(){
-        auto v1 = vector<uint32_t>(20);
+
+        auto v1 = vector<uint32_t>(10000);
         fillVectorWithRandomNumbers(v1, 10000);
-        radixSort(v1, 5, 10);
+
+        auto tStart = clock();
+        radixSort(v1, 4, 10);
+        printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
         printVector<uint32_t>(v1);
-        radixSort(v1, 5, 10, true);
+
+        tStart = clock();
+        radixSort(v1, 4, 10, true);
+        printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
+        printVector<uint32_t>(v1);
+
+        v1 = vector<uint32_t>(20000);
+        fillVectorWithRandomNumbers(v1, 20000);
+        tStart = clock();
+        radixSort(v1, 5, 10);
+        printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
         printVector<uint32_t>(v1);
     }
 }
