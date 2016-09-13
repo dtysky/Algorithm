@@ -1,13 +1,13 @@
 //
-//  insertion_sort
+//  merge_sort
 //  Algorithm
 //
-//  Created by dtysky on 16/9/11.
+//  Created by dtysky on 16/9/13.
 //  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
 #include <iostream>
-#include "insertion_sort.h"
+#include "merge_sort.h"
 #include "utils.h"
 #include <ctime>
 
@@ -17,7 +17,7 @@ namespace my_algorithm {
     using std::endl;
     using std::vector;
 
-    void testInsertionSort(){
+    void testMergeSort(){
 
         auto v1 = vector<uint32_t>(10000);
         fillVectorWithRandomNumbers(v1, 10000);
@@ -25,13 +25,13 @@ namespace my_algorithm {
         printVector<uint32_t>(tmp);
 
         auto tStart = clock();
-        insertionSort<uint32_t>(v1);
+        mergeSort<uint32_t>(v1);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
 
         tStart = clock();
-        insertionSort<uint32_t>(v1, true);
+        mergeSort<uint32_t>(v1, true);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
@@ -40,7 +40,7 @@ namespace my_algorithm {
         fillVectorWithRandomNumbers(v1, 20000);
 
         tStart = clock();
-        insertionSort<uint32_t>(v1);
+        mergeSort<uint32_t>(v1);
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);

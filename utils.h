@@ -44,5 +44,12 @@ void fillVectorWithRandomNumbers(std::vector<uint32_t >& v, const uint32_t& max)
     }
 }
 
+template <typename T>
+std::vector<T> refSort(const std::vector<T>& v) {
+    auto tmp = v;
+    std::sort(tmp.begin(), tmp.end());
+    return tmp;
+}
+
 
 #endif /* utils_hpp */

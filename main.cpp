@@ -13,18 +13,21 @@
 #include "bucket_sort.test.h"
 #include "radix_sort.test.h"
 #include "shell_sort.test.h"
+#include "merge_sort.test.h"
 
 
 int main(int argc, const char * argv[]) {
-    printf("shell\n");
+    printf("merge\n");
+    my_algorithm::testMergeSort();
+    printf("\nshell\n");
     my_algorithm::testShellSort();
-    printf("\ninsertion\n");
-    my_algorithm::testInsertionSort();
-    printf("\nselection\n");
-    my_algorithm::testSelectionSort();
-    printf("\nbucket\n");
-    my_algorithm::testBucketSort();
-    printf("\nradix\n");
-    my_algorithm::testRadixSort();
+//    printf("\ninsertion\n");
+//    my_algorithm::testInsertionSort();
+//    printf("\nselection\n");
+//    my_algorithm::testSelectionSort();
+//    printf("\nbucket\n");
+//    my_algorithm::testBucketSort();
+//    printf("\nradix\n");
+//    my_algorithm::testRadixSort();
     return 0;
 }

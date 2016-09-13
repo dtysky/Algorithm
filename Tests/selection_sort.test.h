@@ -20,6 +20,8 @@ namespace my_algorithm {
 
         auto v1 = vector<uint32_t>(10000);
         fillVectorWithRandomNumbers(v1, 10000);
+        auto tmp = refSort<uint32_t>(v1);
+        printVector<uint32_t>(tmp);
 
         auto tStart = clock();
         selectionSort<uint32_t>(v1);
