@@ -36,8 +36,9 @@ bool isInVector(const std::vector<T>& v, const T& e) {
 }
 
 
-void fillVectorWithRandomNumbers(std::vector<uint32_t >& v, const uint32_t& max) {
+void fillVectorWithRandomNumbers(std::vector<uint32_t >& v, const uint32_t max, const uint32_t seed = 0) {
     auto size = v.size();
+    srand(seed);
 
     for (size_t i = 0; i < size; i++) {
         v[i] = float(max) * rand() / RAND_MAX;

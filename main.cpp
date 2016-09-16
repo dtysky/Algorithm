@@ -14,13 +14,15 @@
 #include "radix_sort.test.h"
 #include "shell_sort.test.h"
 #include "merge_sort.test.h"
-
+#include "quick_sort.test.h"
 
 int main(int argc, const char * argv[]) {
-    printf("merge\n");
+    printf("quick\n");
+    my_algorithm::testQuickSort();
+    printf("\nmerge\n");
     my_algorithm::testMergeSort();
-    printf("\nshell\n");
-    my_algorithm::testShellSort();
+//    printf("\nshell\n");
+//    my_algorithm::testShellSort();
 //    printf("\ninsertion\n");
 //    my_algorithm::testInsertionSort();
 //    printf("\nselection\n");

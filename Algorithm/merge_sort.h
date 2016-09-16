@@ -17,7 +17,7 @@ namespace my_algorithm {
     using std::vector;
 
     // time: O(n * log(n))
-    // space: O(n)
+    // space: O(Pn)
     template <typename T>
     void mergeSort(vector<T>& t_vector, const bool reverse = false) {
         auto size = t_vector.size();

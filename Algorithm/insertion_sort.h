@@ -19,14 +19,13 @@ namespace my_algorithm {
     // time: O(n) ~ O(n^2)
     // space: O(n)
     template <typename T>
-    void insertionSort(vector<T>& t_vector, const bool reverse = false) {
+    void insertionSort(vector<T>& t_vector, const bool reverse = false, const size_t low = 0, const size_t high = 0) {
 
-        auto t_size = t_vector.size();
-        size_t end = 0;
-        size_t current = 0;
+        auto t_size = high == 0 ? t_vector.size() : high + 1;
+        size_t end, current;
         T tmp;
 
-        for (size_t i = 1; i < t_size; i++) {
+        for (size_t i = low + 1; i < t_size; i++) {
             end = i;
             current = end;
             tmp = t_vector[end];

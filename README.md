@@ -24,5 +24,6 @@ Build with CPP.
 4. PostfixExpressionManager: evaluate a postfix expression(time-O(n), space-O(1)) or convert an infix expression to postfix expression(time-O(n), space-O(N)).  
 5. SelectionSort: selection sort, time-O(n^2), space-O(n).  
 6. insertionSort: insertion sort, time-O(n)~O(n^2), space-O(n). 
-7. shellSort: shell sort, time-O(......)(faster than insertion sort), space-O(n). 
+7. shellSort: shell sort, time-O(n)~O(n^(3/2))(faster than insertion sort), space-O(n). 
 8. mergeSort: merge sort, time-O(n * log(n)), space-O(n). 
+9. 
