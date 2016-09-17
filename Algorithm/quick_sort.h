@@ -71,9 +71,10 @@ namespace my_algorithm {
             return;
         }
 
-//        if the size of elements will be sorted, we may use insertion sort to make it quicker like this:
+//        if the size of elements will be sorted is less than 20, we may use insertion sort to make it quicker like this:
 //        if (high - low < 20) {
 //            insertionSort(t_vector, reverse, low, high);
+//            return;
 //        }
 
         size_t middle = _partitionForQuickSort(t_vector, low, high, reverse);
