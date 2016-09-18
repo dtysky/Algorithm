@@ -44,5 +44,16 @@ namespace my_algorithm {
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
+
+        for (size_t i = 0; i < 20000; i++) {
+            v1[i] = 1;
+        }
+
+        tStart = clock();
+        quickSort<uint32_t>(v1, false);
+        printf("Use3Way - Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+        tStart = clock();
+        quickSort<uint32_t>(v1, false, false);
+        printf("Not Use3Way - Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
     }
 }
