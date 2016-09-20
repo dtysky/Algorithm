@@ -14,7 +14,8 @@ Build with CPP.
 4. Stack: stack based on linked list.  
 5. StackBasedOnArray: stack based on array.
 6. Queue: queue based on linked list.  
-7. QueueBasedOnArray: queue based on array.   
+7. QueueBasedOnArray: queue based on array.
+8. PriorityQueue: priority queue based on linked list.  
 
 ## Algorithm
 

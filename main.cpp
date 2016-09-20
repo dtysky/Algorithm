@@ -8,19 +8,21 @@
 
 #include "main.h"
 
-#include "selection_sort.test.h"
-#include "insertion_sort.test.h"
-#include "bucket_sort.test.h"
-#include "radix_sort.test.h"
-#include "shell_sort.test.h"
-#include "merge_sort.test.h"
-#include "quick_sort.test.h"
+//#include "selection_sort.tes/*t.h"
+//#include "insertion_sort.test.h"
+//#include "bucket_sort.test.h"
+//#include "radix_sort.test.h"
+//#include "shell_sort.test.h"
+//#include "merge_sort.test.h"
+//#include "quick_sort.test.h"*/
+#include "priority_queue.test.h"
 
 int main(int argc, const char * argv[]) {
-    printf("quick\n");
-    my_algorithm::testQuickSort();
-    printf("\nmerge\n");
-    my_algorithm::testMergeSort();
+    data_structures::testPriorityQueue();
+//    printf("quick\n");
+//    my_algorithm::testQuickSort();
+//    printf("\nmerge\n");
+//    my_algorithm::testMergeSort();
 //    printf("\nshell\n");
 //    my_algorithm::testShellSort();
 //    printf("\ninsertion\n");

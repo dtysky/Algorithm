@@ -18,7 +18,7 @@ namespace my_algorithm {
     using std::vector;
 
 
-    template <typename T>
+    template <typename T> inline
     void _swapForQuickSort(vector<T>& t_vector, const size_t i1, const size_t i2) {
         T tmp = t_vector[i1];
         t_vector[i1] = t_vector[i2];
@@ -27,7 +27,7 @@ namespace my_algorithm {
 
     // median3, prevent the worst condition
     // set the median item to low, and make their three items be sorted
-    template <typename T>
+    template <typename T> inline
     size_t _median3ForQuickSort(vector<T>& t_vector, const size_t low, const size_t high, const bool reverse) {
         auto middle = (high + low) / 2;
         if (t_vector[low] < t_vector[middle]) {
@@ -42,7 +42,7 @@ namespace my_algorithm {
         return middle;
     }
 
-    template <typename T>
+    template <typename T> inline
     size_t _partitionForQuickSort(vector<T>& t_vector, const size_t low, const size_t high, const bool reverse = false) {
 
         auto middle = _median3ForQuickSort(t_vector, low, high, reverse);
@@ -72,7 +72,7 @@ namespace my_algorithm {
         return l;
     }
 
-    template <typename T>
+    template <typename T> inline
     vector<size_t> _partitionForQuickSort3Way(vector<T>& t_vector, const size_t low, const size_t high, const bool reverse = false) {
 
         auto middle = _median3ForQuickSort(t_vector, low, high, reverse);

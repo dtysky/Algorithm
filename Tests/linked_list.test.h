@@ -26,6 +26,10 @@ namespace data_structures {
             ->insertToTail(9)
             ->insertToTail(10);
         cout << *list << "\n";
+        cout << list->size() << "\n";
+        cout << *list->getKthNode(5) << "\n";
+        cout << *list->getKthNode(0) << "\n";
+        cout << *list->getKthNode(9) << "\n";
         cout << list->isEmpty() << "\n";
         cout << list->header() << "\n";
         cout << list->tail() << "\n";
@@ -43,12 +47,15 @@ namespace data_structures {
             ->del(5)
             ->del(10);
         cout << *list << "\n";
+        cout << list->size() << "\n";
         list->insertToHeader(1);
         list->insert(4, 5)
-            ->insert(9, 10);
+            ->insert(9, 10)
+            ->deleteFromHeader();
         cout << *list << "\n";
         list->clear();
         cout << *list << "\n";
+        cout << list->size() << "\n";
         list->del(1);
         delete list;
         delete copy_list;
