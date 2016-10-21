@@ -42,5 +42,4 @@ namespace data_structures {
         queue1.clear();
         cout << queue1 << endl;
     }
-
 }

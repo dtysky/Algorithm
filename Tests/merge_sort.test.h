@@ -29,6 +29,7 @@ namespace my_algorithm {
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
+        compareTwoVectorsWithAssert(v1, tmp);
 
         tStart = clock();
         mergeSort<uint32_t>(v1, true);

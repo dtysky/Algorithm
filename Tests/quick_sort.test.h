@@ -29,6 +29,7 @@ namespace my_algorithm {
         printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
         printVector<uint32_t>(v1);
+        compareTwoVectorsWithAssert(v1, tmp);
 
         tStart = clock();
         quickSort<uint32_t>(v1, true);
@@ -54,6 +55,6 @@ namespace my_algorithm {
         printf("Use3Way - Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
         tStart = clock();
         quickSort<uint32_t>(v1, false, false);
-        printf("Not Use3Way - Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+        printf("No Use3Way - Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
     }
 }

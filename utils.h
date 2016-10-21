@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
+#include <assert.h>
 
 template <typename T>
 void printVector(std::vector<T>& a) {
@@ -22,13 +23,6 @@ void printVector(std::vector<T>& a) {
     }
     std::cout << std::endl;
 }
-
-
-//template <typename T>
-//void findInVector(const std::vector<T>& v, const T& e) {
-//    return std::find(v.begin(), v.end(), e);
-//}
-
 
 template <typename T>
 bool isInVector(const std::vector<T>& v, const T& e) {
@@ -43,6 +37,11 @@ void fillVectorWithRandomNumbers(std::vector<uint32_t >& v, const uint32_t max, 
     for (size_t i = 0; i < size; i++) {
         v[i] = float(max) * rand() / RAND_MAX;
     }
+}
+
+void compareTwoVectorsWithAssert(std::vector<uint32_t >& v1, std::vector<uint32_t >& v2) {
+    std::cout << std::endl;
+    assert(v1 == v2);
 }
 
 template <typename T>

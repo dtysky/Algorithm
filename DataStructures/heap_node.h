@@ -1,5 +1,5 @@
 //
-//  tree_node
+//  heap_node
 //  Algorithm
 //
 //  Created by dtysky on 16/9/9.
@@ -15,33 +15,34 @@
 
 namespace data_structures {
     template <typename T>
-    class TreeNode {
+    class HeapNode {
     protected:
-        TreeNode *_left, *_right, *_parent;
+        HeapNode *_left, *_right, *_parent;
 
     public:
         T element;
-        TreeNode();
-        TreeNode(const TreeNode& node);
-        virtual ~TreeNode();
-        void insertLeft(const TreeNode* node);
-        void insertRight(const TreeNode* node);
-        TreeNode<T>* deleteLeft(const TreeNode* node);
-        TreeNode<T>* deleteRight(const TreeNode* node);
-        TreeNode<T>* left();
-        TreeNode<T>* right();
-        TreeNode<T>* parent();
-        void operator=(const TreeNode<T>& node);
-        bool operator==(const TreeNode<T>& node);
-        bool operator!=(const TreeNode<T>& node);
-        friend std::ostream& operator<<(std::ostream& out, const TreeNode<T>& node){
-            std::cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
+        HeapNode();
+        HeapNode(const T& element);
+        HeapNode(const HeapNode& node);
+        virtual ~HeapNode();
+        void insertLeft(HeapNode<T>* node);
+        void insertRight(HeapNode<T>* node);
+        HeapNode<T>* deleteLeft();
+        HeapNode<T>* deleteRight();
+        HeapNode<T>* left();
+        HeapNode<T>* right();
+        HeapNode<T>* parent();
+        void operator=(const HeapNode<T>& node);
+        bool operator==(const HeapNode<T>& node);
+        bool operator!=(const HeapNode<T>& node);
+        friend std::ostream& operator<<(std::ostream& out, const HeapNode<T>& node){
+//            std::cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
             return out;
         }
 
 
         template <typename T> inline
-        TreeNode<T>::TreeNode(){
+        HeapNode<T>::HeapNode(){
             _left = nullptr;
             _right = nullptr;
             _parent = nullptr;
@@ -49,7 +50,15 @@ namespace data_structures {
         }
 
         template <typename T> inline
-        TreeNode<T>::TreeNode(const TreeNode<T>& node){
+        HeapNode<T>::HeapNode(const T& element){
+            _left = nullptr;
+            _right = nullptr;
+            _parent = nullptr;
+            this->element = element;
+        }
+
+        template <typename T> inline
+        HeapNode<T>::HeapNode(const HeapNode<T>& node){
             element = node.element;
             _left = node._left;
             _right = node._right;
@@ -57,14 +66,14 @@ namespace data_structures {
         }
 
         template <typename T> inline
-        TreeNode<T>::~TreeNode(){
+        HeapNode<T>::~HeapNode(){
             _left = nullptr;
             _right = nullptr;
             _parent = nullptr;
         }
 
         template <typename T> inline
-        void TreeNode<T>::operator=(const TreeNode<T>& node){
+        void HeapNode<T>::operator=(const HeapNode<T>& node){
             element = node.element;
             _left = node._left;
             _right = node._right;
@@ -72,59 +81,55 @@ namespace data_structures {
         }
 
         template <typename T> inline
-        bool TreeNode<T>::operator==(const TreeNode<T>& node){
+        bool HeapNode<T>::operator==(const HeapNode<T>& node){
             return (element == node.element) && (_parent == node._parent) && (_left == node._left);
         }
 
         template <typename T> inline
-        bool TreeNode<T>::operator!=(const TreeNode<T>& node){
+        bool HeapNode<T>::operator!=(const HeapNode<T>& node){
             return !(*this == node);
         }
 
         template <typename T> inline
-        void TreeNode<T>::insertLeft(TreeNode *node){
+        void HeapNode<T>::insertLeft(HeapNode<T> *node){
             node->_left = _left;
             node->_parent = this;
             _left = node;
         }
 
         template <typename T> inline
-        void TreeNode<T>::insertRight(TreeNode *node){
+        void HeapNode<T>::insertRight(HeapNode<T> *node){
             node->_left = _right;
             node->_parent = this;
             _right = node;
         }
 
         template <typename T> inline
-        TreeNode<T>* TreeNode<T>::deleteLeft(const TreeNode *node){
-            TreeNode<T>* temp_node = _next;
-            if (_next != nullptr) {
-                _next = _next->_next;
-            }
+        HeapNode<T>* HeapNode<T>::deleteLeft(){
+            HeapNode<T>* temp_node = _left;
+            _left = nullptr;
             return temp_node;
         }
 
         template <typename T> inline
-        TreeNode<T>* TreeNode<T>::deleteRight(const TreeNode *node){
-            TreeNode<T>* temp_node = _next;
-            if (_next != nullptr) {
-                _next = _next->_next;
-            }
+        HeapNode<T>* HeapNode<T>::deleteRight(){
+            HeapNode<T>* temp_node = _right;
+            _right = nullptr;
             return temp_node;
         }
 
         template <typename T> inline
-        TreeNode<T>* TreeNode<T>::left(){
+        HeapNode<T>* HeapNode<T>::left(){
             return _left;
         }
 
         template <typename T> inline
-        TreeNode<T>* TreeNode<T>::right(){
+        HeapNode<T>* HeapNode<T>::right(){
             return _right;
         }
 
         template <typename T> inline
-        TreeNode<T>* TreeNode<T>::parent(){
+        HeapNode<T>* HeapNode<T>::parent(){
             return _parent;
         }
     };
