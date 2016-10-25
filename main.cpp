@@ -8,13 +8,15 @@
 
 #include "main.h"
 
-#include "selection_sort.test.h"
-#include "insertion_sort.test.h"
-#include "bucket_sort.test.h"
-#include "radix_sort.test.h"
-#include "shell_sort.test.h"
-#include "merge_sort.test.h"
-#include "quick_sort.test.h"
+//#include "selection_sort.test.h"
+//#include "insertion_sort.test.h"
+//#include "bucket_sort.test.h"
+//#include "radix_sort.test.h"
+//#include "shell_sort.test.h"
+//#include "merge_sort.test.h"
+//#include "quick_sort.test.h"
+#include "binary_heap.test.h"
+
 
 int main(int argc, const char * argv[]) {
 //    printf("quick\n");
@@ -27,9 +29,10 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testInsertionSort();
 //    printf("\nselection\n");
 //    my_algorithm::testSelectionSort();
-    printf("\nbucket\n");
-    my_algorithm::testBucketSort();
+//    printf("\nbucket\n");
+//    my_algorithm::testBucketSort();
 //    printf("\nradix\n");
 //    my_algorithm::testRadixSort();
+    data_structures::testBinaryHeap();
     return 0;
 }

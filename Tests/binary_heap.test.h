@@ -1,0 +1,56 @@
+//
+//  binary_heap
+//  Algorithm
+//
+//  Created by dtysky on 16/9/8.
+//  Copyright © 2016 dtysky@outlook.com. All rights reserved.
+//
+
+#include "binary_heap.h"
+
+
+namespace data_structures {
+    using std::cout;
+    using std::endl;
+
+    void testBinaryHeap() {
+        auto node = HeapNode<uint32_t>(10);
+        cout << node << endl;
+        auto max_heap = MaxBinaryHeap<uint32_t>();
+        max_heap.insert(0)
+            .insert(1)
+            .insert(2)
+            .insert(3)
+            .insert(4)
+            .insert(5)
+            .insert(6)
+            .insert(7)
+            .insert(8)
+            .insert(9)
+            .insert(10);
+        cout << max_heap << endl;
+        cout << max_heap.top() << endl;
+        auto max_heap1 = BinaryHeap<uint32_t>(max_heap);
+        cout << max_heap1 << endl;
+        while (!max_heap.isEmpty()) {
+            cout << max_heap.deleteTop() << endl;
+            cout << max_heap << endl;
+        }
+        cout << max_heap.isEmpty() << endl;
+        max_heap1.clear();
+        cout << max_heap1 << endl;
+        auto min_heap = MinBinaryHeap<uint32_t>();
+        min_heap.insert(0)
+            .insert(1)
+            .insert(2)
+            .insert(3)
+            .insert(4)
+            .insert(5)
+            .insert(6)
+            .insert(7)
+            .insert(8)
+            .insert(9)
+            .insert(10);
+        cout << min_heap << endl;
+    }
+}
