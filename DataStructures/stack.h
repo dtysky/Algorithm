@@ -29,7 +29,7 @@ namespace data_structures {
         Stack<T>& push(const T& element);
         T pop();
         T top();
-        void operator=(const Stack<T>& stack);
+        Stack<T>& operator=(const Stack<T>& stack);
         bool operator==(const Stack<T>& stack);
         bool operator!=(const Stack<T>& stack);
         friend ostream& operator<<(ostream& out, const Stack<T>& stack){
@@ -55,8 +55,9 @@ namespace data_structures {
     Stack<T>::~Stack() {}
 
     template <typename T> inline
-    void Stack<T>::operator=(const Stack<T>& stack){
+    Stack<T>& Stack<T>::operator=(const Stack<T>& stack){
         _list = stack._list;
+        return *this;
     }
 
     template <typename T> inline

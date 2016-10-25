@@ -11,157 +11,130 @@
 
 #include <cstdio>
 #include <iostream>
+#include <array>
 #include <iomanip>
-#include "heap_node.h"
+#include "utils.h"
 
 
 namespace data_structures {
-    template<typename T>
+    template<typename T, size_t Size>
     class BinaryHeap {
     protected:
-        HeapNode<T> *_root;
-        HeapNode<T> *_tail;
-        size_t _size;
+        std::array<T, Size> _array;
         virtual bool _compare(const T &element1, const T &element2);
-        void _exec(HeapNode<T> *node1, HeapNode<T> *node2);
-        void _swim(HeapNode<T> *node);
-        void _sink(HeapNode<T> *node);
-        void _copy(HeapNode<T> *node, HeapNode<T> *node_src);
-        void _delete(HeapNode<T> *node);
+        void _exec(const size_t k1, const size_t k2);
+        void _swim(const size_t k);
+        void _sink(const size_t k);
 
     public:
         BinaryHeap();
-        BinaryHeap(BinaryHeap<T> &heap);
+        BinaryHeap(BinaryHeap<T, Size> &heap);
         virtual ~BinaryHeap();
         bool isEmpty();
+        bool isEmpty() const;
         size_t size();
+        size_t size() const;
         BinaryHeap& clear();
         BinaryHeap& insert(const T &element);
         T top();
         T deleteTop();
-        void operator=(const BinaryHeap<T> &node);
-        bool operator==(const BinaryHeap<T> &node);
-        bool operator!=(const BinaryHeap<T> &node);
-        void printFromNode(HeapNode<T> *node, const int indent = 0) const;
-        friend std::ostream &operator<<(std::ostream &out, const BinaryHeap<T> &heap) {
-            heap.printFromNode(heap._root);
+        BinaryHeap<T, Size>& operator=(const BinaryHeap<T, Size> &heap);
+        bool operator==(const BinaryHeap<T, Size> &heap);
+        bool operator!=(const BinaryHeap<T, Size> &heap);
+        void printSlicing(const size_t start, const size_t end) const;
+        friend std::ostream &operator<<(std::ostream &out, const BinaryHeap<T, Size> &heap) {
+            size_t start = 0;
+            size_t end = 1;
+            auto size = heap.size();
+            while (end <= size) {
+                heap.printSlicing(start, end);
+                start = end;
+                end *= 2;
+            }
             return out;
         };
     };
 
 
-    template<typename T> inline
-    BinaryHeap<T>::BinaryHeap() {
-        _root = new HeapNode<T>();
-        _tail = _root;
-        _size = 0;
+    template<typename T, size_t Size> inline
+    BinaryHeap<T, Size>::BinaryHeap() {
+        _array = std::array<T, Size>();
     }
 
-    template<typename T> inline
-    BinaryHeap<T>::BinaryHeap(BinaryHeap<T> &heap) {
-        _root = new HeapNode<T>();
-        _tail = _root;
-        _size = 0;
-        _copy(_root, heap._root);
+    template<typename T, size_t Size> inline
+    BinaryHeap<T, Size>::BinaryHeap(BinaryHeap<T, Size> &heap) {
+        _array = heap._array;
     }
 
-    template<typename T> inline
-    BinaryHeap<T>::~BinaryHeap() {
-        _delete(_root);
-        delete _tail;
-        _size = 0;
-    }
+    template<typename T, size_t Size> inline
+    BinaryHeap<T, Size>::~BinaryHeap() {}
 
-    template<typename T> inline
-    void BinaryHeap<T>::_copy(HeapNode<T> *node, HeapNode<T> *node_src) {
-        node->element = node_src->element;
-        if (node_src->left() != nullptr) {
-            node->insertLeft(new HeapNode<T>(node_src->left()->element));
-            _tail = node->left();
-            _size ++;
-            _copy(node->left(), node_src->left());
-        }
-        if (node_src->right() != nullptr) {
-            node->insertRight(new HeapNode<T>(node_src->right()->element));
-            _tail = node->right();
-            _size ++;
-            _copy(node->right(), node_src->right());
-        }
-    }
-
-    template<typename T> inline
-    void BinaryHeap<T>::_delete(HeapNode<T> *node){
-        if (node == nullptr) {
-            return;
-        }
-        _delete(node->left());
-        _delete(node->right());
-        delete node;
-    }
-
-    template <typename T> inline
-    void BinaryHeap<T>::operator=(const BinaryHeap<T>& heap) {
-        _root = new HeapNode<T>();
-        _tail = _root;
-        _size = 0;
-        _copy(_root, heap._root);
-    }
-
-    template <typename T> inline
-    bool BinaryHeap<T>::operator==(const BinaryHeap<T>& heap) {
-        return _root == heap._root;
-    }
-
-    template <typename T> inline
-    bool BinaryHeap<T>::operator!=(const BinaryHeap<T>& heap) {
-        return _root != heap._root;
-    }
-
-    template<typename T> inline
-    void BinaryHeap<T>::printFromNode(HeapNode<T> *node, const int indent) const {
-        if(node->left()) {
-            printFromNode(node->left(), indent + 4);
-        }
-        if(node->right()) {
-            printFromNode(node->right(), indent + 4);
-        }
-        if (indent) {
-            std::cout << std::setw(indent) << ' ';
-        }
-        std::cout<< node->element << "\n ";
-    }
-
-    template <typename T> inline
-    bool BinaryHeap<T>::isEmpty() {
-        return _root == _tail;
-    }
-
-    template <typename T> inline
-    BinaryHeap<T>& BinaryHeap<T>::clear() {
-        _delete(_root);
-        _root = new HeapNode<T>();
-        _tail = _root;
-        _size = 0;
+    template<typename T, size_t Size> inline
+    BinaryHeap<T, Size>& BinaryHeap<T, Size>::operator=(const BinaryHeap<T, Size>& heap) {
+        _array = heap._array;
         return *this;
     }
 
-    template <typename T> inline
-    size_t BinaryHeap<T>::size() {
-        return _size;
+    template<typename T, size_t Size> inline
+    bool BinaryHeap<T, Size>::operator==(const BinaryHeap<T, Size>& heap) {
+        return _array == heap._array;
     }
 
-    template <typename T> inline
-    bool BinaryHeap<T>::_compare(const T &element1, const T &element2) {}
-
-    template <typename T> inline
-    void BinaryHeap<T>::_exec(HeapNode<T> *node1, HeapNode<T> *node2) {
-        auto tmp = node1->element;
-        node1->element = node2->element;
-        node2->element = tmp;
+    template<typename T, size_t Size> inline
+    bool BinaryHeap<T, Size>::operator!=(const BinaryHeap<T, Size>& heap) {
+        return _array != heap._array;
     }
 
-    template <typename T> inline
-    void BinaryHeap<T>::_swim(HeapNode<T> *node) {
+    template<typename T, size_t Size> inline
+    void BinaryHeap<T, Size>::printSlicing(const size_t start, const size_t end) const {
+        auto indent = 0;
+        for (auto element: sliceArray<T, Size>(_array, start, end)) {
+            std::cout << std::setw(indent);
+            std::cout << element;
+        }
+        std::cout << std::endl;
+    }
+
+    template<typename T, size_t Size> inline
+    bool BinaryHeap<T, Size>::isEmpty() {
+        return _array.empty();
+    }
+
+    template<typename T, size_t Size> inline
+    bool BinaryHeap<T, Size>::isEmpty() const {
+        return _array.empty();
+    }
+
+    template<typename T, size_t Size> inline
+    BinaryHeap<T, Size>& BinaryHeap<T, Size>::clear() {
+        _array = std::array<T, Size>();
+        return *this;
+    }
+
+    template<typename T, size_t Size> inline
+    size_t BinaryHeap<T, Size>::size() {
+        return _array.size();
+    }
+
+    template<typename T, size_t Size> inline
+    size_t BinaryHeap<T, Size>::size() const {
+        return _array.size();
+    }
+
+    template<typename T, size_t Size> inline
+    bool BinaryHeap<T, Size>::_compare(const T &element1, const T &element2) {
+        return element1 < element2;
+    }
+
+    template<typename T, size_t Size> inline
+    void BinaryHeap<T, Size>::_exec(const size_t k1, const size_t k2){
+        auto tmp = _array[k1];
+        _array[k1] = _array[k2];
+        _array[k2] = tmp;
+    }
+
+    template<typename T, size_t Size> inline
+    void BinaryHeap<T, Size>::_swim(HeapNode<T> *node) {
         if (node->parent() == nullptr) {
             return;
         }
@@ -174,8 +147,8 @@ namespace data_structures {
         }
     }
 
-    template <typename T> inline
-    void BinaryHeap<T>::_sink(HeapNode<T> *node) {
+    template<typename T, size_t Size> inline
+    void BinaryHeap<T, Size>::_sink(HeapNode<T> *node) {
         if (node->left() == nullptr && node->right() == nullptr) {
             return;
         }
@@ -208,8 +181,8 @@ namespace data_structures {
         }
     }
 
-    template<typename T> inline
-    BinaryHeap<T>& BinaryHeap<T>::insert(const T &element) {
+    template<typename T, size_t Size> inline
+    BinaryHeap<T, Size>& BinaryHeap<T, Size>::insert(const T &element) {
         if (_tail->left() == nullptr) {
             _tail->insertLeft(new HeapNode<T>(element));
             _tail = _tail->left();
@@ -219,15 +192,16 @@ namespace data_structures {
         }
         _size++;
         _swim(_tail);
+        return *this;
     }
 
-    template<typename T> inline
-    T BinaryHeap<T>::top() {
-        return _root->element;
+    template<typename T, size_t Size> inline
+    T BinaryHeap<T, Size>::top() {
+        return _array[0];
     }
 
-    template<typename T> inline
-    T BinaryHeap<T>::deleteTop() {
+    template<typename T, size_t Size> inline
+    T BinaryHeap<T, Size>::deleteTop() {
         auto tmp = _root->element;
         if (isEmpty()) {
             clear();
@@ -246,16 +220,16 @@ namespace data_structures {
     }
 
 
-    template <typename T>
-    class MaxBinaryHeap: public BinaryHeap<T> {
+    template<typename T, size_t Size>
+    class MaxBinaryHeap: public BinaryHeap<T, Size> {
     protected:
         bool _compare(const T &element1, const T &element2) {
             return element1 > element2;
         }
     };
 
-    template <typename T>
-    class MinBinaryHeap: public BinaryHeap<T> {
+    template<typename T, size_t Size>
+    class MinBinaryHeap: public BinaryHeap<T, Size> {
     protected:
         bool _compare(const T &element1, const T &element2) {
             return element1 < element2;

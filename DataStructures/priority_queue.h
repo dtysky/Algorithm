@@ -33,7 +33,7 @@ namespace data_structures {
         T dequeueMinN(const size_t n = 1);
         T maxN(const size_t n = 1);
         T minN(const size_t n = 1);
-        void operator=(const PriorityQueue<T>& queue);
+        PriorityQueue<T>& operator=(const PriorityQueue<T>& queue);
         bool operator==(const PriorityQueue<T>& queue);
         bool operator!=(const PriorityQueue<T>& queue);
         friend std::ostream& operator<<(std::ostream& out, const PriorityQueue<T>& queue){
@@ -58,8 +58,9 @@ namespace data_structures {
     PriorityQueue<T>::~PriorityQueue() {}
 
     template <typename T> inline
-    void PriorityQueue<T>::operator=(const PriorityQueue<T>& queue){
+    PriorityQueue<T>& PriorityQueue<T>::operator=(const PriorityQueue<T>& queue){
         _list = queue._list;
+        return *this;
     }
 
     template <typename T> inline

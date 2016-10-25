@@ -30,7 +30,7 @@ namespace data_structures {
         T dequeue();
         T front();
         T rear();
-        void operator=(const Queue<T>& queue);
+        Queue<T>& operator=(const Queue<T>& queue);
         bool operator==(const Queue<T>& queue);
         bool operator!=(const Queue<T>& queue);
         friend ostream& operator<<(ostream& out, const Queue<T>& queue){
@@ -56,8 +56,9 @@ namespace data_structures {
     Queue<T>::~Queue() {}
 
     template <typename T> inline
-    void Queue<T>::operator=(const Queue<T>& queue){
+    Queue<T>& Queue<T>::operator=(const Queue<T>& queue){
         _list = queue._list;
+        return *this;
     }
 
     template <typename T> inline

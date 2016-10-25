@@ -22,112 +22,118 @@ namespace data_structures {
     public:
         T element;
         TreeNode();
-        TreeNode(const TreeNode& node);
+        TreeNode(const T &element);
+        TreeNode(const TreeNode &node);
         virtual ~TreeNode();
-        void insertLeft(const TreeNode* node);
-        void insertRight(const TreeNode* node);
-        TreeNode<T>* deleteLeft(const TreeNode* node);
-        TreeNode<T>* deleteRight(const TreeNode* node);
-        TreeNode<T>* left();
-        TreeNode<T>* right();
-        TreeNode<T>* parent();
-        void operator=(const TreeNode<T>& node);
-        bool operator==(const TreeNode<T>& node);
-        bool operator!=(const TreeNode<T>& node);
-        friend std::ostream& operator<<(std::ostream& out, const TreeNode<T>& node){
-            std::cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
+        void insertLeft(TreeNode<T> *node);
+        void insertRight(TreeNode<T> *node);
+        TreeNode<T> *deleteLeft();
+        TreeNode<T> *deleteRight();
+        TreeNode<T> *left();
+        TreeNode<T> *right();
+        TreeNode<T> *parent();
+        TreeNode<T>& operator=(const TreeNode<T> &node);
+        bool operator==(const TreeNode<T> &node);
+        bool operator!=(const TreeNode<T> &node);
+        friend std::ostream &operator<<(std::ostream &out, const TreeNode<T> &node) {
+            std::cout << "Current: " << &node << ", Element: " << node.element << ", Parent: " << node._parent
+                      << ", Left: " << node._left << ", Right: " << node._right;
             return out;
         }
-
-
-        template <typename T> inline
-        TreeNode<T>::TreeNode(){
-            _left = nullptr;
-            _right = nullptr;
-            _parent = nullptr;
-            element = T();
-        }
-
-        template <typename T> inline
-        TreeNode<T>::TreeNode(const TreeNode<T>& node){
-            element = node.element;
-            _left = node._left;
-            _right = node._right;
-            _parent = node._parent;
-        }
-
-        template <typename T> inline
-        TreeNode<T>::~TreeNode(){
-            _left = nullptr;
-            _right = nullptr;
-            _parent = nullptr;
-        }
-
-        template <typename T> inline
-        void TreeNode<T>::operator=(const TreeNode<T>& node){
-            element = node.element;
-            _left = node._left;
-            _right = node._right;
-            _parent = node._parent;
-        }
-
-        template <typename T> inline
-        bool TreeNode<T>::operator==(const TreeNode<T>& node){
-            return (element == node.element) && (_parent == node._parent) && (_left == node._left);
-        }
-
-        template <typename T> inline
-        bool TreeNode<T>::operator!=(const TreeNode<T>& node){
-            return !(*this == node);
-        }
-
-        template <typename T> inline
-        void TreeNode<T>::insertLeft(TreeNode *node){
-            node->_left = _left;
-            node->_parent = this;
-            _left = node;
-        }
-
-        template <typename T> inline
-        void TreeNode<T>::insertRight(TreeNode *node){
-            node->_left = _right;
-            node->_parent = this;
-            _right = node;
-        }
-
-        template <typename T> inline
-        TreeNode<T>* TreeNode<T>::deleteLeft(const TreeNode *node){
-            TreeNode<T>* temp_node = _next;
-            if (_next != nullptr) {
-                _next = _next->_next;
-            }
-            return temp_node;
-        }
-
-        template <typename T> inline
-        TreeNode<T>* TreeNode<T>::deleteRight(const TreeNode *node){
-            TreeNode<T>* temp_node = _next;
-            if (_next != nullptr) {
-                _next = _next->_next;
-            }
-            return temp_node;
-        }
-
-        template <typename T> inline
-        TreeNode<T>* TreeNode<T>::left(){
-            return _left;
-        }
-
-        template <typename T> inline
-        TreeNode<T>* TreeNode<T>::right(){
-            return _right;
-        }
-
-        template <typename T> inline
-        TreeNode<T>* TreeNode<T>::parent(){
-            return _parent;
-        }
     };
+
+    template <typename T> inline
+    TreeNode<T>::TreeNode(){
+        _left = nullptr;
+        _right = nullptr;
+        _parent = nullptr;
+        element = T();
+    }
+
+    template <typename T> inline
+    TreeNode<T>::TreeNode(const T& element){
+        _left = nullptr;
+        _right = nullptr;
+        _parent = nullptr;
+        this->element = element;
+    }
+
+    template <typename T> inline
+    TreeNode<T>::TreeNode(const TreeNode<T>& node){
+        element = node.element;
+        _left = node._left;
+        _right = node._right;
+        _parent = node._parent;
+    }
+
+    template <typename T> inline
+    TreeNode<T>::~TreeNode(){
+        _left = nullptr;
+        _right = nullptr;
+        _parent = nullptr;
+    }
+
+    template <typename T> inline
+    TreeNode<T>& TreeNode<T>::operator=(const TreeNode<T>& node){
+        element = node.element;
+        _left = node._left;
+        _right = node._right;
+        _parent = node._parent;
+        return *this;
+    }
+
+    template <typename T> inline
+    bool TreeNode<T>::operator==(const TreeNode<T>& node){
+        return (element == node.element) && (_parent == node._parent) && (_left == node._left);
+    }
+
+    template <typename T> inline
+    bool TreeNode<T>::operator!=(const TreeNode<T>& node){
+        return !(*this == node);
+    }
+
+    template <typename T> inline
+    void TreeNode<T>::insertLeft(TreeNode<T> *node){
+        node->_left = _left;
+        node->_parent = this;
+        _left = node;
+    }
+
+    template <typename T> inline
+    void TreeNode<T>::insertRight(TreeNode<T> *node){
+        node->_left = _right;
+        node->_parent = this;
+        _right = node;
+    }
+
+    template <typename T> inline
+    TreeNode<T>* TreeNode<T>::deleteLeft(){
+        TreeNode<T>* temp_node = _left;
+        _left = nullptr;
+        return temp_node;
+    }
+
+    template <typename T> inline
+    TreeNode<T>* TreeNode<T>::deleteRight(){
+        TreeNode<T>* temp_node = _right;
+        _right = nullptr;
+        return temp_node;
+    }
+
+    template <typename T> inline
+    TreeNode<T>* TreeNode<T>::left(){
+        return _left;
+    }
+
+    template <typename T> inline
+    TreeNode<T>* TreeNode<T>::right(){
+        return _right;
+    }
+
+    template <typename T> inline
+    TreeNode<T>* TreeNode<T>::parent(){
+        return _parent;
+    }
 }
 
 #endif //ALGORITHM_TREE_NODE_H

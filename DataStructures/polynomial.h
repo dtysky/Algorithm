@@ -60,7 +60,6 @@ namespace data_structures {
         }
         return _result;
     }
-
     
     template <typename Unit, typename Value> inline
     Polynomail<Unit, Value> Polynomail<Unit, Value>::operator-() const {

@@ -49,7 +49,7 @@ namespace data_structures{
         ListNode<T>* tail() const;
         ListNode<T>* begin() const;
         ListNode<T>* end() const;
-        void operator=(const LinkedList<T>& list);
+        LinkedList<T>& operator=(const LinkedList<T>& list);
         bool operator==(const LinkedList<T>& list);
         bool operator!=(const LinkedList<T>& list);
         friend ostream& operator<<(ostream& out, const LinkedList<T>& list){
@@ -98,7 +98,7 @@ namespace data_structures{
     }
     
     template <typename T> inline
-    void LinkedList<T>::operator=(const LinkedList<T>& list) {
+    LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& list) {
         _header = new ListNode<T>();
         _tail = _header;
         _size = 0;
@@ -107,6 +107,7 @@ namespace data_structures{
             _current = _current->next();
             insertToTail(_current->element);
         }
+        return *this;
     }
     
     template <typename T> inline

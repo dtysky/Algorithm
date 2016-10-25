@@ -38,7 +38,7 @@ namespace data_structures {
         T dequeue();
         T front();
         T rear();
-        void operator=(const QueueBasedOnArray<T, Size>& queue);
+        QueueBasedOnArray<T, Size>& operator=(const QueueBasedOnArray<T, Size>& queue);
         bool operator==(const QueueBasedOnArray<T, Size>& queue);
         bool operator!=(const QueueBasedOnArray<T, Size>& queue);
         friend ostream& operator<<(ostream& out, const QueueBasedOnArray<T, Size>& queue){
@@ -84,12 +84,13 @@ namespace data_structures {
     QueueBasedOnArray<T, Size>::~QueueBasedOnArray() {}
 
     template <typename T, size_t Size> inline
-    void QueueBasedOnArray<T, Size>::operator=(const QueueBasedOnArray<T, Size>& queue){
+    QueueBasedOnArray<T, Size>& QueueBasedOnArray<T, Size>::operator=(const QueueBasedOnArray<T, Size>& queue){
         _cursor_front = queue._cursor_front;
         _cursor_rear = queue._cursor_rear;
         _full = queue._full;
         _empty = queue._empty;
         _array = queue._array;
+        return *this;
     }
 
     template <typename T, size_t Size> inline

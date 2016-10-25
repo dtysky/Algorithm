@@ -29,7 +29,7 @@ namespace my_algorithm {
         SymbolPairChecker(const SymbolPairChecker& checker);
         SymbolPairChecker(const std::vector<std::string>& symbol_pairs);
         virtual ~SymbolPairChecker();
-        void operator=(const SymbolPairChecker& checker);
+        SymbolPairChecker& operator=(const SymbolPairChecker& checker);
         void setSymbolPairs(const std::vector<std::string>& symbol_pairs);
         bool check(const std::string& str);
         uint32_t position();

@@ -34,11 +34,12 @@ namespace my_algorithm {
 
     SymbolPairChecker::~SymbolPairChecker() {}
 
-    void SymbolPairChecker::operator=(const SymbolPairChecker &checker) {
+    SymbolPairChecker& SymbolPairChecker::operator=(const SymbolPairChecker &checker) {
         _cursor = checker._cursor;
         _open_symbols = checker._open_symbols;
         _close_symbols = checker._close_symbols;
         _stack = data_structures::Stack<char>();
+        return *this;
     }
 
     void SymbolPairChecker::setSymbolPairs(const std::vector<std::string> &symbol_pairs) {

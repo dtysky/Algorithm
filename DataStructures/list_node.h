@@ -32,7 +32,7 @@ namespace data_structures {
         void insertAfter(ListNode<T>* node);
         ListNode<T>* deleteAfter();
         ListNode<T>* next();
-        void operator=(const ListNode<T>& node);
+        ListNode<T>& operator=(const ListNode<T>& node);
         bool operator==(const ListNode<T>& node);
         bool operator!=(const ListNode<T>& node);
         friend ostream& operator<<(ostream& out, const ListNode<T>& node){
@@ -66,9 +66,10 @@ namespace data_structures {
     }
     
     template <typename T> inline
-    void ListNode<T>::operator=(const ListNode<T>& node){
+    ListNode<T>& ListNode<T>::operator=(const ListNode<T>& node){
         this->element = node.element;
         _next = node._next;
+        return *this;
     }
     
     template <typename T> inline

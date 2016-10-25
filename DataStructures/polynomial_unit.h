@@ -11,6 +11,7 @@
 
 #include <cstdio>
 #include <cmath>
+#include <iostream>
 
 namespace data_structures{
     using std::cout;

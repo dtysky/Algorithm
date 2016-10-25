@@ -15,6 +15,8 @@
 #include <cstdlib>
 #include <algorithm>
 #include <assert.h>
+#include <array>
+
 
 template <typename T>
 void printVector(std::vector<T>& a) {
@@ -48,6 +50,13 @@ template <typename T>
 std::vector<T> refSort(const std::vector<T>& v) {
     auto tmp = v;
     std::sort(tmp.begin(), tmp.end());
+    return tmp;
+}
+
+template <typename T, size_t Size>
+std::array<T, Size> sliceArray(const std::array<T, Size>& array, const size_t start, const size_t end) {
+    auto tmp = std::array<T, end - start>();
+    std::copy(array.begin() + start, array.begin() + end, tmp.begin);
     return tmp;
 }
 
