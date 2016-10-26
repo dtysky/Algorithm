@@ -53,12 +53,5 @@ std::vector<T> refSort(const std::vector<T>& v) {
     return tmp;
 }
 
-template <typename T, size_t Size>
-std::array<T, Size> sliceArray(const std::array<T, Size>& array, const size_t start, const size_t end) {
-    auto tmp = std::array<T, end - start>();
-    std::copy(array.begin() + start, array.begin() + end, tmp.begin);
-    return tmp;
-}
-
 
 #endif /* utils_hpp */

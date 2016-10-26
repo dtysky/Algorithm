@@ -14,7 +14,7 @@ namespace data_structures {
     using std::endl;
 
     void testBinaryHeap() {
-        MaxBinaryHeap<uint32_t> max_heap;
+        MaxBinaryHeap<uint32_t, 100> max_heap;
         max_heap.insert(0)
             .insert(1)
             .insert(2)
