@@ -42,22 +42,15 @@ namespace data_structures {
         BinaryHeap<T, Size>& operator=(const BinaryHeap<T, Size> &heap);
         bool operator==(const BinaryHeap<T, Size> &heap);
         bool operator!=(const BinaryHeap<T, Size> &heap);
-        void print32_tSlicing(const size_t start, const size_t end, const int32_t indent, const int32_t line) const;
+        void printRow(const int32_t line, const int32_t indent) const;
         friend std::ostream &operator<<(std::ostream &out, const BinaryHeap<T, Size> &heap) {
-            auto lines = float(int32_t(log2f(heap.size())));
+            auto size = heap.size();
+            auto lines = float(int32_t(log2f(size)));
             int32_t line = 0;
             int32_t indent;
-            size_t start = 0;
-            size_t end = 0;
-            auto size = heap.size();
-            while (end <= size) {
+            while (line <= lines) {
                 indent = int32_t(6 * powf(2.0, lines - line));
-                heap.print32_tSlicing(start, end, indent, line);
-                if (start == 0) {
-                    end = 1;
-                }
-                start = end;
-                end *= 2;
+                heap.printRow(line, indent);
                 line++;
             }
             return out;
@@ -74,7 +67,7 @@ namespace data_structures {
     template<typename T, size_t Size> inline
     BinaryHeap<T, Size>::BinaryHeap(BinaryHeap<T, Size> &heap) {
         _array = heap._array;
-        _size = 0;
+        _size = heap._size;
     }
 
     template<typename T, size_t Size> inline
@@ -85,7 +78,7 @@ namespace data_structures {
     template<typename T, size_t Size> inline
     BinaryHeap<T, Size>& BinaryHeap<T, Size>::operator=(const BinaryHeap<T, Size>& heap) {
         _array = heap._array;
-        _size = 0;
+        _size = heap._size;
         return *this;
     }
 
@@ -100,22 +93,20 @@ namespace data_structures {
     }
 
     template<typename T, size_t Size> inline
-    void BinaryHeap<T, Size>::print32_tSlicing(const size_t start, const size_t end, const int32_t indent, const int32_t line) const {
-        double_t lead;
-        if (line == 0) {
-            lead = 0;
-        } else {
-            lead = (2 * line - 1) / 2.0;
-        }
-        for (size_t i = start; i <= end; i++) {
-            if (i == start && start !=0) {
+    void BinaryHeap<T, Size>::printRow(const int32_t line, const int32_t indent) const {
+        auto lead = (pow(2, line) - 1) / 2.0;
+        auto start = size_t(pow(2, line)) - 1;
+        auto end = size_t(pow(2, line + 1)) - 1;
+        end = end > size() ? size() : end;
+        for (size_t i = start; i < end; i++) {
+            if (i == start) {
                 std::cout << std::setw(int32_t(indent * (lead + 1)));
             } else {
                 std::cout << std::setw(indent);
             }
             std::cout << _array[i];
         }
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
     }
 
     template<typename T, size_t Size> inline
@@ -159,41 +150,47 @@ namespace data_structures {
 
     template<typename T, size_t Size> inline
     void BinaryHeap<T, Size>::_swim(const size_t k) {
+        if (k == 0) {
+            return;
+        }
         auto current = k;
         auto parent = (current - 1) / 2;
-        while (parent != 0 && _compare(_array[current], _array[parent])) {
-            parent = (current - 1) / 2;
+        while (current != 0 && _compare(_array[current], _array[parent])) {
             _exec(current, parent);
             current = parent;
+            parent = (current - 1) / 2;
         }
     }
 
     template<typename T, size_t Size> inline
     void BinaryHeap<T, Size>::_sink(const size_t k) {
         auto current = k;
-        auto left = (current + 1) * 2 - 1;
-        auto right = (current + 1) * 2;
+        size_t left, right;
         auto size = this->size();
         while (true) {
-            if (left > size) {
+            left = (current + 1) * 2 - 1;
+            right = (current + 1) * 2;
+            if (left >= size) {
                 return;
             }
             bool l_c_c, r_c_c, l_c_r;
-            l_c_c = _compare(_array[current], _array[left]);
-            if (left <= size && right > size) {
-                if (!l_c_c) {
+            l_c_c = _compare(_array[left], _array[current]);
+            if (left == size - 1) {
+                if (l_c_c) {
                     _exec(current, left);
                 }
                 return;
             }
-            r_c_c = _compare(_array[current], _array[right]);
+            r_c_c = _compare(_array[right], _array[current]);
             l_c_r = _compare(_array[left], _array[right]);
-            if (l_c_r && !l_c_c) {
+            if (l_c_r && l_c_c) {
                 _exec(current, left);
+                current = left;
                 continue;
             }
-            if (!l_c_r && !r_c_c) {
+            if (!l_c_r && r_c_c) {
                 _exec(current, right);
+                current = right;
             }
         }
     }
@@ -221,9 +218,9 @@ namespace data_structures {
             clear();
             return tmp;
         }
-        _exec(0, _size);
-        _sink(0);
+        _exec(0, _size - 1);
         _size--;
+        _sink(0);
         return tmp;
     }
 
@@ -232,7 +229,7 @@ namespace data_structures {
     class MaxBinaryHeap: public BinaryHeap<T, Size> {
     protected:
         bool _compare(const T &element1, const T &element2) {
-            return element1 >= element2;
+            return element1 > element2;
         }
     };
 
@@ -240,7 +237,7 @@ namespace data_structures {
     class MinBinaryHeap: public BinaryHeap<T, Size> {
     protected:
         bool _compare(const T &element1, const T &element2) {
-            return element1 <= element2;
+            return element1 < element2;
         }
     };
 };
