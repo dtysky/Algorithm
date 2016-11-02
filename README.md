@@ -29,4 +29,4 @@ Build with CPP.
 7. shellSort: shell sort, time-O(n)~O(n^(3/2))(faster than insertion sort), space-O(n). 
 8. mergeSort: merge sort, time-O(n * log(n)), space-O(Pn). 
 9. quickSort: quick sort, optimized by insertion sort, median3 and 3way, time-O(n * log(n)), space-O(n).
-10. quickSort: heap sort, time-O(n * log(n)), space-O(2n).
+10. heapSort: heap sort, time-O(n * log(n)), space-O(2n).
