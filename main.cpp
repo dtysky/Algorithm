@@ -15,7 +15,7 @@
 //#include "shell_sort.test.h"
 //#include "merge_sort.test.h"
 //#include "quick_sort.test.h"
-#include "binary_heap.test.h"
+#include "heap_sort.test.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -33,6 +33,7 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testBucketSort();
 //    printf("\nradix\n");
 //    my_algorithm::testRadixSort();
-    data_structures::testBinaryHeap();
+    printf("\nheap\n");
+    my_algorithm::testHeapSort();
     return 0;
 }

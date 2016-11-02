@@ -191,7 +191,9 @@ namespace data_structures {
             if (!l_c_r && r_c_c) {
                 _exec(current, right);
                 current = right;
+                continue;
             }
+            return;
         }
     }
 
