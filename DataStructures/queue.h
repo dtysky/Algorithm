@@ -93,7 +93,7 @@ namespace data_structures {
         if (isEmpty()) {
             throw std::out_of_range("Noting in this queue !");
         }
-        T result = _list.header()->element;
+        T result = _list.begin()->element;
         _list.deleteFromHeader();
         return result;
     }
@@ -103,7 +103,7 @@ namespace data_structures {
         if (isEmpty()) {
             throw std::out_of_range("Noting in this queue !");
         }
-        return _list.header()->element;
+        return _list.begin()->element;
     }
 
     template <typename T> inline

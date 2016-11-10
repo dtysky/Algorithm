@@ -35,7 +35,7 @@ namespace data_structures {
         Polynomail<Unit, Value> operator*(const Polynomail<Unit, Value>& py);
         friend ostream& operator<<(ostream& out, const Polynomail<Unit, Value>& py){
             auto tail = py.tail();
-            for(auto node = py.header(); node != py.end(); node = node->next()) {
+            for(auto node = py.begin(); node != py.end(); node = node->next()) {
                 cout << node->element << (node == tail ? "" : " + ");
             }
             return out;
@@ -55,7 +55,7 @@ namespace data_structures {
     template <typename Unit, typename Value> inline
     Value Polynomail<Unit, Value>::eval(const Value& x) {
         Value _result = Value();
-        for(auto node = this->header(); node != this->end(); node = node->next()) {
+        for(auto node = this->begin(); node != this->end(); node = node->next()) {
             _result += node->element.eval(x);
         }
         return _result;
@@ -64,7 +64,7 @@ namespace data_structures {
     template <typename Unit, typename Value> inline
     Polynomail<Unit, Value> Polynomail<Unit, Value>::operator-() const {
         auto _result = Polynomail<Unit, Value>(*this);
-        for(auto node = _result.header(); node != _result.end(); node = node->next()) {
+        for(auto node = _result.begin(); node != _result.end(); node = node->next()) {
             node->element.coefficient = -node->element.coefficient;
         }
         return _result;
@@ -73,7 +73,7 @@ namespace data_structures {
     template <typename Unit, typename Value> inline
     Polynomail<Unit, Value> Polynomail<Unit, Value>::operator-() {
         auto _result = Polynomail<Unit, Value>(*this);
-        for(auto node = _result.header(); node != _result.end(); node = node->next()) {
+        for(auto node = _result.begin(); node != _result.end(); node = node->next()) {
             node->element.coefficient = -node->element.coefficient;
         }
         return _result;
@@ -90,8 +90,8 @@ namespace data_structures {
         auto _result = Polynomail<Unit, Value>();
         auto _result_node = _result._header;
         auto element = Unit();
-        auto n1 = this->header();
-        auto n2 = py.header();
+        auto n1 = this->begin();
+        auto n2 = py.begin();
         // nodes in lists are plused are from big to small
         while (n1 != this->end() || n2 != py.end()) {
             if (n1 == this->end()){
@@ -148,10 +148,10 @@ namespace data_structures {
         if (this->isEmpty() || py.isEmpty()) {
             return _result;
         }
-        for (auto n1 = this->header(); n1 != this->end(); n1 = n1 -> next()) {
+        for (auto n1 = this->begin(); n1 != this->end(); n1 = n1 -> next()) {
             auto _tmp = Polynomail<Unit, Value>();
             auto _tmp_node = _tmp._header;
-            for (auto n2 = py.header(); n2 != py.end(); n2 = n2 -> next()) {
+            for (auto n2 = py.begin(); n2 != py.end(); n2 = n2 -> next()) {
                 _tmp_node->insertAfter(new ListNode<Unit>({
                     n1->element.exponent + n2->element.exponent,
                     n1->element.coefficient * n2->element.coefficient,

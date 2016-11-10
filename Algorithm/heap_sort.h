@@ -16,10 +16,13 @@
 
 namespace my_algorithm {
     // time: O(nlog(n))
-    // space: O(2n)
+    // space: O(n)
     template<typename T, size_t Size>
     void heapSort(std::vector<T>& t_vector, bool reverse = false) {
         auto size = size_t(t_vector.size());
+        if (size > Size) {
+            throw std::out_of_range("Vector's size must be less than heap's.");
+        }
         if (reverse) {
             data_structures::MaxBinaryHeap<T, Size> heap;
             for (int i = 0; i < size; i++) {

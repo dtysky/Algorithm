@@ -131,7 +131,7 @@ namespace data_structures {
         auto size = _list.size();
         T result;
         if (n == size) {
-            result = _list.header()->element;
+            result = _list.begin()->element;
             _list.deleteFromHeader();
         }
         else {
@@ -147,7 +147,7 @@ namespace data_structures {
         _checkN(n);
         T result;
         if (n == 1) {
-            result = _list.header()->element;
+            result = _list.begin()->element;
             _list.deleteFromHeader();
         }
         else {

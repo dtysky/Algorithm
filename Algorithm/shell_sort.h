@@ -17,7 +17,7 @@ namespace my_algorithm {
     using std::vector;
 
     // time: ......
-    // space: O(n)
+    // space: O(1)
     template <typename T>
     void shellSort(vector<T>& t_vector, const vector<uint32_t>& step_queue, const bool reverse = false) {
         auto size = t_vector.size();

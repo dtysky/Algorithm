@@ -17,7 +17,7 @@ namespace my_algorithm {
     using std::vector;
 
     // time: O(n^2)
-    // space: O(n)
+    // space: O(1)
     template <typename T>
     void selectionSort(vector<T>& t_vector, const bool reverse = false) {
         size_t cursor_current = 0;

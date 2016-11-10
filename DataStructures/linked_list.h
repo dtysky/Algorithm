@@ -56,7 +56,7 @@ namespace data_structures{
             if (list.isEmpty()) {
                 return out;
             }
-            ListNode<T>* _current = list.header();
+            ListNode<T>* _current = list.begin();
             while (!list.isTail(_current)) {
                 cout << _current->element << " ";
                 _current = _current->next();
@@ -257,7 +257,7 @@ namespace data_structures{
     
     template <typename T> inline
     ListNode<T>* LinkedList<T>::header() const {
-        return _header->next();
+        return _header;
     }
     
     template <typename T> inline
