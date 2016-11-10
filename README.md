@@ -17,6 +17,7 @@ Build with CPP.
 7. QueueBasedOnArray: queue based on array.
 8. PriorityQueue: priority queue based on linked list.  
 9. BinaryHeap: Binary heap based on array.  
+10. SymbolTable: Symbol table based on linked list.  
 
 ## Algorithm
 
