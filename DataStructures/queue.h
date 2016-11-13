@@ -31,8 +31,8 @@ namespace data_structures {
         T front();
         T rear();
         Queue<T>& operator=(const Queue<T>& queue);
-        bool operator==(const Queue<T>& queue);
-        bool operator!=(const Queue<T>& queue);
+        bool operator==(const Queue<T>& queue) const;
+        bool operator!=(const Queue<T>& queue) const;
         friend ostream& operator<<(ostream& out, const Queue<T>& queue){
             cout << "Front ---- ";
             cout << queue._list;
@@ -62,12 +62,12 @@ namespace data_structures {
     }
 
     template <typename T> inline
-    bool Queue<T>::operator==(const Queue<T>& queue){
+    bool Queue<T>::operator==(const Queue<T>& queue) const {
         return _list == queue._list;
     }
 
     template <typename T> inline
-    bool Queue<T>::operator!=(const Queue<T>& queue){
+    bool Queue<T>::operator!=(const Queue<T>& queue) const {
         return _list != queue._list;
     }
 

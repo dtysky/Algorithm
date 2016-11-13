@@ -40,8 +40,8 @@ namespace data_structures {
         T top();
         T deleteTop();
         BinaryHeap<T, Size>& operator=(const BinaryHeap<T, Size> &heap);
-        bool operator==(const BinaryHeap<T, Size> &heap);
-        bool operator!=(const BinaryHeap<T, Size> &heap);
+        bool operator==(const BinaryHeap<T, Size> &heap) const;
+        bool operator!=(const BinaryHeap<T, Size> &heap) const;
         void printRow(const int32_t line, const int32_t indent) const;
         friend std::ostream &operator<<(std::ostream &out, const BinaryHeap<T, Size> &heap) {
             auto size = heap.size();
@@ -83,12 +83,12 @@ namespace data_structures {
     }
 
     template<typename T, size_t Size> inline
-    bool BinaryHeap<T, Size>::operator==(const BinaryHeap<T, Size>& heap) {
+    bool BinaryHeap<T, Size>::operator==(const BinaryHeap<T, Size>& heap) const {
         return _array == heap._array;
     }
 
     template<typename T, size_t Size> inline
-    bool BinaryHeap<T, Size>::operator!=(const BinaryHeap<T, Size>& heap) {
+    bool BinaryHeap<T, Size>::operator!=(const BinaryHeap<T, Size>& heap) const {
         return _array != heap._array;
     }
 

@@ -16,7 +16,7 @@
 //#include "merge_sort.test.h"
 //#include "quick_sort.test.h"
 //#include "heap_sort.test.h"
-#include "symbol_table.test.h"
+#include "orderly_symbol_table.test.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -36,6 +36,6 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testRadixSort();
 //    printf("\nheap\n");
 //    my_algorithm::testHeapSort();
-    data_structures::testSymbolTable();
+    data_structures::testOrderlySymbolTable();
     return 0;
 }

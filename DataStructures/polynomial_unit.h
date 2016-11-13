@@ -16,7 +16,7 @@
 namespace data_structures{
     using std::cout;
     using std::ostream;
-    
+
     struct PolynomailUnit {
         float exponent;
         float coefficient;
@@ -30,10 +30,10 @@ namespace data_structures{
         float eval(const float& x) {
             return coefficient * pow(x, exponent);
         }
-        bool operator==(const PolynomailUnit& unit) {
+        bool operator==(const PolynomailUnit& unit) const {
             return exponent == unit.exponent && coefficient == unit.coefficient;
         };
-        bool operator!=(const PolynomailUnit& unit) {
+        bool operator!=(const PolynomailUnit& unit) const {
             return exponent != unit.exponent || coefficient != unit.coefficient;
         };
     };

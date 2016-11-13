@@ -50,8 +50,8 @@ namespace data_structures{
         ListNode<T>* begin() const;
         ListNode<T>* end() const;
         LinkedList<T>& operator=(const LinkedList<T>& list);
-        bool operator==(const LinkedList<T>& list);
-        bool operator!=(const LinkedList<T>& list);
+        bool operator==(const LinkedList<T>& list) const;
+        bool operator!=(const LinkedList<T>& list) const;
         friend ostream& operator<<(ostream& out, const LinkedList<T>& list){
             if (list.isEmpty()) {
                 return out;
@@ -111,12 +111,12 @@ namespace data_structures{
     }
     
     template <typename T> inline
-    bool LinkedList<T>::operator==(const LinkedList<T>& list){
+    bool LinkedList<T>::operator==(const LinkedList<T>& list) const {
         return _header == list._header;
     }
     
     template <typename T> inline
-    bool LinkedList<T>::operator!=(const LinkedList<T>& list){
+    bool LinkedList<T>::operator!=(const LinkedList<T>& list) const {
         return _header != list._header;
     }
 

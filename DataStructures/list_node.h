@@ -33,8 +33,8 @@ namespace data_structures {
         ListNode<T>* deleteAfter();
         ListNode<T>* next();
         ListNode<T>& operator=(const ListNode<T>& node);
-        bool operator==(const ListNode<T>& node);
-        bool operator!=(const ListNode<T>& node);
+        bool operator==(const ListNode<T>& node) const;
+        bool operator!=(const ListNode<T>& node) const;
         friend ostream& operator<<(ostream& out, const ListNode<T>& node){
             cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
             return out;
@@ -73,12 +73,12 @@ namespace data_structures {
     }
     
     template <typename T> inline
-    bool ListNode<T>::operator==(const ListNode<T>& node){
+    bool ListNode<T>::operator==(const ListNode<T>& node) const {
         return (this->element == node.element) && (_next == node._next);
     }
     
     template <typename T> inline
-    bool ListNode<T>::operator!=(const ListNode<T>& node){
+    bool ListNode<T>::operator!=(const ListNode<T>& node) const {
         return (this->element != node.element) || (_next != node._next);
     }
     

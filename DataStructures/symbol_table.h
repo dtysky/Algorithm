@@ -44,7 +44,7 @@ namespace data_structures {
 
     template <typename Key, typename Value>
     class SymbolTable {
-    private:
+    protected:
         LinkedList<SymbolTableElement<Key, Value>> _list;
     public:
         SymbolTable();
@@ -140,7 +140,7 @@ namespace data_structures {
                 return node->element.value;
             }
         }
-        throw std::out_of_range("Key error !");
+        throw std::out_of_range("Key error, no such key in this table !");
     }
 
     template <typename Key, typename Value> inline
@@ -154,7 +154,7 @@ namespace data_structures {
             }
             pre_node = node;
         }
-        throw std::out_of_range("Key error !");
+        throw std::out_of_range("Key error, no such key in this table !");
     }
 
     template <typename Key, typename Value> inline

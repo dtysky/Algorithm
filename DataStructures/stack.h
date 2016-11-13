@@ -30,8 +30,8 @@ namespace data_structures {
         T pop();
         T top();
         Stack<T>& operator=(const Stack<T>& stack);
-        bool operator==(const Stack<T>& stack);
-        bool operator!=(const Stack<T>& stack);
+        bool operator==(const Stack<T>& stack) const;
+        bool operator!=(const Stack<T>& stack) const;
         friend ostream& operator<<(ostream& out, const Stack<T>& stack){
             cout << "Top ---- ";
             cout << stack._list;
@@ -61,12 +61,12 @@ namespace data_structures {
     }
 
     template <typename T> inline
-    bool Stack<T>::operator==(const Stack<T>& stack){
+    bool Stack<T>::operator==(const Stack<T>& stack) const {
         return _list == stack._list;
     }
 
     template <typename T> inline
-    bool Stack<T>::operator!=(const Stack<T>& stack){
+    bool Stack<T>::operator!=(const Stack<T>& stack) const {
         return _list != stack._list;
     }
 

@@ -27,6 +27,7 @@ namespace data_structures {
         PriorityQueue(const PriorityQueue<T>& queue);
         virtual ~PriorityQueue();
         bool isEmpty();
+        size_t size();
         PriorityQueue<T>& clear();
         PriorityQueue<T>& enqueue(const T &element);
         T dequeueMaxN(const size_t n = 1);
@@ -34,8 +35,12 @@ namespace data_structures {
         T maxN(const size_t n = 1);
         T minN(const size_t n = 1);
         PriorityQueue<T>& operator=(const PriorityQueue<T>& queue);
-        bool operator==(const PriorityQueue<T>& queue);
-        bool operator!=(const PriorityQueue<T>& queue);
+        bool operator==(const PriorityQueue<T>& queue) const;
+        bool operator!=(const PriorityQueue<T>& queue) const;
+        ListNode<T>* begin() const;
+        ListNode<T>* end() const;
+        ListNode<T>* header() const;
+        ListNode<T>* tail() const;
         friend std::ostream& operator<<(std::ostream& out, const PriorityQueue<T>& queue){
             std::cout << "Min ---- ";
             std::cout << queue._list;
@@ -64,18 +69,23 @@ namespace data_structures {
     }
 
     template <typename T> inline
-    bool PriorityQueue<T>::operator==(const PriorityQueue<T>& queue){
+    bool PriorityQueue<T>::operator==(const PriorityQueue<T>& queue) const {
         return _list == queue._list;
     }
 
     template <typename T> inline
-    bool PriorityQueue<T>::operator!=(const PriorityQueue<T>& queue){
+    bool PriorityQueue<T>::operator!=(const PriorityQueue<T>& queue) const {
         return _list != queue._list;
     }
 
     template <typename T> inline
     bool PriorityQueue<T>::isEmpty() {
         return _list.isEmpty();
+    }
+
+    template <typename T> inline
+    size_t PriorityQueue<T>::size(){
+        return _list.size();
     }
 
     template <typename T> inline
@@ -156,6 +166,26 @@ namespace data_structures {
             _list.deleteAfterNode(node);
         }
         return result;
+    }
+
+    template <typename T> inline
+    ListNode<T>* PriorityQueue<T>::begin() const {
+        return _list.begin();
+    }
+
+    template <typename T> inline
+    ListNode<T>* PriorityQueue<T>::end() const {
+        return _list.end();
+    }
+
+    template <typename T> inline
+    ListNode<T>* PriorityQueue<T>::header() const {
+        return _list.header();
+    }
+
+    template <typename T> inline
+    ListNode<T>* PriorityQueue<T>::tail() const {
+        return _list.tail();
     }
 
 }

@@ -39,8 +39,8 @@ namespace data_structures {
         T front();
         T rear();
         QueueBasedOnArray<T, Size>& operator=(const QueueBasedOnArray<T, Size>& queue);
-        bool operator==(const QueueBasedOnArray<T, Size>& queue);
-        bool operator!=(const QueueBasedOnArray<T, Size>& queue);
+        bool operator==(const QueueBasedOnArray<T, Size>& queue) const;
+        bool operator!=(const QueueBasedOnArray<T, Size>& queue) const;
         friend ostream& operator<<(ostream& out, const QueueBasedOnArray<T, Size>& queue){
             cout << "Front ---- ";
             if (queue.isEmpty()) {}
@@ -94,12 +94,12 @@ namespace data_structures {
     }
 
     template <typename T, size_t Size> inline
-    bool QueueBasedOnArray<T, Size>::operator==(const QueueBasedOnArray<T, Size>& queue){
+    bool QueueBasedOnArray<T, Size>::operator==(const QueueBasedOnArray<T, Size>& queue) const {
         return _array == queue._array && _cursor_front == queue._cursor_front && _cursor_rear == queue._cursor_rear;
     }
 
     template <typename T, size_t Size> inline
-    bool QueueBasedOnArray<T, Size>::operator!=(const QueueBasedOnArray<T, Size>& queue){
+    bool QueueBasedOnArray<T, Size>::operator!=(const QueueBasedOnArray<T, Size>& queue) const {
         return _cursor_front != queue._cursor_front || _cursor_rear != queue._cursor_rear || _array != queue._array;
     }
 

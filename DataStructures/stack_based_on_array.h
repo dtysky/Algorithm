@@ -37,8 +37,8 @@ namespace data_structures {
         T pop();
         T top();
         StackBasedOnArray<T, Size>& operator=(const StackBasedOnArray<T, Size>& stack);
-        bool operator==(const StackBasedOnArray<T, Size>& stack);
-        bool operator!=(const StackBasedOnArray<T, Size>& stack);
+        bool operator==(const StackBasedOnArray<T, Size>& stack) const;
+        bool operator!=(const StackBasedOnArray<T, Size>& stack) const;
         friend ostream& operator<<(ostream& out, const StackBasedOnArray<T, Size>& stack){
             cout << "Top ---- ";
             for(auto i = stack._cursor; i > -1; i--) {
@@ -73,12 +73,12 @@ namespace data_structures {
     }
 
     template <typename T, size_t Size> inline
-    bool StackBasedOnArray<T, Size>::operator==(const StackBasedOnArray<T, Size>& stack){
+    bool StackBasedOnArray<T, Size>::operator==(const StackBasedOnArray<T, Size>& stack) const {
         return _array == stack._array && _cursor == stack._cursor;
     }
 
     template <typename T, size_t Size> inline
-    bool StackBasedOnArray<T, Size>::operator!=(const StackBasedOnArray<T, Size>& stack){
+    bool StackBasedOnArray<T, Size>::operator!=(const StackBasedOnArray<T, Size>& stack) const {
         return _cursor != stack._cursor || _array != stack._array;
     }
 
