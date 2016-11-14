@@ -31,13 +31,19 @@ bool isInVector(const std::vector<T>& v, const T& e) {
     return std::find(v.begin(), v.end(), e) != v.end();
 }
 
-
 void fillVectorWithRandomNumbers(std::vector<uint32_t >& v, const uint32_t max, const uint32_t seed = 0) {
     auto size = v.size();
     srand(seed);
 
     for (size_t i = 0; i < size; i++) {
         v[i] = float(max) * rand() / RAND_MAX;
+    }
+}
+
+void fillVectorWithRangeNumbers(std::vector<uint32_t >& v, const uint32_t max, const uint32_t seed = 0) {
+    auto size = v.size();
+    for (size_t i = 0; i < size; i++) {
+        v[i] = i;
     }
 }
 

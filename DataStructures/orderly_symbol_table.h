@@ -6,59 +6,17 @@
 //  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
-#ifndef ALGORITHM_SYMBOLTABLE_H
-#define ALGORITHM_SYMBOLTABLE_H
+#ifndef ALGORITHM_ORDERLY_SYMBOL_TABLE_H
+#define ALGORITHM_ORDERLY_SYMBOL_TABLE_H
 
 #include <cstdio>
 #include <vector>
 #include <iostream>
 #include "priority_queue.h"
+#include "symbol_table_elements.h"
 
 
 namespace data_structures {
-    template <typename Key, typename Value>
-    struct OrderlySymbolTableElement {
-    public:
-        Key key;
-        Value value;
-        OrderlySymbolTableElement() {}
-        OrderlySymbolTableElement(const Key& k, const Value& v) {
-            key = k;
-            value = v;
-        }
-        OrderlySymbolTableElement(const OrderlySymbolTableElement<Key, Value>& element) {
-            key = element.key;
-            value = element.value;
-        }
-        OrderlySymbolTableElement<Key, Value>& operator=(const OrderlySymbolTableElement<Key, Value>& element) {
-            key = element.key;
-            value = element.value;
-            return *this;
-        }
-        bool operator==(const OrderlySymbolTableElement<Key, Value>& element) const {
-            return key == element.key;
-        }
-        bool operator!=(const OrderlySymbolTableElement<Key, Value>& element) const {
-            return key != element.key;
-        }
-        bool operator>(const OrderlySymbolTableElement<Key, Value>& element) const {
-            return key > element.key;
-        }
-        bool operator<(const OrderlySymbolTableElement<Key, Value>& element) const {
-            return key < element.key;
-        }
-        bool operator>=(const OrderlySymbolTableElement<Key, Value>& element) const {
-            return key >= element.key;
-        }
-        bool operator<=(const OrderlySymbolTableElement<Key, Value>& element) const {
-            return key <= element.key;
-        }
-        friend std::ostream &operator<<(std::ostream &out, const OrderlySymbolTableElement<Key, Value> &element) {
-            std::cout << element.key << ": " << element.value << std::endl;
-            return out;
-        };
-    };
-
     template <typename Key, typename Value>
     class OrderlySymbolTable {
     protected:
@@ -247,4 +205,4 @@ namespace data_structures {
 }
 
 
-#endif //ALGORITHM_SYMBOLTABLE_H
+#endif //ALGORITHM_ORDERLY_SYMBOL_TABLE_H

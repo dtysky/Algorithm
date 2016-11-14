@@ -6,42 +6,17 @@
 //  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
-#ifndef ALGORITHM_SYMBOLTABLE_H
-#define ALGORITHM_SYMBOLTABLE_H
+#ifndef ALGORITHM_SYMBOL_TABLE_H
+#define ALGORITHM_SYMBOL_TABLE_H
 
 #include <cstdio>
 #include <vector>
 #include <iostream>
 #include "linked_list.h"
+#include "symbol_table_elements.h"
 
 
 namespace data_structures {
-    template <typename Key, typename Value>
-    struct SymbolTableElement {
-    public:
-        Key key;
-        Value value;
-        SymbolTableElement() {}
-        virtual ~SymbolTableElement() {}
-        SymbolTableElement(const Key& k, const Value& v) {
-            key = k;
-            value = v;
-        }
-        SymbolTableElement(const SymbolTableElement<Key, Value>& element) {
-            key = element.key;
-            value = element.value;
-        }
-        SymbolTableElement<Key, Value>& operator=(const SymbolTableElement<Key, Value>& element) {
-            key = element.key;
-            value = element.value;
-            return *this;
-        }
-        friend std::ostream &operator<<(std::ostream &out, const SymbolTableElement<Key, Value> &element) {
-            std::cout << element.key << ": " << element.value << std::endl;
-            return out;
-        };
-    };
-
     template <typename Key, typename Value>
     class SymbolTable {
     protected:
@@ -183,4 +158,4 @@ namespace data_structures {
 }
 
 
-#endif //ALGORITHM_SYMBOLTABLE_H
+#endif //ALGORITHM_SYMBOL_TABLE_H
