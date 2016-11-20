@@ -21,6 +21,8 @@ namespace data_structures {
 
     public:
         T element;
+        size_t node_count;
+        bool is_left;
         TreeNode();
         TreeNode(const T &element);
         TreeNode(const TreeNode &node);
@@ -48,6 +50,8 @@ namespace data_structures {
         _right = nullptr;
         _parent = nullptr;
         element = T();
+        node_count = 1;
+        is_left = false;
     }
 
     template <typename T> inline
@@ -55,6 +59,8 @@ namespace data_structures {
         _left = nullptr;
         _right = nullptr;
         _parent = nullptr;
+        node_count = 1;
+        is_left = false;
         this->element = element;
     }
 
@@ -64,6 +70,8 @@ namespace data_structures {
         _left = node._left;
         _right = node._right;
         _parent = node._parent;
+        node_count = 1;
+        is_left = false;
     }
 
     template <typename T> inline
@@ -71,6 +79,8 @@ namespace data_structures {
         _left = nullptr;
         _right = nullptr;
         _parent = nullptr;
+        node_count = 1;
+        is_left = false;
     }
 
     template <typename T> inline
@@ -79,6 +89,8 @@ namespace data_structures {
         _left = node._left;
         _right = node._right;
         _parent = node._parent;
+        node_count = 1;
+        is_left = false;
         return *this;
     }
 
@@ -96,6 +108,7 @@ namespace data_structures {
     void TreeNode<T>::insertLeft(TreeNode<T> *node){
         node->_left = _left;
         node->_parent = this;
+        node->is_left = true;
         _left = node;
     }
 
@@ -103,6 +116,7 @@ namespace data_structures {
     void TreeNode<T>::insertRight(TreeNode<T> *node){
         node->_left = _right;
         node->_parent = this;
+        node->is_left = false;
         _right = node;
     }
 
