@@ -19,6 +19,7 @@ Build with CPP.
 9. BinaryHeap: Binary heap based on array.  
 10. SymbolTable: Symbol table based on linked list.  
 11. OrderlySymbolTable: Orderly symbol table based on priority queue.  
+12. BinarySearchTree: Binary search tree based on pointer.  
 
 ## Algorithm
 
