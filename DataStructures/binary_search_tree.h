@@ -26,7 +26,7 @@ namespace data_structures {
         void _clearFromNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node);
         BinarySearchTreeElement<Key, Value> _deleteMinFromNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node);
         TreeNode<BinarySearchTreeElement<Key, Value>> *_find(const Key& key);
-        size_t _rankFromNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node);
+        size_t _rankOfNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node);
 
     public:
         BinarySearchTree();
@@ -171,7 +171,7 @@ namespace data_structures {
             if (node->element.key == key) {
                 return node;
             }
-            if (node->element.key < key) {
+            if (key < node->element.key) {
                 node = node->left();
             } else {
                 node = node->right();
@@ -228,14 +228,21 @@ namespace data_structures {
     }
 
     template <typename Key, typename Value> inline
-    size_t BinarySearchTree<Key, Value>::_rankFromNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node){
+    size_t BinarySearchTree<Key, Value>::_rankOfNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node){
         size_t r = 0;
-        auto tmp_node = node;
-        while (tmp_node != nullptr) {
-            if (tmp_node->left() != nullptr) {
-                r += tmp_node->left()->node_count;
+        if (node->left()) {
+            r = node->left()->node_count;
+        }
+        auto current_node = node;
+        auto pre_node = node->left();
+        while (current_node != nullptr) {
+            if (current_node->left() && current_node->left() != pre_node) {
+                r += current_node->left()->node_count + 1;
+            } else if (pre_node && !pre_node->is_left) {
+                r ++;
             }
-            tmp_node = tmp_node->parent();
+            pre_node = current_node;
+            current_node = current_node->parent();
         }
         return r;
     }
@@ -249,14 +256,14 @@ namespace data_structures {
             throw std::out_of_range("Index error, k is out of range !");
         }
         auto node = _root;
-        auto r = _rankFromNode(node);
+        auto r = _rankOfNode(node);
         while (r != k) {
             if (k < r) {
                 node = node->left();
             } else {
                 node = node->right();
             }
-            r = _rankFromNode(node);
+            r = _rankOfNode(node);
         }
         return node->element.key;
     }
@@ -264,7 +271,7 @@ namespace data_structures {
     template<typename Key, typename Value> inline
     size_t BinarySearchTree<Key, Value>::rank(const Key &key){
         auto node = _find(key);
-        return _rankFromNode(node);
+        return _rankOfNode(node);
     }
 };
 

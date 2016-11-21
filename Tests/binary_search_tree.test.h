@@ -17,16 +17,8 @@ namespace data_structures {
     using std::cout;
     using std::endl;
     void testBinarySearchTree(){
-//        auto tree = BinarySearchTree<std::string, uint32_t>();
         BinarySearchTree<std::string, uint32_t> tree;
         cout << tree.isEmpty() << endl;
-
-//        BinarySearchTree<std::string, std::string> tree;
-//        for (auto key: std::vector<std::string>{"e", "b", "c", "a", "d", "f", "aa", "bb", "cc", "dd", "ee"}) {
-//            tree.set(key, key);
-//            cout << key << endl;
-//            cout << tree << endl;
-//        }
 
         tree.set("e", 0)
             .set("b", 1)
@@ -44,10 +36,15 @@ namespace data_structures {
         cout << tree.get("a") << endl;
         tree.set("a", 334);
         cout << tree.get("a") << endl;
-        cout << tree.select(0) << endl;
-        cout << tree.rank(tree.select(0)) << endl;
-        cout << tree.select(4) << endl;
-        cout << tree.rank(tree.select(4)) << endl;
+
+        for (auto key: std::vector<std::string>{"a", "b", "c", "d", "e", "f", "aa", "bb", "cc", "dd", "ee"}) {
+            cout << key << " " << tree.rank(key) << endl;
+        }
+
+        for (auto rank: std::vector<size_t>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) {
+            cout << rank << " " << tree.select(rank) << endl;
+        }
+
         auto tree1 = tree;
         cout << (tree == tree1) << endl;
         tree.del("a");
