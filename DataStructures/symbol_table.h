@@ -38,9 +38,9 @@ namespace data_structures {
         std::vector<Key> keys();
         std::vector<SymbolTableElement<Key, Value>> elements();
         friend std::ostream &operator<<(std::ostream &out, const SymbolTable<Key, Value> &table) {
-            std::cout << "{" << std::endl;
-            std::cout << " " << table._list;
-            std::cout << "}" << std::endl;
+            out << "{" << std::endl;
+            out << " " << table._list;
+            out << "}" << std::endl;
             return out;
         };
     };

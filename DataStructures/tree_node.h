@@ -38,7 +38,7 @@ namespace data_structures {
         bool operator==(const TreeNode<T> &node);
         bool operator!=(const TreeNode<T> &node);
         friend std::ostream &operator<<(std::ostream &out, const TreeNode<T> &node) {
-            std::cout << "Current: " << &node << ", Element: " << node.element << ", Parent: " << node._parent
+            out << "Current: " << &node << ", Element: " << node.element << ", Parent: " << node._parent
                       << ", Left: " << node._left << ", Right: " << node._right;
             return out;
         }

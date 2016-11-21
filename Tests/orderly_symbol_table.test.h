@@ -34,7 +34,6 @@ namespace data_structures {
         table.set("a", 334);
         cout << table.get("a") << endl;
         auto table1 = table;
-        cout << table << endl;
         cout << (table == table1) << endl;
         for (auto element: table.elements()) {
             cout << element << " ";

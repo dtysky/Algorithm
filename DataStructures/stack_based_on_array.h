@@ -40,11 +40,11 @@ namespace data_structures {
         bool operator==(const StackBasedOnArray<T, Size>& stack) const;
         bool operator!=(const StackBasedOnArray<T, Size>& stack) const;
         friend ostream& operator<<(ostream& out, const StackBasedOnArray<T, Size>& stack){
-            cout << "Top ---- ";
+            out << "Top ---- ";
             for(auto i = stack._cursor; i > -1; i--) {
-                cout << stack._array[i] << " ";
+                out << stack._array[i] << " ";
             }
-            cout << " ---- Bottom";
+            out << " ---- Bottom";
             return out;
         };
     };

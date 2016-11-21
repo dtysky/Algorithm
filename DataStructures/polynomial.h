@@ -36,7 +36,7 @@ namespace data_structures {
         friend ostream& operator<<(ostream& out, const Polynomail<Unit, Value>& py){
             auto tail = py.tail();
             for(auto node = py.begin(); node != py.end(); node = node->next()) {
-                cout << node->element << (node == tail ? "" : " + ");
+                out << node->element << (node == tail ? "" : " + ");
             }
             return out;
         };

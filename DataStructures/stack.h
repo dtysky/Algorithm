@@ -33,9 +33,9 @@ namespace data_structures {
         bool operator==(const Stack<T>& stack) const;
         bool operator!=(const Stack<T>& stack) const;
         friend ostream& operator<<(ostream& out, const Stack<T>& stack){
-            cout << "Top ---- ";
-            cout << stack._list;
-            cout << " ---- Bottom";
+            out << "Top ---- ";
+            out << stack._list;
+            out << " ---- Bottom";
             return out;
         };
     };

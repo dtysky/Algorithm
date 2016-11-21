@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <iostream>
 #include <iomanip>
+#include "utils.h"
 #include "tree_node.h"
 #include "tree_elements.h"
 
@@ -42,9 +43,8 @@ namespace data_structures {
         BinarySearchTree<Key, Value>& operator=(const BinarySearchTree<Key, Value> &tree);
         bool operator==(const BinarySearchTree<Key, Value> &tree);
         bool operator!=(const BinarySearchTree<Key, Value> &tree);
-        void printFromNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node, const int indent = 0) const;
         friend std::ostream &operator<<(std::ostream &out, const BinarySearchTree<Key, Value> &tree) {
-            tree.printFromNode(tree._root);
+            printBinaryTree<TreeNode<BinarySearchTreeElement<Key, Value>>>(tree._root, 8, 0, out);
             return out;
         };
     };
@@ -114,20 +114,6 @@ namespace data_structures {
         return _root != tree._root;
     }
 
-    template<typename Key, typename Value> inline
-    void BinarySearchTree<Key, Value>::printFromNode(TreeNode<BinarySearchTreeElement<Key, Value>> *node, const int indent) const {
-        if(node->left()) {
-            printFromNode(node->left(), indent + 4);
-        }
-        if(node->right()) {
-            printFromNode(node->right(), indent + 4);
-        }
-        if (indent) {
-            std::cout << std::setw(indent) << ' ';
-        }
-        std::cout<< node->element.key << "(" << node->node_count << ")\n ";
-    }
-
     template <typename Key, typename Value> inline
     bool BinarySearchTree<Key, Value>::isEmpty() {
         return _root == nullptr;
@@ -154,12 +140,12 @@ namespace data_structures {
         auto node = _root;
         auto parent = _root->parent();
         while (node != nullptr) {
-            parent = node->parent();
             if (node->element.key == key) {
                 node->element.value = value;
-                break;
+                return *this;
             }
-            if (node->element.key < key) {
+            parent = node;
+            if (key < node->element.key) {
                 node = node->left();
             } else {
                 node = node->right();
@@ -183,7 +169,7 @@ namespace data_structures {
         auto node = _root;
         while (node != nullptr) {
             if (node->element.key == key) {
-                return node->element.value;
+                return node;
             }
             if (node->element.key < key) {
                 node = node->left();

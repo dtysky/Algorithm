@@ -34,9 +34,9 @@ namespace data_structures {
         bool operator==(const Queue<T>& queue) const;
         bool operator!=(const Queue<T>& queue) const;
         friend ostream& operator<<(ostream& out, const Queue<T>& queue){
-            cout << "Front ---- ";
-            cout << queue._list;
-            cout << " ---- Rear";
+            out << "Front ---- ";
+            out << queue._list;
+            out << " ---- Rear";
             return out;
         };
     };

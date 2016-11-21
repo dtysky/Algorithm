@@ -16,7 +16,7 @@
 //#include "merge_sort.test.h"
 //#include "quick_sort.test.h"
 //#include "heap_sort.test.h"
-#include "binary_search.test.h"
+#include "binary_search_tree.test.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -36,6 +36,6 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testRadixSort();
 //    printf("\nheap\n");
 //    my_algorithm::testHeapSort();
-    my_algorithm::testBinarySearch();
+    data_structures::testBinarySearchTree();
     return 0;
 }

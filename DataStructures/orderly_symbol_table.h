@@ -44,11 +44,11 @@ namespace data_structures {
         size_t rankKey(const Key& key);
         size_t sizeBetweenKeys(const Key& key1, const Key& key2);
         friend std::ostream &operator<<(std::ostream &out, const OrderlySymbolTable<Key, Value> &table) {
-            std::cout << "{" << std::endl;
+            out << "{" << std::endl;
             for (auto node = table._queue.begin(); node != table._queue.end(); node = node->next()) {
-                std::cout << "  " << node->element;
+                out << "  " << node->element;
             }
-            std::cout << "}" << std::endl;
+            out << "}" << std::endl;
             return out;
         };
     };

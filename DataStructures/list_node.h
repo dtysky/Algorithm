@@ -36,7 +36,7 @@ namespace data_structures {
         bool operator==(const ListNode<T>& node) const;
         bool operator!=(const ListNode<T>& node) const;
         friend ostream& operator<<(ostream& out, const ListNode<T>& node){
-            cout << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
+            out << "Current: " << &node << ", Element: " << node.element << ", Next: " << node._next;
             return out;
         }
     };

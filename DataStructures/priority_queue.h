@@ -42,9 +42,9 @@ namespace data_structures {
         ListNode<T>* header() const;
         ListNode<T>* tail() const;
         friend std::ostream& operator<<(std::ostream& out, const PriorityQueue<T>& queue){
-            std::cout << "Min ---- ";
-            std::cout << queue._list;
-            std::cout << " ---- Max";
+            out << "Min ---- ";
+            out << queue._list;
+            out << " ---- Max";
             return out;
         };
     };

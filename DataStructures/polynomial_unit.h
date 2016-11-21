@@ -40,7 +40,7 @@ namespace data_structures{
     
     
     ostream& operator<<(ostream& out, const PolynomailUnit& unit){
-        cout << unit.coefficient << "x^" << unit.exponent;
+        out << unit.coefficient << "x^" << unit.exponent;
         return out;
     };
 }

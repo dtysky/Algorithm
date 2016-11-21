@@ -42,22 +42,22 @@ namespace data_structures {
         bool operator==(const QueueBasedOnArray<T, Size>& queue) const;
         bool operator!=(const QueueBasedOnArray<T, Size>& queue) const;
         friend ostream& operator<<(ostream& out, const QueueBasedOnArray<T, Size>& queue){
-            cout << "Front ---- ";
+            out << "Front ---- ";
             if (queue.isEmpty()) {}
             else if (queue._cursor_front < queue._cursor_rear) {
                 for(auto i = queue._cursor_front + 1; i <= queue._cursor_rear; i++) {
-                    cout << queue._array[i] << " ";
+                    out << queue._array[i] << " ";
                 }
             }
             else {
                 for(auto i = queue._cursor_front + 1; i < Size; i++) {
-                    cout << queue._array[i] << " ";
+                    out << queue._array[i] << " ";
                 }
                 for(auto i = 0; i <= queue._cursor_rear; i++) {
-                    cout << queue._array[i] << " ";
+                    out << queue._array[i] << " ";
                 }
             }
-            cout << " ---- Rear";
+            out << " ---- Rear";
             return out;
         };
     };

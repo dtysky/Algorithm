@@ -58,10 +58,10 @@ namespace data_structures{
             }
             ListNode<T>* _current = list.begin();
             while (!list.isTail(_current)) {
-                cout << _current->element << " ";
+                out << _current->element << " ";
                 _current = _current->next();
             }
-            cout << _current->element;
+            out << _current->element;
             return out;
         };
     };

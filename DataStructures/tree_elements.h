@@ -52,7 +52,7 @@ namespace data_structures {
             return key <= element.key;
         }
         friend std::ostream &operator<<(std::ostream &out, const BinarySearchTreeElement<Key, Value> &element) {
-            std::cout << element.key << ": " << element.value << std::endl;
+            out<< element.key << ":" << element.value;
             return out;
         };
     };
