@@ -106,17 +106,19 @@ namespace data_structures {
 
     template <typename T> inline
     void TreeNode<T>::insertLeft(TreeNode<T> *node){
-        node->_left = _left;
-        node->_parent = this;
-        node->is_left = true;
+        if (node != nullptr) {
+            node->_parent = this;
+            node->is_left = true;
+        }
         _left = node;
     }
 
     template <typename T> inline
     void TreeNode<T>::insertRight(TreeNode<T> *node){
-        node->_left = _right;
-        node->_parent = this;
-        node->is_left = false;
+        if (node != nullptr) {
+            node->_parent = this;
+            node->is_left = false;
+        }
         _right = node;
     }
 

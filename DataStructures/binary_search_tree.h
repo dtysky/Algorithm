@@ -196,8 +196,13 @@ namespace data_structures {
         auto parent = min_node->parent();
         auto new_min_node = min_node->right();
         auto result = min_node->element;
-        delete parent->deleteLeft();
-        parent->insertLeft(new_min_node);
+        if (min_node->is_left) {
+            delete parent->deleteLeft();
+            parent->insertLeft(new_min_node);
+        } else {
+            delete parent->deleteRight();
+            parent->insertRight(new_min_node);
+        }
         return result;
     }
 
@@ -205,10 +210,6 @@ namespace data_structures {
     Value BinarySearchTree<Key, Value>::del(const Key &key) {
         auto node = _find(key);
         auto result = node->element.value;
-        if (node == _root) {
-            clear();
-            return result;
-        }
         auto new_node = node->left();
         if (node->left() == nullptr) {
             new_node = node->right();
@@ -221,6 +222,7 @@ namespace data_structures {
                 node->parent()->deleteRight();
                 node->parent()->insertRight(new_node);
             }
+            delete node;
             return result;
         }
         node->element = _deleteMinFromNode(node->right());
