@@ -15,43 +15,43 @@
 
 namespace data_structures {
     template <typename Key, typename Value>
-    struct BinarySearchTreeElement {
+    struct TreeElement {
     public:
         Key key;
         Value value;
-        BinarySearchTreeElement() {}
-        BinarySearchTreeElement(const Key& k, const Value& v) {
+        TreeElement() {}
+        TreeElement(const Key& k, const Value& v) {
             key = k;
             value = v;
         }
-        BinarySearchTreeElement(const BinarySearchTreeElement<Key, Value>& element) {
+        TreeElement(const TreeElement<Key, Value>& element) {
             key = element.key;
             value = element.value;
         }
-        BinarySearchTreeElement<Key, Value>& operator=(const BinarySearchTreeElement<Key, Value>& element) {
+        TreeElement<Key, Value>& operator=(const TreeElement<Key, Value>& element) {
             key = element.key;
             value = element.value;
             return *this;
         }
-        bool operator==(const BinarySearchTreeElement<Key, Value>& element) const {
+        bool operator==(const TreeElement<Key, Value>& element) const {
             return key == element.key;
         }
-        bool operator!=(const BinarySearchTreeElement<Key, Value>& element) const {
+        bool operator!=(const TreeElement<Key, Value>& element) const {
             return key != element.key;
         }
-        bool operator>(const BinarySearchTreeElement<Key, Value>& element) const {
+        bool operator>(const TreeElement<Key, Value>& element) const {
             return key > element.key;
         }
-        bool operator<(const BinarySearchTreeElement<Key, Value>& element) const {
+        bool operator<(const TreeElement<Key, Value>& element) const {
             return key < element.key;
         }
-        bool operator>=(const BinarySearchTreeElement<Key, Value>& element) const {
+        bool operator>=(const TreeElement<Key, Value>& element) const {
             return key >= element.key;
         }
-        bool operator<=(const BinarySearchTreeElement<Key, Value>& element) const {
+        bool operator<=(const TreeElement<Key, Value>& element) const {
             return key <= element.key;
         }
-        friend std::ostream &operator<<(std::ostream &out, const BinarySearchTreeElement<Key, Value> &element) {
+        friend std::ostream &operator<<(std::ostream &out, const TreeElement<Key, Value> &element) {
             out<< element.key << ":" << element.value;
             return out;
         };
