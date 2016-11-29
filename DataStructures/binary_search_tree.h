@@ -166,7 +166,7 @@ namespace data_structures {
 
     template<typename Key, typename Value> inline
     TreeNode<TreeElement<Key, Value>>* BinarySearchTree<Key, Value>::_find(const Key& key) {
-        auto node = _root;
+        TreeNode<TreeElement<Key, Value>>* node = _root;
         while (node != nullptr) {
             if (node->element.key == key) {
                 return node;
@@ -188,7 +188,7 @@ namespace data_structures {
 
     template<typename Key, typename Value> inline
     TreeElement<Key, Value> BinarySearchTree<Key, Value>::_deleteMinFromNode(TreeNode<TreeElement<Key, Value>> *node){
-        auto min_node = node;
+        TreeNode<TreeElement<Key, Value>>* min_node = node;
         while (min_node->left() != nullptr) {
             min_node->node_count--;
             min_node = min_node->left();
