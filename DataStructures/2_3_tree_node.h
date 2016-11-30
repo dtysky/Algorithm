@@ -1,163 +1,20 @@
 //
-//  tree_nodes
+//  2_3_tree_node
 //  Algorithm
 //
-//  Created by dtysky on 16/9/9.
+//  Created by dtysky on 16/11/30.
 //  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
-#ifndef ALGORITHM_TREE_NODE_H
-#define ALGORITHM_TREE_NODE_H
+#ifndef ALGORITHM_2_3_TREE_NODE_H
+#define ALGORITHM_2_3_TREE_NODE_H
 
 #include <cstdio>
 #include <iostream>
-#include "tree_elements.h"
+#include "tree_element.h"
 
 
 namespace data_structures {
-    /* -------- TreeNode -------- */
-    template <typename T, typename NodeType = TreeNode>
-    class TreeNode {
-    protected:
-        NodeType<T> *_left, *_right, *_parent;
-        void _init();
-        void _copy(const NodeType<T> &node);
-
-    public:
-        T element;
-        size_t node_count;
-        bool is_left;
-        TreeNode();
-        TreeNode(const T &element);
-        TreeNode(const NodeType<T> &node);
-        virtual ~TreeNode();
-        NodeType<T> * insertLeft(NodeType<T> *node);
-        NodeType<T> * insertRight(NodeType<T> *node);
-        NodeType<T> *deleteLeft();
-        NodeType<T> *deleteRight();
-        NodeType<T> *left();
-        NodeType<T> *right();
-        NodeType<T> *parent();
-        NodeType<T>& operator=(const NodeType<T> &node);
-        bool operator==(const NodeType<T> &node);
-        bool operator!=(const NodeType<T> &node);
-        friend std::ostream &operator<<(std::ostream &out, const NodeType<T> &node) {
-            out << "Current: " << &node << ", Element: " << node.element << ", Parent: " << node._parent
-                      << ", Left: " << node._left << ", Right: " << node._right;
-            return out;
-        }
-    };
-
-    template <typename T, typename NodeType> inline
-    void TreeNode<T>::_init() {
-        _left = nullptr;
-        _right = nullptr;
-        _parent = nullptr;
-        element = T();
-        node_count = 1;
-        is_left = false;
-    }
-
-    template <typename T, typename NodeType> inline
-    void TreeNode<T>::_copy(const NodeType<T> &node){
-        element = node.element;
-        _left = node._left;
-        _right = node._right;
-        _parent = node._parent;
-        node_count = 1;
-        is_left = false;
-    }
-
-    template <typename T, typename NodeType> inline
-    TreeNode<T>::TreeNode(){
-        _init();
-    }
-
-    template <typename T, typename NodeType> inline
-    TreeNode<T>::TreeNode(const T& element){
-        _init();
-        this->element = element;
-    }
-
-    template <typename T, typename NodeType> inline
-    TreeNode<T>::TreeNode(const NodeType<T>& node){
-        _copy(node);
-    }
-
-    template <typename T, typename NodeType> inline
-    TreeNode<T>::~TreeNode(){
-        _init();
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T>& TreeNode<T>::operator=(const NodeType<T>& node){
-        _copy(node);
-        return *this;
-    }
-
-    template <typename T, typename NodeType> inline
-    bool TreeNode<T>::operator==(const NodeType<T>& node){
-        return (element == node.element) && (_parent == node._parent) && (_left == node._left);
-    }
-
-    template <typename T, typename NodeType> inline
-    bool TreeNode<T>::operator!=(const NodeType<T>& node){
-        return !(*this == node);
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T> * TreeNode<T>::insertLeft(NodeType<T> *node){
-        NodeType<T>* temp_node = _left;
-        if (node != nullptr) {
-            node->_parent = this;
-            node->is_left = true;
-        }
-        _left = node;
-        return temp_node;
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T> * TreeNode<T>::insertRight(NodeType<T> *node){
-        NodeType<T>* temp_node = _right;
-        if (node != nullptr) {
-            node->_parent = this;
-            node->is_left = false;
-        }
-        _right = node;
-        return temp_node;
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T>* TreeNode<T>::deleteLeft(){
-        NodeType<T>* temp_node = _left;
-        _left = nullptr;
-        return temp_node;
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T>* TreeNode<T>::deleteRight(){
-        NodeType<T>* temp_node = _right;
-        _right = nullptr;
-        return temp_node;
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T>* TreeNode<T>::left(){
-        return _left;
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T>* TreeNode<T>::right(){
-        return _right;
-    }
-
-    template <typename T, typename NodeType> inline
-    NodeType<T>* TreeNode<T>::parent(){
-        return _parent;
-    }
-
-
-    /* -------- ThreeTreeNode -------- */
     template <typename T>
     class TwoThreeTreeNode {
     protected:
@@ -185,7 +42,6 @@ namespace data_structures {
         size_t type1to2(const T& element);
         TwoThreeTreeNode<T>* type1to0(const size_t child);
         TwoThreeTreeNode<T>* type2to1(const size_t element, const size_t child);
-//        TwoThreeTreeNode<T>* type3to2(const size_t delete_index);
         size_t type2to3(const T& element);
         size_t type1to2(TwoThreeTreeNode<T>* node);
         size_t type0to1(const T& element);
@@ -235,18 +91,18 @@ namespace data_structures {
     }
 
     template <typename T> inline
-    TwoThreeTreeNode<T>::TwoThreeTreeNode(const size_t type = 1){
+    TwoThreeTreeNode<T>::TwoThreeTreeNode(const size_t type){
         _init(type);
     }
 
     template <typename T> inline
-    TwoThreeTreeNode<T>::TwoThreeTreeNode(const T& elements, const size_t type = 1){
+    TwoThreeTreeNode<T>::TwoThreeTreeNode(const T& elements, const size_t type){
         _init(type);
         this->elements[0] = elements;
     }
 
     template <typename T> inline
-    TwoThreeTreeNode<T>::TwoThreeTreeNode(const T& elements[], const size_t type = 1){
+    TwoThreeTreeNode<T>::TwoThreeTreeNode(const T& elements[], const size_t){
         _init(type);
         this->elements = elements;
     }
@@ -257,7 +113,7 @@ namespace data_structures {
     }
 
     template <typename T> inline
-    void TwoThreeTreeNode<T>::~TwoThreeTreeNode(){
+    TwoThreeTreeNode<T>::~TwoThreeTreeNode(){
         _init(type);
     }
 
@@ -307,7 +163,7 @@ namespace data_structures {
     }
 
     template <typename T> inline
-    T TwoThreeTreeNode<T>::getIndex(){
+    size_t TwoThreeTreeNode<T>::getIndex(){
         for (size_t i = 0; i < _parent->type; i++) {
             if (_parent->child(i) == this) {
                 return i;
@@ -502,8 +358,6 @@ namespace data_structures {
         _check(index);
         return _children[index];
     }
-
-
 }
 
-#endif //ALGORITHM_TREE_NODE_H
+#endif //ALGORITHM_2_3_TREE_NODE_H

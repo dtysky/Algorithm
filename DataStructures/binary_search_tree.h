@@ -13,20 +13,20 @@
 #include <iostream>
 #include <iomanip>
 #include "utils.h"
-#include "tree_nodes.h"
-#include "tree_elements.h"
+#include "binary_tree_node.h"
+#include "tree_element.h"
 
 
 namespace data_structures {
     template<typename Key, typename Value>
     class BinarySearchTree {
     protected:
-        TreeNode<TreeElement<Key, Value>> *_root;
-        void _copy(TreeNode<TreeElement<Key, Value>> *node, TreeNode<TreeElement<Key, Value>> *node_src);
-        void _clearFromNode(TreeNode<TreeElement<Key, Value>> *node);
-        TreeElement<Key, Value> _deleteMinFromNode(TreeNode<TreeElement<Key, Value>> *node);
-        TreeNode<TreeElement<Key, Value>> *_find(const Key& key);
-        size_t _rankOfNode(TreeNode<TreeElement<Key, Value>> *node);
+        BinaryTreeNode<TreeElement<Key, Value>> *_root;
+        void _copy(BinaryTreeNode<TreeElement<Key, Value>> *node, BinaryTreeNode<TreeElement<Key, Value>> *node_src);
+        void _clearFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
+        TreeElement<Key, Value> _deleteMinFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
+        BinaryTreeNode<TreeElement<Key, Value>> *_find(const Key& key);
+        size_t _rankOfNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
 
     public:
         BinarySearchTree();
@@ -44,7 +44,7 @@ namespace data_structures {
         bool operator==(const BinarySearchTree<Key, Value> &tree);
         bool operator!=(const BinarySearchTree<Key, Value> &tree);
         friend std::ostream &operator<<(std::ostream &out, const BinarySearchTree<Key, Value> &tree) {
-            printBinaryTree<TreeNode<TreeElement<Key, Value>>>(tree._root, 8, 0, out);
+            printBinaryTree<BinaryTreeNode<TreeElement<Key, Value>>>(tree._root, 8, 0, out);
             return out;
         };
     };
@@ -61,7 +61,7 @@ namespace data_structures {
             _root = nullptr;
             return;
         }
-        _root = new TreeNode<TreeElement<Key, Value>>();
+        _root = new BinaryTreeNode<TreeElement<Key, Value>>();
         _copy(_root, tree._root);
     }
 
@@ -71,20 +71,20 @@ namespace data_structures {
     }
 
     template<typename Key, typename Value> inline
-    void BinarySearchTree<Key, Value>::_copy(TreeNode<TreeElement<Key, Value>> *node, TreeNode<TreeElement<Key, Value>> *node_src) {
+    void BinarySearchTree<Key, Value>::_copy(BinaryTreeNode<TreeElement<Key, Value>> *node, BinaryTreeNode<TreeElement<Key, Value>> *node_src) {
         node->element = node_src->element;
         if (node_src->left() != nullptr) {
-            node->insertLeft(new TreeNode<TreeElement<Key, Value>>(node_src->left()->element));
+            node->insertLeft(new BinaryTreeNode<TreeElement<Key, Value>>(node_src->left()->element));
             _copy(node->left(), node_src->left());
         }
         if (node_src->right() != nullptr) {
-            node->insertRight(new TreeNode<TreeElement<Key, Value>>(node_src->right()->element));
+            node->insertRight(new BinaryTreeNode<TreeElement<Key, Value>>(node_src->right()->element));
             _copy(node->right(), node_src->right());
         }
     }
 
     template<typename Key, typename Value> inline
-    void BinarySearchTree<Key, Value>::_clearFromNode(TreeNode<TreeElement<Key, Value>> *node){
+    void BinarySearchTree<Key, Value>::_clearFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node){
         if (node == nullptr) {
             return;
         }
@@ -99,7 +99,7 @@ namespace data_structures {
             _root = nullptr;
             return *this;
         }
-        _root = new TreeNode<TreeElement<Key, Value>>();
+        _root = new BinaryTreeNode<TreeElement<Key, Value>>();
         _copy(_root, tree._root);
         return *this;
     }
@@ -134,7 +134,7 @@ namespace data_structures {
     template<typename Key, typename Value> inline
     BinarySearchTree<Key, Value>& BinarySearchTree<Key, Value>::set(const Key &key, const Value &value){
         if (isEmpty()) {
-            _root = new TreeNode<TreeElement<Key, Value>>(TreeElement<Key, Value>(key, value));
+            _root = new BinaryTreeNode<TreeElement<Key, Value>>(TreeElement<Key, Value>(key, value));
             return *this;
         }
         auto node = _root;
@@ -151,7 +151,7 @@ namespace data_structures {
                 node = node->right();
             }
         }
-        node = new TreeNode<TreeElement<Key, Value>>(TreeElement<Key, Value>(key, value));
+        node = new BinaryTreeNode<TreeElement<Key, Value>>(TreeElement<Key, Value>(key, value));
         if (key < parent->element.key) {
             parent->insertLeft(node);
         } else {
@@ -165,8 +165,8 @@ namespace data_structures {
     }
 
     template<typename Key, typename Value> inline
-    TreeNode<TreeElement<Key, Value>>* BinarySearchTree<Key, Value>::_find(const Key& key) {
-        TreeNode<TreeElement<Key, Value>>* node = _root;
+    BinaryTreeNode<TreeElement<Key, Value>>* BinarySearchTree<Key, Value>::_find(const Key& key) {
+        BinaryTreeNode<TreeElement<Key, Value>>* node = _root;
         while (node != nullptr) {
             if (node->element.key == key) {
                 return node;
@@ -187,8 +187,8 @@ namespace data_structures {
     }
 
     template<typename Key, typename Value> inline
-    TreeElement<Key, Value> BinarySearchTree<Key, Value>::_deleteMinFromNode(TreeNode<TreeElement<Key, Value>> *node){
-        TreeNode<TreeElement<Key, Value>>* min_node = node;
+    TreeElement<Key, Value> BinarySearchTree<Key, Value>::_deleteMinFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node){
+        BinaryTreeNode<TreeElement<Key, Value>>* min_node = node;
         while (min_node->left() != nullptr) {
             min_node->node_count--;
             min_node = min_node->left();
@@ -230,7 +230,7 @@ namespace data_structures {
     }
 
     template <typename Key, typename Value> inline
-    size_t BinarySearchTree<Key, Value>::_rankOfNode(TreeNode<TreeElement<Key, Value>> *node){
+    size_t BinarySearchTree<Key, Value>::_rankOfNode(BinaryTreeNode<TreeElement<Key, Value>> *node){
         size_t r = 0;
         if (node->left()) {
             r = node->left()->node_count;
