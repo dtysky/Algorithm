@@ -40,7 +40,7 @@ namespace data_structures {
         bool operator==(const TwoThreeTree<Key, Value> &tree);
         bool operator!=(const TwoThreeTree<Key, Value> &tree);
         friend std::ostream &operator<<(std::ostream &out, const TwoThreeTree<Key, Value> &tree) {
-            printBinaryTree<TwoThreeTreeNode<TreeElement<Key, Value>>>(tree._root, 8, 0, out);
+//            printBinaryTree<TwoThreeTreeNode<TreeElement<Key, Value>>>(tree._root, 8, 0, out);
             return out;
         };
     };
@@ -214,14 +214,87 @@ namespace data_structures {
 
     template <typename Key, typename Value> inline
     void TwoThreeTree<Key, Value>::_deleteEmptyNode(TwoThreeTreeNode<TreeElement<Key, Value>> *node){
-        if (node->parent() == _root && node->parent()->type == 1) {
-
+        auto parent = node->parent();
+        auto node_index = node->getIndex();
+        if (node == _root) {
+            _root = _root->child(0);
+            delete node;
+            return;
         }
-        if (node->parent()->type == 2) {
-
+        if (parent->type == 2) {
+            if (node_index == 0) {
+                auto brother = parent->child(1);
+                if (brother->type == 1) {
+                    brother->type1to2(parent->getElement(0));
+                    brother->insertChild(0, node->child(0));
+                    delete parent->type2to1(0, 0);
+                } else if (brother->type == 2) {
+                    node->type0to1(parent->getElement(0));
+                    node->insertChild(1, brother->child(0));
+                    parent->setElement(0, brother->getElement(0));
+                    delete brother->type2to1(0, 1);
+                }
+                return;
+            }
+            if (node_index == 1) {
+                auto brother = parent->child(2);
+                if (brother->type == 1) {
+                    brother->type1to2(parent->getElement(1));
+                    brother->insertChild(0, node->child(0));
+                    delete parent->type2to1(1, 1);
+                } else if (brother->type == 2) {
+                    node->type0to1(parent->getElement(1));
+                    node->insertChild(1, brother->child(0));
+                    parent->setElement(1, brother->getElement(0));
+                    delete brother->type2to1(1, 2);
+                }
+                return;
+            }
+            if (node_index == 2) {
+                auto brother = parent->child(2);
+                if (brother->type == 1) {
+                    brother->type1to2(parent->getElement(1));
+                    brother->insertChild(1, node->child(0));
+                    delete parent->type2to1(2, 1);
+                } else if (brother->type == 2) {
+                    node->type0to1(parent->getElement(1));
+                    node->insertChild(0, brother->child(2));
+                    parent->setElement(1, brother->getElement(1));
+                    delete brother->type2to1(1, 2);
+                }
+                return;
+            }
         }
-        if (node->parent()->type == 1) {
+        if (parent->type == 1) {
 
+            if (node_index == 0) {
+                auto brother = parent->child(1);
+                if (brother->type == 1) {
+                    brother->type1to2(parent->getElement(0));
+                    brother->insertChild(0, node->child(0));
+                    delete parent->type1to0(0);
+                } else if (brother->type == 2) {
+                    node->type0to1(parent->getElement(0));
+                    node->insertChild(1, brother->child(0));
+                    parent->setElement(0, brother->getElement(0));
+                    brother->type2to1(0, 0);
+                    return;
+                }
+            } else if (node_index == 1) {
+                auto brother = parent->child(1);
+                if (brother->type == 1) {
+                    brother->type1to2(parent->getElement(0));
+                    brother->insertChild(1, node->child(0));
+                    delete parent->type1to0(0);
+                } else if (brother->type == 2) {
+                    node->type0to1(parent->getElement(0));
+                    node->insertChild(0, brother->child(2));
+                    parent->setElement(0, brother->getElement(1));
+                    brother->type2to1(1, 2);
+                    return;
+                }
+            }
+            _deleteEmptyNode(parent);
         }
     }
 
@@ -250,79 +323,8 @@ namespace data_structures {
             node->type2to1(index, 0);
             return result;
         }
-        auto parent = node->parent();
-        auto node_index = node->getIndex();
-        if (parent->type == 2) {
-            if (node_index == 0) {
-                auto brother = parent->child(1);
-                if (brother->type == 1) {
-                    node->type1to2(brother);
-                    node->setElement(0, parent->getElement(0));
-                    delete parent->type2to1(0, 1);
-                } else if (brother->type == 2) {
-                    node->setElement(0, parent->getElement(0));
-                    node->insertChild(1, brother->child(0));
-                    parent->setElement(0, brother->getElement(0));
-                    delete brother->type2to1(0, 1);
-                }
-                return result;
-            }
-            if (node_index == 1) {
-                auto brother = parent->child(2);
-                if (brother->type == 1) {
-                    node->type1to2(brother);
-                    node->setElement(0, parent->getElement(1));
-                    delete parent->type2to1(1, 2);
-                } else if (brother->type == 2) {
-                    node->setElement(0, parent->getElement(0));
-                    node->insertChild(1, brother->child(0));
-                    parent->setElement(1, brother->getElement(0));
-                    delete brother->type2to1(1, 2);
-                }
-                return result;
-            }
-            if (node_index == 2) {
-                auto brother = parent->child(2);
-                if (brother->type == 1) {
-                    node->type1to2(brother);
-                    node->setElement(1, parent->getElement(1));
-                    delete parent->type2to1(1, 1);
-                } else if (brother->type == 2) {
-                    node->setElement(0, parent->getElement(1));
-                    node->insertChild(1, brother->child(2));
-                    parent->setElement(1, brother->getElement(1));
-                    delete brother->type2to1(1, 2);
-                }
-                return result;
-            }
-        }
-        if (parent->type == 1) {
-
-            if (node_index == 0) {
-                auto brother = parent->child(1);
-                if (brother->type == 1) {
-                    node->type1to2(brother);
-                    delete parent->type1to0(1);
-                } else if (brother->type == 2) {
-                    node->setElement(0, parent->getElement(0));
-                    node->insertChild(1, brother->child(0));
-                    parent->setElement(0, brother->getElement(0));
-                    brother->type2to1(0, 0);
-                }
-            } else if (node_index == 1) {
-                auto brother = parent->child(1);
-                if (brother->type == 1) {
-                    node->type1to2(brother);
-                    delete parent->type1to0(0);
-                } else if (brother->type == 2) {
-                    node->setElement(0, parent->getElement(0));
-                    node->insertChild(0, brother->child(2));
-                    parent->setElement(0, brother->getElement(1));
-                    brother->type2to1(1, 2);
-                }
-            }
-            _deleteEmptyNode(parent);
-        }
+        node->type1to0(0);
+        _deleteEmptyNode(node);
         return result;
     }
     

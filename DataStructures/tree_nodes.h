@@ -188,6 +188,7 @@ namespace data_structures {
 //        TwoThreeTreeNode<T>* type3to2(const size_t delete_index);
         size_t type2to3(const T& element);
         size_t type1to2(TwoThreeTreeNode<T>* node);
+        size_t type0to1(const T& element);
         TwoThreeTreeNode<T>* expandRoot();
         TwoThreeTreeNode<T>* expand();
         TwoThreeTreeNode<T>* parent();
@@ -340,14 +341,28 @@ namespace data_structures {
             throw std::out_of_range("Type error, type of current node is not 1 !");
         }
         type = 2;
-        _children[2] = nullptr;
         if (element.key < elements[0].key) {
             elements[1] = elements[0];
             elements[0] = element;
+            _children[2] = _children[1];
+            _children[1] = _children[0];
+            _children[0] = nullptr;
             return 0;
         }
         elements[1] = element;
+        _children[2] = nullptr;
         return 1;
+    }
+
+    template <typename T> inline
+    size_t TwoThreeTreeNode<T>::type0to1(const T& element){
+        if (type != 0) {
+            throw std::out_of_range("Type error, type of current node is not 0 !");
+        }
+        type = 1;
+        elements[0] = element;
+        _children[1] = nullptr;
+        return 0;
     }
 
     template <typename T> inline
