@@ -19,8 +19,6 @@ namespace my_algorithm {
 
     void testHeapSort(){
 
-        vector<uint32_t> step_queue = {4, 3, 2, 1};
-
         auto v1 = vector<uint32_t>(10000);
         fillVectorWithRandomNumbers(v1, 10000);
         auto tmp = refSort<uint32_t>(v1);

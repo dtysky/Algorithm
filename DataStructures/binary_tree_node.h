@@ -11,7 +11,8 @@
 
 #include <cstdio>
 #include <iostream>
-#include "tree_element.h"
+#include <string>
+#include <sstream>
 
 
 namespace data_structures {
@@ -19,17 +20,18 @@ namespace data_structures {
     class BinaryTreeNode {
     protected:
         BinaryTreeNode<T> *_left, *_right, *_parent;
+        bool _is_left;
         void _init();
         void _copy(const BinaryTreeNode<T> &node);
 
     public:
         T element;
         size_t node_count;
-        bool is_left;
         BinaryTreeNode();
         BinaryTreeNode(const T &element);
         BinaryTreeNode(const BinaryTreeNode<T> &node);
         virtual ~BinaryTreeNode();
+        bool isLeft();
         BinaryTreeNode<T> * insertLeft(BinaryTreeNode<T> *node);
         BinaryTreeNode<T> * insertRight(BinaryTreeNode<T> *node);
         BinaryTreeNode<T> *deleteLeft();
@@ -37,6 +39,7 @@ namespace data_structures {
         BinaryTreeNode<T> *left();
         BinaryTreeNode<T> *right();
         BinaryTreeNode<T> *parent();
+        std::string toString();
         BinaryTreeNode<T>& operator=(const BinaryTreeNode<T> &node);
         bool operator==(const BinaryTreeNode<T> &node);
         bool operator!=(const BinaryTreeNode<T> &node);
@@ -54,7 +57,7 @@ namespace data_structures {
         _parent = nullptr;
         element = T();
         node_count = 1;
-        is_left = false;
+        _is_left = false;
     }
 
     template <typename T> inline
@@ -64,7 +67,7 @@ namespace data_structures {
         _right = node._right;
         _parent = node._parent;
         node_count = 1;
-        is_left = false;
+        _is_left = false;
     }
 
     template <typename T> inline
@@ -105,11 +108,16 @@ namespace data_structures {
     }
 
     template <typename T> inline
+    bool BinaryTreeNode<T>::isLeft(){
+        return _is_left;
+    }
+
+    template <typename T> inline
     BinaryTreeNode<T> * BinaryTreeNode<T>::insertLeft(BinaryTreeNode<T> *node){
         BinaryTreeNode<T>* temp_node = _left;
         if (node != nullptr) {
             node->_parent = this;
-            node->is_left = true;
+            node->_is_left = true;
         }
         _left = node;
         return temp_node;
@@ -120,7 +128,7 @@ namespace data_structures {
         BinaryTreeNode<T>* temp_node = _right;
         if (node != nullptr) {
             node->_parent = this;
-            node->is_left = false;
+            node->_is_left = false;
         }
         _right = node;
         return temp_node;
@@ -153,6 +161,13 @@ namespace data_structures {
     template <typename T> inline
     BinaryTreeNode<T>* BinaryTreeNode<T>::parent(){
         return _parent;
+    }
+
+    template <typename T> inline
+    std::string BinaryTreeNode<T>::toString(){
+        std::ostringstream ss;
+        ss << element << "(" << node_count << ")";
+        return ss.str();
     }
 }
 

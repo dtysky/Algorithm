@@ -24,7 +24,7 @@ namespace data_structures {
         BinaryTreeNode<TreeElement<Key, Value>> *_root;
         void _copy(BinaryTreeNode<TreeElement<Key, Value>> *node, BinaryTreeNode<TreeElement<Key, Value>> *node_src);
         void _clearFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
-        TreeElement<Key, Value> _deleteMinFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
+        BinaryTreeNode<TreeElement<Key, Value>> *_deleteMinFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
         BinaryTreeNode<TreeElement<Key, Value>> *_find(const Key& key);
         size_t _rankOfNode(BinaryTreeNode<TreeElement<Key, Value>> *node);
 
@@ -187,35 +187,34 @@ namespace data_structures {
     }
 
     template<typename Key, typename Value> inline
-    TreeElement<Key, Value> BinarySearchTree<Key, Value>::_deleteMinFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node){
+    BinaryTreeNode<TreeElement<Key, Value>>* BinarySearchTree<Key, Value>::_deleteMinFromNode(BinaryTreeNode<TreeElement<Key, Value>> *node){
         BinaryTreeNode<TreeElement<Key, Value>>* min_node = node;
         while (min_node->left() != nullptr) {
-            min_node->node_count--;
             min_node = min_node->left();
         }
         auto parent = min_node->parent();
         auto new_min_node = min_node->right();
-        auto result = min_node->element;
-        if (min_node->is_left) {
-            delete parent->deleteLeft();
+        if (min_node->isLeft()) {
+            parent->deleteLeft();
             parent->insertLeft(new_min_node);
         } else {
-            delete parent->deleteRight();
+            parent->deleteRight();
             parent->insertRight(new_min_node);
         }
-        return result;
+        return min_node;
     }
 
     template<typename Key, typename Value> inline
     Value BinarySearchTree<Key, Value>::del(const Key &key) {
         auto node = _find(key);
+        auto parent = node->parent();
         auto result = node->element.value;
         auto new_node = node->left();
         if (node->left() == nullptr) {
             new_node = node->right();
         }
         if (node->left() == nullptr || node->right() == nullptr) {
-            if (node->is_left) {
+            if (node->isLeft()) {
                 node->parent()->deleteLeft();
                 node->parent()->insertLeft(new_node);
             } else {
@@ -223,9 +222,16 @@ namespace data_structures {
                 node->parent()->insertRight(new_node);
             }
             delete node;
-            return result;
+        } else {
+            auto min_node = _deleteMinFromNode(node->right());
+            node->element = min_node->element;
+            parent = min_node->parent();
+            delete min_node;
         }
-        node->element = _deleteMinFromNode(node->right());
+        while (parent != nullptr) {
+            parent->node_count--;
+            parent = parent->parent();
+        }
         return result;
     }
 
@@ -240,7 +246,7 @@ namespace data_structures {
         while (current_node != nullptr) {
             if (current_node->left() && current_node->left() != pre_node) {
                 r += current_node->left()->node_count + 1;
-            } else if (pre_node && !pre_node->is_left) {
+            } else if (pre_node && !pre_node->isLeft()) {
                 r ++;
             }
             pre_node = current_node;

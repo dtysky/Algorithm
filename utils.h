@@ -101,7 +101,7 @@ void printNodes(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLe
         out << ((i == 0) ? std::setw(startLen) : std::setw(nodeSpaceLen)) << "" << ((*iter && (*iter)->left()) ? std::setfill('_') : std::setfill(' '));
         out << std::setw(branchLen+2);
         if ((*iter)) {
-            out << nodeToString(*iter);
+            out << (*iter)->toString();
         } else {
             out << "";
         }
@@ -117,7 +117,7 @@ void printLeaves(int indentSpace, int level, int nodesInThisLevel, const std::de
     for (int i = 0; i < nodesInThisLevel; i++, iter++) {
         out << ((i == 0) ? std::setw(indentSpace+2) : std::setw(2*level+2));
         if ((*iter)) {
-            out << nodeToString(*iter);
+            out << (*iter)->toString();
         } else {
             out << "";
         }

@@ -1,13 +1,16 @@
 //
-//  binary_search_tree
+//  red_black_tree
 //  Algorithm
 //
-//  Created by dtysky on 16/8/24.
-//  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
+//  Created by dtysky on 16/12/4.
+//  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
+#ifndef ALGORITHM_RED_BLACK_TREE_TEST_H
+#define ALGORITHM_RED_BLACK_TREE_TEST_H
+
 #include <string>
-#include "binary_search_tree.h"
+#include "red_black_tree.h"
 #include <iostream>
 #include <vector>
 
@@ -15,8 +18,9 @@
 namespace data_structures {
     using std::cout;
     using std::endl;
-    void testBinarySearchTree(){
-        BinarySearchTree<std::string, uint32_t> tree;
+
+    void testRBTree() {
+        RBTree<std::string, uint32_t> tree;
         cout << tree.isEmpty() << endl;
 
         tree.set("e", 0)
@@ -60,3 +64,5 @@ namespace data_structures {
         cout << tree.get("a") << endl;
     }
 }
+
+#endif //ALGORITHM_RED_BLACK_TREE_TEST_H
