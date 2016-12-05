@@ -27,9 +27,10 @@ namespace data_structures {
         size_t _rankOfNode(RBTreeNode<TreeElement<Key, Value>> *node);
         RBTreeNode<TreeElement<Key, Value>>* _leftRotate(RBTreeNode<TreeElement<Key, Value>> *node);
         RBTreeNode<TreeElement<Key, Value>>* _rightRotate(RBTreeNode<TreeElement<Key, Value>> *node);
-        RBTreeNode<TreeElement<Key, Value>>* _flipColors(RBTreeNode<TreeElement<Key, Value>> *node);
+        bool _flipColors(RBTreeNode<TreeElement<Key, Value>> *node);
         RBTreeNode<TreeElement<Key, Value>>* _leftMove(RBTreeNode<TreeElement<Key, Value>> *node);
         RBTreeNode<TreeElement<Key, Value>>* _rightMove(RBTreeNode<TreeElement<Key, Value>> *node);
+        RBTreeNode<TreeElement<Key, Value>>* _balance(RBTreeNode<TreeElement<Key, Value>> *node);
 
     public:
         RBTree();
@@ -137,41 +138,66 @@ namespace data_structures {
     template <typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_leftRotate(RBTreeNode<TreeElement<Key, Value>> *node){
         auto right = node->right();
-        if (right != nullptr && right->isRed()) {
-            auto tmp_count = right->node_count;
-            right->node_count = node->node_count;
-            node->node_count = tmp_count;
-            auto tmp_node = right->left();
-            if (node->isLeft()) {
-                node->parent()->insertLeft(right);
-            } else {
-                node->parent()->insertRight(right);
-            }
-            right->insertLeft(node, true);
-            node->insertRight(tmp_node);
-            return right;
+        auto tmp_node = right->left();
+        auto tmp_count = right->node_count;
+        right->node_count = node->node_count;
+        node->node_count -= tmp_count - (tmp_node != nullptr ? tmp_node->node_count : 0);
+        if (node == _root) {
+            _root = right;
+            _root->initRoot();
         }
-        return node;
+        else if (node->isLeft()) {
+            node->parent()->insertLeft(right, node->isRed());
+        } else {
+            node->parent()->insertRight(right, node->isRed());
+        }
+        right->insertLeft(node, true);
+        node->insertRight(tmp_node);
+        return right;
     }
 
     template <typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_rightRotate(RBTreeNode<TreeElement<Key, Value>> *node){
         auto left = node->left();
-        if (left != nullptr && left->isRed()) {
-            auto tmp_count = left->node_count;
-            left->node_count = node->node_count;
-            node->node_count = tmp_count;
-            auto tmp_node = left->right();
-            if (node->isLeft()) {
-                node->parent()->insertLeft(left);
-            } else {
-                node->parent()->insertRight(left);
-            }
-            left->insertRight(node, true);
-            node->insertLeft(tmp_node);
-            return left;
+        auto tmp_node = left->right();
+        auto tmp_count = left->node_count;
+        left->node_count = node->node_count;
+        node->node_count -= tmp_count - (tmp_node != nullptr ? tmp_node->node_count : 0);
+        if (node == _root) {
+            _root = left;
+            _root->initRoot();
+        } else if (node->isLeft()) {
+            node->parent()->insertLeft(left, node->isRed());
+        } else {
+            node->parent()->insertRight(left, node->isRed());
         }
-        return node;
+        left->insertRight(node, true);
+        node->insertLeft(tmp_node);
+        return left;
+    }
+
+    template <typename Key, typename Value> inline
+    bool RBTree<Key, Value>::_flipColors(RBTreeNode<TreeElement<Key, Value>> *node){
+        auto left = node->left();
+        auto right = node->right();
+        if (left == nullptr || right == nullptr) {
+            return false;
+        }
+        if (!node->isRed() && left->isRed() && right->isRed()) {
+            if (node != _root) {
+                node->flipColors();
+            }
+            left->flipColors();
+            right->flipColors();
+            return true;
+        }
+        if (node->isRed() && !left->isRed() && !right->isRed()) {
+            node->flipColors();
+            left->flipColors();
+            right->flipColors();
+            return true;
+        }
+        return false;
     }
 
     template <typename Key, typename Value> inline
@@ -179,9 +205,11 @@ namespace data_structures {
         if (!node->isRed()) {
             return node;
         }
-        auto right = node->right();
-        _flipColors(node);
+        if (!_flipColors(node)) {
+            return node;
+        }
         // if node is red, left and right are not red
+        auto right = node->right();
         if (right->left() == nullptr || !right->left()->isRed()) {
             return node;
         }
@@ -196,38 +224,37 @@ namespace data_structures {
         if (!node->isRed()) {
             return node;
         }
-        auto left = node->left();
-        _flipColors(node);
+        if (!_flipColors(node)) {
+            return node;
+        }
         // if node is red, left and right are not red
+        auto left = node->left();
         if (left->left() == nullptr || !left->left()->isRed()) {
             return node;
         }
-        _leftRotate(left);
+        _rightRotate(left);
         node = _rightRotate(node);
         _flipColors(node);
         return node;
     }
 
     template <typename Key, typename Value> inline
-    RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_flipColors(RBTreeNode<TreeElement<Key, Value>> *node){
+    RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_balance(RBTreeNode<TreeElement<Key, Value>> *node){
         auto left = node->left();
         auto right = node->right();
-        if (left == nullptr || right == nullptr) {
-            return node;
-        }
-        if (!node->isRed() && left->isRed() && right->isRed()) {
-            if (node != _root) {
-                node->flipColors();
+        if (right != nullptr && right->isRed()) {
+            if (left != nullptr && left->isRed()) {
+                _flipColors(node);
+            } else {
+                node = _leftRotate(node);
             }
-            left->flipColors();
-            right->flipColors();
-            return node;
         }
-        if (node->isRed() && !left->isRed() && !right->isRed()) {
-            node->flipColors();
-            left->flipColors();
-            right->flipColors();
-            return node;
+        if (
+            (left != nullptr && left->left() != nullptr)
+            && (left->isRed() && left->left()->isRed())
+            ) {
+            node = _rightRotate(node);
+            _flipColors(node);
         }
         return node;
     }
@@ -260,14 +287,7 @@ namespace data_structures {
         }
         while (parent != nullptr) {
             parent->node_count++;
-            _leftRotate(parent);
-            if (
-                (parent->left() != nullptr && parent->right() != nullptr)
-                && (parent->left()->isRed() && parent->right()->isRed())
-            ){
-                _flipColors(parent);
-            }
-            parent = parent->parent();
+            parent = _balance(parent)->parent();
         }
         return *this;
     }
@@ -281,12 +301,12 @@ namespace data_structures {
             }
             if (key < node->element.key) {
                 if (withMoving) {
-                    _leftMove(node);
+                    node = _leftMove(node);
                 }
                 node = node->left();
             } else {
                 if (withMoving) {
-                    _rightMove(node);
+                    node = _rightMove(node);
                 }
                 node = node->right();
             }
@@ -304,7 +324,7 @@ namespace data_structures {
     RBTreeNode<TreeElement<Key, Value>>*  RBTree<Key, Value>::_deleteMinFromNode(RBTreeNode<TreeElement<Key, Value>> *node){
         RBTreeNode<TreeElement<Key, Value>>* min_node = node;
         while (min_node->left() != nullptr) {
-            _leftMove(node);
+            min_node = _leftMove(min_node);
             min_node = min_node->left();
         }
         auto parent = min_node->parent();
@@ -318,13 +338,26 @@ namespace data_structures {
 
     template<typename Key, typename Value> inline
     Value RBTree<Key, Value>::del(const Key &key) {
+        _root->flipColors();
         auto node = _find(key, true);
         auto parent = node->parent();
         auto result = node->element.value;
-
         if (node->left() == nullptr || node->right() == nullptr) {
+//            if (node == _root && size() == 1) {
+//                if (size() == 1) {
+//                    _root = nullptr;
+//                } else if (node->left() == nullptr) {
+//                    _root = node->left();
+//                    _root->initRoot();
+//                } else {
+//                    _root = node->right();
+//                    _root->initRoot();
+//                }
+//                delete node;
+//                return result;
+//            }
             if (!node->isRed()) {
-                _rightRotate(node);
+                node = _rightRotate(node);
             }
             if (node->isLeft()) {
                 node->parent()->deleteLeft();
@@ -333,21 +366,16 @@ namespace data_structures {
             }
             delete node;
         } else {
+            node = _rightMove(node);
             auto min_node = _deleteMinFromNode(node->right());
             node->element = min_node->element;
             parent = min_node->parent();
             delete min_node;
         }
+//        printBinaryTree<RBTreeNode<TreeElement<Key, Value>>>(_root, 8, 0, std::cout);
         while (parent != nullptr) {
             parent->node_count--;
-            _leftRotate(parent);
-            if (
-                (parent->left() != nullptr && parent->right() != nullptr)
-                && (parent->left()->isRed() && parent->right()->isRed())
-                ){
-                _flipColors(parent);
-            }
-            parent = parent->parent();
+            parent = _balance(parent)->parent();
         }
         return result;
 

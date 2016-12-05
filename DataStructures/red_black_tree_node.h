@@ -33,9 +33,10 @@ namespace data_structures {
         virtual ~RBTreeNode();
         bool isLeft();
         bool isRed();
+        RBTreeNode<T> *initRoot();
         RBTreeNode<T> *flipColors();
-        RBTreeNode<T> * insertLeft(RBTreeNode<T> *node, const bool is_red = false);
-        RBTreeNode<T> * insertRight(RBTreeNode<T> *node, const bool is_red = false);
+        RBTreeNode<T> *insertLeft(RBTreeNode<T> *node, const bool is_red = false);
+        RBTreeNode<T> *insertRight(RBTreeNode<T> *node, const bool is_red = false);
         RBTreeNode<T> *deleteLeft();
         RBTreeNode<T> *deleteRight();
         RBTreeNode<T> *left();
@@ -119,6 +120,14 @@ namespace data_structures {
     template <typename T> inline
     bool RBTreeNode<T>::isRed(){
         return _is_red;
+    }
+
+    template <typename T> inline
+    RBTreeNode<T>* RBTreeNode<T>::initRoot(){
+        _parent = nullptr;
+        _is_left = false;
+        _is_red = false;
+        return this;
     }
 
     template <typename T> inline
