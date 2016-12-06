@@ -135,11 +135,16 @@ namespace data_structures {
         return _root->node_count;
     }
 
+    // use the node's right-child to instead of itself,
+    // then make itself as its right-child's left-child,
+    // at last, insert its right-child's left-child to its right
     template <typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_leftRotate(RBTreeNode<TreeElement<Key, Value>> *node){
         auto right = node->right();
         auto tmp_node = right->left();
 
+        // use the node's count to instead of right-child's and:
+        // right-child's count = left child's count + right-child's left-child's count
         auto tmp_count = right->node_count;
         right->node_count = node->node_count;
         node->node_count -= tmp_count - (tmp_node != nullptr ? tmp_node->node_count : 0);
@@ -158,11 +163,17 @@ namespace data_structures {
         return right;
     }
 
+
+    // use the node's left-child to instead of itself,
+    // then make itself as its left-child's right-child,
+    // at last, insert its left-child's right-child to its left
     template <typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_rightRotate(RBTreeNode<TreeElement<Key, Value>> *node){
         auto left = node->left();
         auto tmp_node = left->right();
 
+        // use the node's count to instead of left-child's and:
+        // left-child's count = right-child's count + left-child's right-child's count
         auto tmp_count = left->node_count;
         left->node_count = node->node_count;
         node->node_count -= tmp_count - (tmp_node != nullptr ? tmp_node->node_count : 0);
@@ -180,6 +191,8 @@ namespace data_structures {
         return left;
     }
 
+    // equal to the 'expand' and 'combine' method of 2-3-tree
+    // red-black-red <-> black-red-black
     template <typename Key, typename Value> inline
     bool RBTree<Key, Value>::_flipColors(RBTreeNode<TreeElement<Key, Value>> *node){
         auto left = node->left();
@@ -204,6 +217,10 @@ namespace data_structures {
         return false;
     }
 
+    // 1. if node's left-child is already red, do noting
+    // 2. if node's right-child is already red, rotate it to make sure the left-child is red
+    // 3. if node's right-child is a 2-node, just flip node's colors
+    // 4. if node's right-child is a 3-node, flip node's colors, right-rotate its right-child and left-rotate itself, then flip itself again
     template <typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_leftMove(RBTreeNode<TreeElement<Key, Value>> *node){
         if (!node->isRed()) {
@@ -230,6 +247,11 @@ namespace data_structures {
         return node;
     }
 
+    // 0. this method is almost like the 'right-move' method, but has some difference in condition 4
+    // 1. if node's right-child is already red, do noting
+    // 2. if node's left-child is already red, rotate it to make sure the right-child is red
+    // 3. if node's left-child is a 2-node, just flip node's colors
+    // 4. if node's left-child is a 3-node, flip node's colors, then right-rotate itself and flip itself again
     template <typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_rightMove(RBTreeNode<TreeElement<Key, Value>> *node){
         if (!node->isRed()) {
@@ -266,10 +288,8 @@ namespace data_structures {
                 node = _leftRotate(node);
             }
         }
-        if (
-            (left != nullptr && left->left() != nullptr)
-            && (left->isRed() && left->left()->isRed())
-            ) {
+        // if node is a 4-node
+        if ((left != nullptr && left->left() != nullptr) && (left->isRed() && left->left()->isRed())) {
             node = _rightRotate(node);
             _flipColors(node);
         }
@@ -306,12 +326,14 @@ namespace data_structures {
             parent->node_count++;
             parent = _balance(parent)->parent();
         }
+        // reset the root's color
         if (_root->isRed()) {
             _root->flipColors();
         }
         return *this;
     }
 
+    // withMoving is used for finding a node witch is prepared to delete
     template<typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_find(const Key& key, const bool withMoving) {
         RBTreeNode<TreeElement<Key, Value>>* node = _root;
@@ -356,6 +378,7 @@ namespace data_structures {
         return min_node;
     }
 
+    // we must ensure that the node will be deleted is a 3-node or 4-node
     template<typename Key, typename Value> inline
     Value RBTree<Key, Value>::del(const Key &key) {
         _root->flipColors();
@@ -389,11 +412,11 @@ namespace data_structures {
             parent->node_count--;
             parent = _balance(parent)->parent();
         }
+        // reset the root's color
         if (_root->isRed()) {
             _root->flipColors();
         }
         return result;
-
     }
 
     template <typename Key, typename Value> inline
@@ -408,7 +431,7 @@ namespace data_structures {
             if (current_node->left() && current_node->left() != pre_node) {
                 r += current_node->left()->node_count + 1;
             } else if (pre_node && !pre_node->isLeft()) {
-                r ++;
+                r++;
             }
             pre_node = current_node;
             current_node = current_node->parent();

@@ -247,7 +247,7 @@ namespace data_structures {
             if (current_node->left() && current_node->left() != pre_node) {
                 r += current_node->left()->node_count + 1;
             } else if (pre_node && !pre_node->isLeft()) {
-                r ++;
+                r++;
             }
             pre_node = current_node;
             current_node = current_node->parent();

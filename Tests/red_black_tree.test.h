@@ -45,28 +45,28 @@ namespace data_structures {
         tree.set("a", 334);
         cout << tree.get("a") << endl;
 
-//        for (auto key: std::vector<std::string>{"a", "b", "c", "d", "e", "f", "aa", "bb", "cc", "dd", "ee"}) {
-//            cout << key << " " << tree.rank(key) << endl;
-//        }
-//
-//        for (auto rank: std::vector<size_t>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) {
-//            cout << rank << " " << tree.select(rank) << endl;
-//        }
-//
-//        auto tree1 = tree;
-//        cout << (tree == tree1) << endl;
+        for (auto key: std::vector<std::string>{"a", "b", "c", "d", "e", "f", "aa", "bb", "cc", "dd", "ee"}) {
+            cout << key << " " << tree.rank(key) << endl;
+        }
+
+        for (auto rank: std::vector<size_t>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) {
+            cout << rank << " " << tree.select(rank) << endl;
+        }
+
+        auto tree1 = tree;
+        cout << (tree == tree1) << endl;
 
         for (auto key: std::vector<std::string>{"a", "b", "c", "d", "e", "f", "aa", "bb", "cc", "dd", "ee"}) {
             cout << "key, value: " << endl << key << ", " << tree.del(key) << endl;
             cout << "tree:" << endl << tree << endl;
         }
-//
-//        cout << tree << endl;
-//        cout << tree1.isEmpty() << endl;
-//        tree1.clear();
-//        cout << tree1 << endl;
-//        cout << tree1.isEmpty() << endl;
-//        cout << tree.get("a") << endl;
+
+        cout << tree << endl;
+        cout << tree1.isEmpty() << endl;
+        tree1.clear();
+        cout << tree1 << endl;
+        cout << tree1.isEmpty() << endl;
+        cout << tree.get("a") << endl;
     }
 }
 
