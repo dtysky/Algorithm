@@ -139,9 +139,11 @@ namespace data_structures {
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_leftRotate(RBTreeNode<TreeElement<Key, Value>> *node){
         auto right = node->right();
         auto tmp_node = right->left();
+
         auto tmp_count = right->node_count;
         right->node_count = node->node_count;
         node->node_count -= tmp_count - (tmp_node != nullptr ? tmp_node->node_count : 0);
+
         if (node == _root) {
             _root = right;
             _root->initRoot();
@@ -160,9 +162,11 @@ namespace data_structures {
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::_rightRotate(RBTreeNode<TreeElement<Key, Value>> *node){
         auto left = node->left();
         auto tmp_node = left->right();
+
         auto tmp_count = left->node_count;
         left->node_count = node->node_count;
         node->node_count -= tmp_count - (tmp_node != nullptr ? tmp_node->node_count : 0);
+
         if (node == _root) {
             _root = left;
             _root->initRoot();
@@ -205,10 +209,17 @@ namespace data_structures {
         if (!node->isRed()) {
             return node;
         }
+        if (node->left() != nullptr && node->left()->isRed()) {
+            return node;
+        }
+        if (node->right() != nullptr && node->right()->isRed()) {
+            node = _leftRotate(node);
+            return node;
+        }
         if (!_flipColors(node)) {
             return node;
         }
-        // if node is red, left and right are not red
+        // if node is red, left and right nodes are not red
         auto right = node->right();
         if (right->left() == nullptr || !right->left()->isRed()) {
             return node;
@@ -224,15 +235,21 @@ namespace data_structures {
         if (!node->isRed()) {
             return node;
         }
+        if (node->right() != nullptr && node->right()->isRed()) {
+            return node;
+        }
+        if (node->left() != nullptr && node->left()->isRed()) {
+            node = _rightRotate(node);
+            return node;
+        }
         if (!_flipColors(node)) {
             return node;
         }
-        // if node is red, left and right are not red
+        // if node is red, left and right nodes are not red
         auto left = node->left();
         if (left->left() == nullptr || !left->left()->isRed()) {
             return node;
         }
-        _rightRotate(left);
         node = _rightRotate(node);
         _flipColors(node);
         return node;
@@ -289,6 +306,9 @@ namespace data_structures {
             parent->node_count++;
             parent = _balance(parent)->parent();
         }
+        if (_root->isRed()) {
+            _root->flipColors();
+        }
         return *this;
     }
 
@@ -342,22 +362,11 @@ namespace data_structures {
         auto node = _find(key, true);
         auto parent = node->parent();
         auto result = node->element.value;
-        if (node->left() == nullptr || node->right() == nullptr) {
-//            if (node == _root && size() == 1) {
-//                if (size() == 1) {
-//                    _root = nullptr;
-//                } else if (node->left() == nullptr) {
-//                    _root = node->left();
-//                    _root->initRoot();
-//                } else {
-//                    _root = node->right();
-//                    _root->initRoot();
-//                }
-//                delete node;
-//                return result;
-//            }
-            if (!node->isRed()) {
-                node = _rightRotate(node);
+        if (node->left() == nullptr && node->right() == nullptr) {
+            if (node == _root) {
+                _root = nullptr;
+                delete node;
+                return result;
             }
             if (node->isLeft()) {
                 node->parent()->deleteLeft();
@@ -365,17 +374,23 @@ namespace data_structures {
                 node->parent()->deleteRight();
             }
             delete node;
-        } else {
-            node = _rightMove(node);
+        } else if (node->right() == nullptr) {
+            node = _rightRotate(node);
+            parent = node;
+            delete node->deleteRight();
+        }  else {
+            _rightMove(node);
             auto min_node = _deleteMinFromNode(node->right());
             node->element = min_node->element;
             parent = min_node->parent();
             delete min_node;
         }
-//        printBinaryTree<RBTreeNode<TreeElement<Key, Value>>>(_root, 8, 0, std::cout);
         while (parent != nullptr) {
             parent->node_count--;
             parent = _balance(parent)->parent();
+        }
+        if (_root->isRed()) {
+            _root->flipColors();
         }
         return result;
 

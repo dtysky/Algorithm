@@ -48,7 +48,8 @@ namespace data_structures {
         bool operator!=(const RBTreeNode<T> &node);
         friend std::ostream &operator<<(std::ostream &out, const RBTreeNode<T> &node) {
             out << "Current: " << &node << ", Element: " << node.element << ", Parent: " << node._parent
-                << ", Left: " << node._left << ", Right: " << node._right;
+                << ", Left: " << node._left << ", Right: " << node._right
+                << ", IsLeft: " << node._is_left << ", IsRed: " << node._is_red;
             return out;
         }
     };

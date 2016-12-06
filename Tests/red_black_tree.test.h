@@ -57,8 +57,8 @@ namespace data_structures {
 //        cout << (tree == tree1) << endl;
 
         for (auto key: std::vector<std::string>{"a", "b", "c", "d", "e", "f", "aa", "bb", "cc", "dd", "ee"}) {
-            cout << key << ":" << tree.del(key) << endl;
-            cout << tree << endl;
+            cout << "key, value: " << endl << key << ", " << tree.del(key) << endl;
+            cout << "tree:" << endl << tree << endl;
         }
 //
 //        cout << tree << endl;
