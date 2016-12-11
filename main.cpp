@@ -16,7 +16,7 @@
 //#include "merge_sort.test.h"
 //#include "quick_sort.test.h"
 //#include "heap_sort.test.h"
-#include "red_black_tree.test.h"
+#include "avl_tree.test.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -36,6 +36,6 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testRadixSort();
 //    printf("\nheap\n");
 //    my_algorithm::testHeapSort();
-    data_structures::testRBTree();
+    data_structures::testAVLTree();
     return 0;
 }

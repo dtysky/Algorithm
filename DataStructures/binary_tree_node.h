@@ -27,11 +27,13 @@ namespace data_structures {
     public:
         T element;
         size_t node_count;
+        int b_factor;
         BinaryTreeNode();
         BinaryTreeNode(const T &element);
         BinaryTreeNode(const BinaryTreeNode<T> &node);
         virtual ~BinaryTreeNode();
         bool isLeft();
+        BinaryTreeNode<T> *initRoot();
         BinaryTreeNode<T> * insertLeft(BinaryTreeNode<T> *node);
         BinaryTreeNode<T> * insertRight(BinaryTreeNode<T> *node);
         BinaryTreeNode<T> *deleteLeft();
@@ -58,6 +60,7 @@ namespace data_structures {
         element = T();
         node_count = 1;
         _is_left = false;
+        b_factor = 0;
     }
 
     template <typename T> inline
@@ -68,6 +71,7 @@ namespace data_structures {
         _parent = node._parent;
         node_count = 1;
         _is_left = false;
+        b_factor = 0;
     }
 
     template <typename T> inline
@@ -110,6 +114,13 @@ namespace data_structures {
     template <typename T> inline
     bool BinaryTreeNode<T>::isLeft(){
         return _is_left;
+    }
+
+    template <typename T> inline
+    BinaryTreeNode<T>* BinaryTreeNode<T>::initRoot(){
+        _parent = nullptr;
+        _is_left = false;
+        return this;
     }
 
     template <typename T> inline
@@ -166,7 +177,11 @@ namespace data_structures {
     template <typename T> inline
     std::string BinaryTreeNode<T>::toString(){
         std::ostringstream ss;
-        ss << element << "(" << node_count << ")";
+        if (b_factor == 0) {
+            ss << element << "(" << node_count << ")";
+        } else {
+            ss << element << "(" << node_count << "," << b_factor << ")";
+        }
         return ss.str();
     }
 }
