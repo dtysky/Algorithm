@@ -22,6 +22,7 @@ Build with CPP.
 12. BinarySearchTree: Binary search tree based on pointer.  
 13. TwoThreeTree: 2-3-tree based on pointer, waiting for testing.
 14. RBTree: Red-black tree based on pointer.
+15. AVLTree: AVL tree based on pointer.
 
 ## Algorithm
 
