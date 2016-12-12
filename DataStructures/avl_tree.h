@@ -290,7 +290,6 @@ namespace data_structures {
                 node = _rlRotate(node);
             }
         }
-//        printBinaryTree<BinaryTreeNode<TreeElement<Key, Value>>>(_root, 8, 0, std::cout);
         _balance(node->left());
         _balance(node->right());
     }
@@ -326,7 +325,7 @@ namespace data_structures {
             _reBalanceFactor(node, 1, true);
         }
         // insert to a old line
-        if (parent->node_count == 2) {
+        else {
             parent->b_factor = 0;
         }
         while (parent != nullptr) {
@@ -393,37 +392,33 @@ namespace data_structures {
             } else {
                 node->parent()->deleteRight();
             }
-            delete node;
         } else if (node->right() == nullptr) {
             node = _llRotate(node);
             is_left = node->isLeft();
             parent = node;
-            delete node->deleteRight();
+            node = node->deleteRight();
         }  else {
             auto min_node = _deleteMinFromNode(node->right());
             node->element = min_node->element;
             is_left = min_node->isLeft();
             parent = min_node->parent();
-            delete min_node;
+            node = min_node;
         }
         // delete a line has single child: 1
-        size_t b_factor = parent->node_count == 2 ? 1 : 0;
+        if (parent->node_count == 2) {
+            _reBalanceFactor(node, -1);
+        }
         // delete a line has two children
-        if (parent->node_count == 3) {
+        else {
             if (is_left) {
                 parent->b_factor -= 1;
             } else {
                 parent->b_factor += 1;
             }
         }
+        delete node;
         while (parent != nullptr) {
             parent->node_count--;
-            if (is_left) {
-                parent->b_factor -= b_factor;
-            } else {
-                parent->b_factor += b_factor;
-            }
-            is_left = parent->isLeft();
             parent = parent->parent();
         }
         _balance(_root);
