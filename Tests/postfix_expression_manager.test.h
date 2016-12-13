@@ -60,7 +60,7 @@ namespace my_algorithm {
 
     void testPostfixExpressionManager() {
 
-        auto manager = my_algorithm::PostfixExpressionManager<MyInt>();
+        my_algorithm::PostfixExpressionManager<MyInt> manager;
         auto expression = std::vector<std::string>{
             "5", "1", "*", "6", "+", "7", "1", "*", "+"
         };

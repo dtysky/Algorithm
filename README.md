@@ -23,6 +23,7 @@ Build with CPP.
 13. TwoThreeTree: 2-3-tree based on pointer, waiting for testing.
 14. RBTree: Red-black tree based on pointer.
 15. AVLTree: AVL tree based on pointer.
+16. HashTable: Separate chaining hash table based on array and symbol table.
 
 ## Algorithm
 

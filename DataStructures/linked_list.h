@@ -109,12 +109,15 @@ namespace data_structures{
         }
         return *this;
     }
-    
+
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename T> inline
     bool LinkedList<T>::operator==(const LinkedList<T>& list) const {
         return _header == list._header;
     }
-    
+
+    /*---------------- todo: waiting for correcting ----------------*/
+
     template <typename T> inline
     bool LinkedList<T>::operator!=(const LinkedList<T>& list) const {
         return _header != list._header;

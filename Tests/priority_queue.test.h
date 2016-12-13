@@ -13,7 +13,7 @@ namespace data_structures {
     using std::endl;
 
     void testPriorityQueue(){
-        auto queue = PriorityQueue<uint32_t>();
+        PriorityQueue<uint32_t> queue;
         queue.enqueue(0)
             .enqueue(10)
             .enqueue(4)

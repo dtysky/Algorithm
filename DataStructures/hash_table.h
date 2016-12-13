@@ -110,6 +110,7 @@ namespace data_structures {
         }
         for (auto &table : _array) {
             table.clear();
+            _size = 0;
         }
     }
 

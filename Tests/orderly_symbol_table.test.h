@@ -15,7 +15,7 @@ namespace data_structures {
     using std::cout;
     using std::endl;
     void testOrderlySymbolTable(){
-        auto table = OrderlySymbolTable<std::string, uint32_t>();
+        OrderlySymbolTable<std::string, uint32_t> table;
         cout << table.isEmpty() << endl;
         table.set("a", 0)
             .set("b", 1)
