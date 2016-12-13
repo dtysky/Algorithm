@@ -6,9 +6,6 @@
 //  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
-#ifndef ALGORITHM_AVL_TREE_TEST_H
-#define ALGORITHM_AVL_TREE_TEST_H
-
 #include <string>
 #include <iostream>
 #include <vector>
@@ -69,5 +66,3 @@ namespace data_structures {
         cout << tree.get("a") << endl;
     }
 }
-
-#endif //ALGORITHM_AVL_TREE_TEST_H

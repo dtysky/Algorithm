@@ -47,8 +47,8 @@ namespace my_algorithm {
         _operators = T::operators;
         _operators.insert(_operators.begin(), {")"});
         _operators.push_back({"("});
-        for (auto ops: _operators) {
-            for (auto op: ops) {
+        for (auto &ops: _operators) {
+            for (auto &op: ops) {
                 _all_operators.push_back(op);
             }
         }
@@ -71,7 +71,7 @@ namespace my_algorithm {
     template <typename T> inline
     T PostfixExpressionManager<T>::eval(const std::vector<std::string> &expression) {
         _stack.clear();
-        for (auto e: expression) {
+        for (auto &e: expression) {
             if (!isInVector(_all_operators, e)) {
                 _stack.push(T(e));
                 continue;
@@ -90,7 +90,7 @@ namespace my_algorithm {
         _stack_converter.clear();
         _stack_priority.clear();
         auto max_priority = _operators.size();
-        for (auto e: expression) {
+        for (auto &e: expression) {
             if (!isInVector(_all_operators, e)) {
                 result_stack.push(e);
                 continue;

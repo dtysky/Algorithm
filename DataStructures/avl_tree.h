@@ -379,7 +379,6 @@ namespace data_structures {
     Value AVLTree<Key, Value>::del(const Key &key) {
         auto node = _find(key);
         auto parent = node->parent();
-        auto is_left = node->isLeft();
         auto result = node->element.value;
         if (node->left() == nullptr && node->right() == nullptr) {
             if (node == _root) {
@@ -394,13 +393,11 @@ namespace data_structures {
             }
         } else if (node->right() == nullptr) {
             node = _llRotate(node);
-            is_left = node->isLeft();
             parent = node;
             node = node->deleteRight();
         }  else {
             auto min_node = _deleteMinFromNode(node->right());
             node->element = min_node->element;
-            is_left = min_node->isLeft();
             parent = min_node->parent();
             node = min_node;
         }
@@ -410,7 +407,7 @@ namespace data_structures {
         }
         // delete a line has two children
         else {
-            if (is_left) {
+            if (node->isLeft()) {
                 parent->b_factor -= 1;
             } else {
                 parent->b_factor += 1;

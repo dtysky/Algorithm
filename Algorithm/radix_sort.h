@@ -25,11 +25,11 @@ namespace my_algorithm {
 
         for (auto dig = 0; dig < t_msd; dig++) {
             auto counts = vector<LinkedList<uint32_t>>(size_t(t_radix));
-            for (auto t: t_vector) {
+            for (auto &t: t_vector) {
                 counts[uint32_t(t / pow(t_radix, dig)) % t_radix].insertToTail(t);
             }
             auto position = 0;
-            for (auto count: counts) {
+            for (auto &count: counts) {
                 for (auto node = count.begin(); node != count.end(); node = node->next()) {
                     t_vector[position] = node->element;
                     position++;

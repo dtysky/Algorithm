@@ -1,21 +1,21 @@
 //
-//  symbol_table
+//  hash_table
 //  Algorithm
 //
-//  Created by dtysky on 16/8/24.
-//  Copyright © 2016年 dtysky@outlook.com. All rights reserved.
+//  Created by dtysky on 16/12/13.
+//  Copyright © 2016 dtysky@outlook.com. All rights reserved.
 //
 
 #include <string>
-#include "symbol_table.h"
+#include "hash_table.h"
 #include <iostream>
 
 
 namespace data_structures {
     using std::cout;
     using std::endl;
-    void testSymbolTable(){
-        auto table = SymbolTable<std::string, uint32_t>();
+    void testHashTable(){
+        auto table = HashTable<std::string, uint32_t, 5>();
         cout << table.isEmpty() << endl;
         table.set("a", 0)
             .set("b", 1)
@@ -34,14 +34,15 @@ namespace data_structures {
         table.set("a", 334);
         cout << table.get("a") << endl;
         auto table1 = table;
+        cout << table1 << endl;
         cout << (table == table1) << endl;
         for (auto element: table.elements()) {
-            cout << element << " ";
+            cout << element;
         }
         cout << endl;
         for (auto key: table.keys()) {
             cout << key << ": " << table.del(key) << endl;
-            cout << table << endl;
+            cout << table << table.size() << endl << endl;
         }
         cout << table.isEmpty() << endl;
         table1.clear();

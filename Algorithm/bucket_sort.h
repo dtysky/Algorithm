@@ -20,7 +20,7 @@ namespace my_algorithm {
     // space: O(t_max)
     void bucketSort(vector<uint32_t>& t_vector, const uint32_t t_max, const bool reverse = false) {
         auto bucket = vector<uint32_t>(size_t(t_max + 1));
-        for (auto t: t_vector) {
+        for (auto &t: t_vector) {
             bucket[t] = 1;
         }
 

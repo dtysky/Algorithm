@@ -43,7 +43,7 @@ namespace my_algorithm {
     }
 
     void SymbolPairChecker::setSymbolPairs(const std::vector<std::string> &symbol_pairs) {
-        for (auto pair: symbol_pairs) {
+        for (auto &pair: symbol_pairs) {
             _open_symbols += pair[0];
             _close_symbols += pair[1];
         }
