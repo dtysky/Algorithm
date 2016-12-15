@@ -109,11 +109,13 @@ namespace data_structures {
         return *this;
     }
 
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename Key, typename Value> inline
     bool AVLTree<Key, Value>::operator==(const AVLTree<Key, Value>& tree) {
         return _root == tree._root;
     }
 
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename Key, typename Value> inline
     bool AVLTree<Key, Value>::operator!=(const AVLTree<Key, Value>& tree) {
         return _root != tree._root;

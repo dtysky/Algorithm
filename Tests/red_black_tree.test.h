@@ -24,7 +24,7 @@ namespace data_structures {
 //        for (auto key: std::vector<std::string>{"e", "b", "c", "a", "d", "f", "aa", "bb", "cc", "dd", "ee"}) {
 //            cout << key << ":" << endl << tree.set(key, key) << endl;
 //        }
-//
+
         tree.set("e", 0)
             .set("b", 1)
             .set("c", 2)
@@ -48,6 +48,10 @@ namespace data_structures {
 
         for (auto rank: std::vector<size_t>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) {
             cout << rank << " " << tree.select(rank) << endl;
+        }
+
+        for (auto node: tree.getAllNodes()) {
+            cout << node << "[" << node->element << "]" << endl;
         }
 
         auto tree1 = tree;

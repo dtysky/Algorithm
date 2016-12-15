@@ -104,11 +104,13 @@ namespace data_structures {
         return *this;
     }
 
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename Key, typename Value> inline
     bool BinarySearchTree<Key, Value>::operator==(const BinarySearchTree<Key, Value>& tree) {
         return _root == tree._root;
     }
 
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename Key, typename Value> inline
     bool BinarySearchTree<Key, Value>::operator!=(const BinarySearchTree<Key, Value>& tree) {
         return _root != tree._root;

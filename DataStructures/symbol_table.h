@@ -36,6 +36,7 @@ namespace data_structures {
         Value del(const Key& key);
         SymbolTable<Key, Value>& clear();
         std::vector<Key> keys();
+        std::vector<Key> values();
         std::vector<SymbolTableElement<Key, Value>> elements();
         friend std::ostream &operator<<(std::ostream &out, const SymbolTable<Key, Value> &table) {
             out << "{" << std::endl;
@@ -145,6 +146,15 @@ namespace data_structures {
             keys.push_back(node->element.key);
         }
         return keys;
+    }
+
+    template <typename Key, typename Value> inline
+    std::vector<Key> SymbolTable<Key, Value>::values(){
+        auto values = std::vector<Key>();
+        for (auto node = _list.begin(); node != _list.end(); node = node->next()) {
+            values.push_back(node->element.value);
+        }
+        return values;
     }
 
     template <typename Key, typename Value> inline

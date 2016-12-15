@@ -34,6 +34,12 @@ namespace data_structures {
             value = element.value;
             return *this;
         }
+        bool operator==(const SymbolTableElement<Key, Value>& element) {
+            return key == element.key && value == element.value;
+        }
+        bool operator!=(const SymbolTableElement<Key, Value>& element) {
+            return !(*this == element);
+        }
         friend std::ostream &operator<<(std::ostream &out, const SymbolTableElement<Key, Value> &element) {
             std::cout << element.key << ": " << element.value << std::endl;
             return out;

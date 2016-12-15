@@ -11,6 +11,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <functional>
 #include "tree_element.h"
 #include "red_black_tree_node.h"
 #include "utils.h"
@@ -20,6 +21,7 @@ namespace data_structures {
     class RBTree {
     protected:
         RBTreeNode<TreeElement<Key, Value>> *_root;
+        std::vector<RBTreeNode<TreeElement<Key, Value>>*> _all_nodes;
         void _copy(RBTreeNode<TreeElement<Key, Value>> *node, RBTreeNode<TreeElement<Key, Value>> *node_src);
         void _clearFromNode(RBTreeNode<TreeElement<Key, Value>> *node);
         RBTreeNode<TreeElement<Key, Value>> *_find(const Key& key, const bool withMoving = false);
@@ -39,9 +41,12 @@ namespace data_structures {
         bool isEmpty();
         size_t size();
         RBTree& clear();
+        RBTree& add(const Key& key);
         RBTree& set(const Key& key, const Value &value);
         Value get(const Key& key);
         Value del(const Key& key);
+        RBTreeNode<TreeElement<Key, Value>>* getNode(const Key& key);
+        std::vector<RBTreeNode<TreeElement<Key, Value>>*> getAllNodes();
         Key select(const size_t k);
         size_t rank(const Key& key);
         RBTree<Key, Value>& operator=(const RBTree<Key, Value> &tree);
@@ -108,11 +113,13 @@ namespace data_structures {
         return *this;
     }
 
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename Key, typename Value> inline
     bool RBTree<Key, Value>::operator==(const RBTree<Key, Value>& tree) {
         return _root == tree._root;
     }
 
+    /*---------------- todo: waiting for correcting ----------------*/
     template <typename Key, typename Value> inline
     bool RBTree<Key, Value>::operator!=(const RBTree<Key, Value>& tree) {
         return _root != tree._root;
@@ -296,6 +303,43 @@ namespace data_structures {
         return node;
     }
 
+    // this method is practical when this tree is used as a set
+    template<typename Key, typename Value> inline
+    RBTree<Key, Value>& RBTree<Key, Value>::add(const Key &key){
+        if (isEmpty()) {
+            _root = new RBTreeNode<TreeElement<Key, Value>>(TreeElement<Key, Value>(key, Value()));
+            return *this;
+        }
+        auto node = _root;
+        auto parent = _root->parent();
+        while (node != nullptr) {
+            if (node->element.key == key) {
+                return *this;
+            }
+            parent = node;
+            if (key < node->element.key) {
+                node = node->left();
+            } else {
+                node = node->right();
+            }
+        }
+        node = new RBTreeNode<TreeElement<Key, Value>>(TreeElement<Key, Value>(key, Value()));
+        if (key < parent->element.key) {
+            parent->insertLeft(node, true);
+        } else {
+            parent->insertRight(node, true);
+        }
+        while (parent != nullptr) {
+            parent->node_count++;
+            parent = _balance(parent)->parent();
+        }
+        // reset the root's color
+        if (_root->isRed()) {
+            _root->flipColors();
+        }
+        return *this;
+    }
+
     template<typename Key, typename Value> inline
     RBTree<Key, Value>& RBTree<Key, Value>::set(const Key &key, const Value &value){
         if (isEmpty()) {
@@ -417,6 +461,28 @@ namespace data_structures {
             _root->flipColors();
         }
         return result;
+    }
+
+
+    template<typename Key, typename Value> inline
+    RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::getNode(const Key &key){
+        return _find(key);
+    }
+
+    template<typename Key, typename Value> inline
+    std::vector<RBTreeNode<TreeElement<Key, Value>>*> RBTree<Key, Value>::getAllNodes(){
+        _all_nodes.clear();
+        std::function<void(RBTreeNode<TreeElement<Key, Value>>*)> fun;
+        fun = [this, &fun](RBTreeNode<TreeElement<Key, Value>>* node) -> void {
+            if (node == nullptr) {
+                return;
+            }
+            _all_nodes.push_back(node);
+            fun(node->left());
+            fun(node->right());
+        };
+        fun(_root);
+        return _all_nodes;
     }
 
     template <typename Key, typename Value> inline

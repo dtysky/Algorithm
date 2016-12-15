@@ -110,17 +110,26 @@ namespace data_structures{
         return *this;
     }
 
-    /*---------------- todo: waiting for correcting ----------------*/
     template <typename T> inline
     bool LinkedList<T>::operator==(const LinkedList<T>& list) const {
-        return _header == list._header;
+        if (_size != list._size) {
+            return false;
+        }
+        ListNode<T>* current1 = _header->next();
+        ListNode<T>* current2 = list._header->next();
+        while (current1 != nullptr) {
+            if (current1->element != current2->element) {
+                return false;
+            }
+            current1 = current1->next();
+            current2 = current2->next();
+        }
+        return true;
     }
-
-    /*---------------- todo: waiting for correcting ----------------*/
 
     template <typename T> inline
     bool LinkedList<T>::operator!=(const LinkedList<T>& list) const {
-        return _header != list._header;
+        return !(*this == list);
     }
 
     template <typename T> inline
