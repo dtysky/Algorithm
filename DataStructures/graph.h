@@ -14,18 +14,21 @@
 #include "red_black_tree.h"
 #include "graph_adj_set.h"
 #include <vector>
+#include <algorithm>
 
 
 namespace data_structures {
     template <typename T>
     class Graph {
+        typedef RBTreeNode<TreeElement<T, GraphAdjSet<T>>> Node;
     protected:
         RBTree<T, GraphAdjSet<T>> _tree;
         size_t _edge_count;
     public:
         Graph();
-        Graph(const Graph<T> &graph);
+        Graph(Graph<T> &graph);
         virtual ~Graph();
+        bool isEmpty();
         size_t vertexCount();
         size_t edgeCount();
         size_t selfLoopsCount();
@@ -39,10 +42,18 @@ namespace data_structures {
         Graph<T>& addEdge(const T& v, const T& w);
         Graph<T>& deleteEdge(const T& v, const T& w);
         bool hasEdge(const T& v, const T& w);
-        Graph<T>& operator=(const Graph<T> &graph);
-        bool operator==(const Graph<T> &graph);
-        bool operator!=(const Graph<T> &graph);
-        friend std::ostream &operator<<(std::ostream &out, const Graph<T> &graph) {
+        Graph<T>& operator=(Graph<T> &graph);
+        bool operator==(Graph<T> &graph);
+        bool operator!=(Graph<T> &graph);
+        friend std::ostream &operator<<(std::ostream &out, Graph<T> &graph) {
+            auto nodes = graph._tree.getAllNodes();
+            for (auto node: nodes) {
+                out << node->element.key << ": ";
+                for (auto &v: node->element.value.adjVertex()) {
+                    out << v << " ";
+                }
+                out << std::endl;
+            }
             return out;
         }
     };
@@ -51,30 +62,83 @@ namespace data_structures {
     template <typename T> inline
     Graph<T>::Graph() {
         _tree = RBTree<T, GraphAdjSet<T>>();
+        _edge_count = 0;
     }
 
-    // todo: waiting for completing, keys in GraphAdjSet are pointers, we can't copy them by default method
+    // keys in GraphAdjSet are pointers, we can't copy them by default method
     template <typename T> inline
-    Graph<T>::Graph(const Graph<T> &graph) {}
+    Graph<T>::Graph(Graph<T> &graph) {
+        _tree = RBTree<T, GraphAdjSet<T>>();
+        auto nodes = graph._tree.getAllNodes();
+        for (auto node: nodes) {
+            _tree.add(node->element.key);
+        }
+        for (auto node: nodes) {
+            auto new_node = _tree.getNode(node->element.key);
+            auto adj_vertex = node->element.value.adjVertex();
+            for (auto v: adj_vertex) {
+                new_node->element.value.addEdge(_tree.getNode(v));
+            }
+        }
+    }
 
     template <typename T> inline
     Graph<T>::~Graph() {}
 
-    // todo: waiting for completing, keys in GraphAdjSet are pointers, we can't copy them by default method
+    // keys in GraphAdjSet are pointers, we can't copy them by default method
     template <typename T> inline
-    Graph<T>& Graph<T>::operator=(const Graph<T> &graph) {
+    Graph<T>& Graph<T>::operator=(Graph<T> &graph) {
+        _tree = RBTree<T, GraphAdjSet<T>>();
+        auto nodes = graph._tree.getAllNodes();
+        for (auto node: nodes) {
+            _tree.add(node->element.key);
+        }
+        for (auto node: nodes) {
+            auto new_node = _tree.getNode(node->element.key);
+            auto adj_vertex = node->element.value.adjVertex();
+            for (auto v: adj_vertex) {
+                new_node->element.value.addEdge(_tree.getNode(v));
+            }
+        }
         return *this;
     }
 
     // todo: waiting for completing, keys in GraphAdjSet are pointers, we can't compare them by default method
     template <typename T> inline
-    bool Graph<T>::operator==(const Graph<T> &graph) {
-        return false;
+    bool Graph<T>::operator==(Graph<T> &graph) {
+        auto nodes1 = _tree.getAllNodes();
+        std::sort(nodes1.begin(), nodes1.end(), [](Node* n1, Node* n2) {
+            return n1->element.key < n2->element.key;
+        });
+        auto nodes2 = graph._tree.getAllNodes();
+        std::sort(nodes2.begin(), nodes2.end(), [](Node* n1, Node* n2) {
+            return n1->element.key < n2->element.key;
+        });
+        auto size = nodes1.size();
+        if (size != nodes2.size()) {
+            return false;
+        }
+        for (size_t i = 0; i < size; i++) {
+            auto node1 = nodes1[i];
+            auto node2 = nodes2[i];
+            if (
+                node1->element.key != node2->element.key ||
+                node1->element.value != node2->element.value
+            ) {
+                return false;
+            }
+        }
+        return true;
     }
 
     template <typename T> inline
-    bool Graph<T>::operator!=(const Graph<T> &graph) {
+    bool Graph<T>::operator!=(Graph<T> &graph) {
         return !(*this == graph);
+    }
+
+    template <typename T> inline
+    bool Graph<T>::isEmpty() {
+        return vertexCount() == 0;
     }
 
     template <typename T> inline
@@ -92,7 +156,7 @@ namespace data_structures {
         auto nodes = _tree.getAllNodes();
         size_t count = 0;
         for (auto node: nodes) {
-            count += node->element.value.has(node) ? 1 : 0;
+            count += node->element.value.hasEdge(node) ? 1 : 0;
         }
         return count;
     }
@@ -112,7 +176,7 @@ namespace data_structures {
         auto nodes = _tree.getAllNodes();
         size_t d = 0;
         for (auto node: nodes) {
-            auto &d2 = node->element.value.degree();
+            auto d2 = node->element.value.degree();
             d = d2 > d ? d2 : d;
         }
         return d;
@@ -131,8 +195,8 @@ namespace data_structures {
 
     template <typename T> inline
     Graph<T>& Graph<T>::deleteVertex(const T &vertex){
-        auto v = _tree.get(vertex);
-        auto nodes = v.adjVertexNodes();
+        auto v = _tree.getNode(vertex);
+        auto nodes = v->element.value.adjVertexNodes();
         for (auto node: nodes) {
             node->element.value.deleteEdge(v);
             _edge_count--;
@@ -143,8 +207,8 @@ namespace data_structures {
 
     template <typename T> inline
     bool Graph<T>::hasVertex(const T &v){
-        auto nodes = v.adjVertexNodes();
-        for (auto node: nodes) {
+        auto nodes = _tree.getAllNodes();
+        for (auto &node: nodes) {
             if (node->element.key == v) {
                 return true;
             }
@@ -170,7 +234,9 @@ namespace data_structures {
         if (vp->element.value.deleteEdge(wp)) {
             _edge_count--;
         }
-        wp->element.value.deleteEdge(vp);
+        if (wp != vp) {
+            wp->element.value.deleteEdge(vp);
+        }
         return *this;
     }
 

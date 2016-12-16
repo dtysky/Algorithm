@@ -28,14 +28,14 @@ namespace data_structures {
         GraphAdjSet(const GraphAdjSet<T> &set);
         virtual ~GraphAdjSet();
         std::vector<T> adjVertex();
-        std::vector<T> adjVertexNodes();
+        std::vector<RBTreeNode<TreeElement<T, GraphAdjSet<T>>>*> adjVertexNodes();
         size_t degree();
         bool addEdge(Node *node);
         bool deleteEdge(Node *node);
         bool hasEdge(Node *node);
         GraphAdjSet<T>& operator=(const GraphAdjSet<T> &set);
-        bool operator==(const GraphAdjSet<T> &set);
-        bool operator!=(const GraphAdjSet<T> &set);
+        bool operator==(GraphAdjSet<T> &set);
+        bool operator!=(GraphAdjSet<T> &set);
         friend std::ostream &operator<<(std::ostream &out, const GraphAdjSet<T> &set) {
             out << set._table;
             return out;
@@ -44,31 +44,42 @@ namespace data_structures {
 
     template <typename T> inline
     GraphAdjSet<T>::GraphAdjSet(){
-        _table = SymbolTable<Node*, bool>();
+        _table = SymbolTable<Node*, T>();
     }
 
     template <typename T> inline
-    GraphAdjSet<T>::GraphAdjSet(const GraphAdjSet<T>& node){
-        _table = node._table;
+    GraphAdjSet<T>::GraphAdjSet(const GraphAdjSet<T>& set){
+        _table = set._table;
     }
 
     template <typename T> inline
     GraphAdjSet<T>::~GraphAdjSet(){}
 
     template <typename T> inline
-    GraphAdjSet<T>& GraphAdjSet<T>::operator=(const GraphAdjSet<T>& node){
-        _table = node._table;
+    GraphAdjSet<T>& GraphAdjSet<T>::operator=(const GraphAdjSet<T>& set){
+        _table = set._table;
         return *this;
     }
 
     template <typename T> inline
-    bool GraphAdjSet<T>::operator==(const GraphAdjSet<T>& node){
-        return _table == node._table;
+    bool GraphAdjSet<T>::operator==(GraphAdjSet<T>& set){
+        auto size = _table.size();
+        if (size != set._table.size()) {
+            return false;
+        }
+        auto values1 = _table.values();
+        auto values2 = set._table.values();
+        for (size_t i = 0; i < size; i++) {
+            if (values1[i] != values2[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     template <typename T> inline
-    bool GraphAdjSet<T>::operator!=(const GraphAdjSet<T>& node){
-        return _table != node._table;
+    bool GraphAdjSet<T>::operator!=(GraphAdjSet<T>& set){
+        return !(*this == set);
     }
 
     template <typename T> inline
@@ -89,7 +100,7 @@ namespace data_structures {
     template <typename T> inline
     bool GraphAdjSet<T>::addEdge(Node *node){
         auto size = _table.size();
-        _table.set(node, node->element.value);
+        _table.set(node, node->element.key);
         return size != _table.size();
     }
 

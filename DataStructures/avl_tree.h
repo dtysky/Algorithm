@@ -135,7 +135,7 @@ namespace data_structures {
 
     template <typename Key, typename Value> inline
     size_t AVLTree<Key, Value>::size() {
-        return _root->node_count;
+        return _root == nullptr ? 0 : _root->node_count;
     }
 
     template <typename Key, typename Value> inline

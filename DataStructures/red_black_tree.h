@@ -139,7 +139,7 @@ namespace data_structures {
 
     template <typename Key, typename Value> inline
     size_t RBTree<Key, Value>::size() {
-        return _root->node_count;
+        return _root == nullptr ? 0 : _root->node_count;
     }
 
     // use the node's right-child to instead of itself,
