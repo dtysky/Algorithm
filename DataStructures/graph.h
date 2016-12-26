@@ -32,7 +32,9 @@ namespace data_structures {
         size_t vertexCount();
         size_t edgeCount();
         size_t selfLoopsCount();
+        RBTreeNode<TreeElement<T, GraphAdjSet<T>>>* getNode(const T& vertex);
         std::vector<T> adjVertex(const T& vertex);
+        std::vector<RBTreeNode<TreeElement<T, GraphAdjSet<T>>>*> adjVertexNodes(const T& vertex);
         size_t degree(const T& vertex);
         size_t maxDegree();
         size_t avgDegree();
@@ -162,8 +164,18 @@ namespace data_structures {
     }
 
     template <typename T> inline
+    RBTreeNode<TreeElement<T, GraphAdjSet<T>>>* Graph<T>::getNode(const T &vertex){
+        return _tree.getNode(vertex);
+    }
+
+    template <typename T> inline
     std::vector<T> Graph<T>::adjVertex(const T& vertex){
         return _tree.get(vertex).adjVertex();
+    }
+
+    template <typename T> inline
+    std::vector<RBTreeNode<TreeElement<T, GraphAdjSet<T>>>*> Graph<T>::adjVertexNodes(const T &vertex){
+        return _tree.get(vertex).adjVertexNodes();
     }
 
     template <typename T> inline

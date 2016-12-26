@@ -37,6 +37,7 @@ namespace data_structures{
         ListNode<T>* getKthNode(const size_t k);
         ListNode<T>* find(const T& element);
         ListNode<T>* findPrevious(const T& element);
+        bool has(const T& element);
         LinkedList<T>* insert(const T& pre_element, const T& new_element);
         LinkedList<T>* insertAfterNode(ListNode<T>* _current, const T& new_element);
         LinkedList<T>* insertToHeader(const T& element);
@@ -194,6 +195,11 @@ namespace data_structures{
             return nullptr;
         }
         return _previous;
+    }
+
+    template <typename T> inline
+    bool LinkedList<T>::has(const T &element){
+        return find(element) == nullptr;
     }
     
     template <typename T> inline
