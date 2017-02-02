@@ -16,7 +16,8 @@
 #include "graph.h"
 #include "graph_adj_set.h"
 #include "symbol_table.h"
-#include "queue.h";
+#include "queue.h"
+#include "utils.h"
 
 
 namespace my_algorithm {
@@ -36,8 +37,8 @@ namespace my_algorithm {
         void _dfs(Node* vertex) {
             auto adj_set = vertex->element.value.adjVertexNodes();
             for (auto v: adj_set) {
-                if (std::find(_marked_nodes.begin(), _marked_nodes.end(), v) == _marked_nodes.end()) {
-                    return;
+                if (isInVector<Node*>(_marked_nodes, v)) {
+                    continue;
                 }
                 _marked_nodes.push_back(v);
                 _count++;
@@ -46,6 +47,7 @@ namespace my_algorithm {
         }
     public:
         GraphDFS(Graph<T>& graph, const T& vertex) {
+            _count = 0;
             _dfs(graph.getNode(vertex));
         }
         bool marked(const T& vertex) {
@@ -76,13 +78,13 @@ namespace my_algorithm {
         void _dfs(Node* vertex, Path& path) {
             auto adj_set = vertex->element.value.adjVertexNodes();
             for (auto v: adj_set) {
-                if (std::find(_marked_nodes.begin(), _marked_nodes.end(), v) == _marked_nodes.end()) {
-                    return;
+                if (isInVector<Node*>(_marked_nodes, v)) {
+                    continue;
                 }
                 _marked_nodes.push_back(v);
                 auto new_path = Path(path);
-                new_path.push_back(vertex);
-                _paths.set(vertex->element.key, new_path);
+                new_path.push_back(v);
+                _paths.set(v->element.key, new_path);
                 _dfs(v, new_path);
             }
         }
@@ -105,12 +107,14 @@ namespace my_algorithm {
         Path pathNodesTo(const T& vertex) {
             return _paths.get(vertex);
         }
-        void print(const T& vertex) {
-            auto elements = _paths.elements();
-            for (auto e: elements) {
-                std::cout << e.key << ': ';
-                for (auto path: e.value) {
-                    std::cout << path->element.key << ' ';
+        void print() {
+            auto self = _marked_nodes[0]->element.key;
+            auto paths = _paths.elements();
+            for (auto path: paths) {
+                std::cout << self << " -> " << path.key;
+                std::cout << ": ";
+                for (auto node: path.value) {
+                    std::cout << node->element.key << ' ';
                 }
                 std::cout << std::endl;
             }
@@ -127,19 +131,19 @@ namespace my_algorithm {
         SymbolTable<T, Path> _paths;
         void _bfs(Node* start) {
             _paths.clear();
-            _marked_nodes.push_back(start);
             _queue.enqueue(start);
+            _paths.set(start->element.key, Path());
             while (!_queue.isEmpty()) {
-                auto v = _queue.dequeue();
-                auto adj_set = v->element.value.adjVertexNodes();
+                auto vertex = _queue.dequeue();
+                auto adj_set = vertex->element.value.adjVertexNodes();
                 for (auto v: adj_set) {
-                    if (std::find(_marked_nodes.begin(), _marked_nodes.end(), v) == _marked_nodes.end()) {
+                    if (isInVector<Node*>(_marked_nodes, v)) {
                         continue;
                     }
                     _marked_nodes.push_back(v);
                     _queue.enqueue(v);
-                    if (_paths.has(v->element.key)) {
-                        _paths.set(v->element.key, Path());
+                    if (!_paths.has(v->element.key)) {
+                        _paths.set(v->element.key, _paths.get(vertex->element.key));
                     }
                     auto new_path = _paths.get(v->element.key);
                     new_path.push_back(v);
@@ -165,12 +169,14 @@ namespace my_algorithm {
         Path pathNodesTo(const T& vertex) {
             return _paths.get(vertex);
         }
-        void print(const T& vertex) {
-            auto elements = _paths.elements();
-            for (auto e: elements) {
-                std::cout << e.key << ': ';
-                for (auto path: e.value) {
-                    std::cout << path->element.key << ' ';
+        void print() {
+            auto self = _marked_nodes[0]->element.key;
+            auto paths = _paths.elements();
+            for (auto path: paths) {
+                std::cout << self << " -> " << path.key;
+                std::cout << ": ";
+                for (auto node: path.value) {
+                    std::cout << node->element.key << ' ';
                 }
                 std::cout << std::endl;
             }
