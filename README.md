@@ -39,3 +39,4 @@ Build with CPP.
 9. quickSort: quick sort, optimized by insertion sort, median3 and 3way, time-O(n * log(n)), space-O(n).
 10. heapSort: heap sort, time-O(n * log(n)), space-O(n).
 11. binarySearch: binary search, time-O(log(n)), space-O(1).
+12. GraphDFS, GraphPathsDFS, GraphPathsBFS: algorithms for searching in graphs.
