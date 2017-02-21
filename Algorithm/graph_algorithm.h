@@ -28,8 +28,8 @@ namespace my_algorithm {
     using data_structures::SymbolTable;
     using data_structures::Queue;
 
-    template <typename T>
-    class GraphDFS {
+    template <class G, typename T>
+    class DFS {
         typedef RBTreeNode<TreeElement<T, GraphAdjSet<T>>> Node;
     protected:
         std::vector<Node*> _marked_nodes;
@@ -46,7 +46,7 @@ namespace my_algorithm {
             }
         }
     public:
-        GraphDFS(Graph<T>& graph, const T& vertex) {
+        DFS(G& graph, const T& vertex) {
             _count = 0;
             _dfs(graph.getNode(vertex));
         }
@@ -68,8 +68,8 @@ namespace my_algorithm {
         }
     };
 
-    template <typename T>
-    class GraphPathsDFS {
+    template <class G, typename T>
+    class PathsDFS {
         typedef RBTreeNode<TreeElement<T, GraphAdjSet<T>>> Node;
         typedef std::vector<Node*> Path;
     protected:
@@ -89,7 +89,7 @@ namespace my_algorithm {
             }
         }
     public:
-        GraphPathsDFS(Graph<T>& graph, const T& vertex) {
+        PathsDFS(G& graph, const T& vertex) {
             auto new_path = Path();
             _dfs(graph.getNode(vertex), new_path);
         }
@@ -121,8 +121,8 @@ namespace my_algorithm {
         }
     };
 
-    template <typename T>
-    class GraphPathsBFS {
+    template <class G, typename T>
+    class PathsBFS {
         typedef RBTreeNode<TreeElement<T, GraphAdjSet<T>>> Node;
         typedef std::vector<Node*> Path;
     protected:
@@ -152,7 +152,7 @@ namespace my_algorithm {
             }
         }
     public:
-        GraphPathsBFS(Graph<T>& graph, const T& vertex) {
+        PathsBFS(G& graph, const T& vertex) {
             _bfs(graph.getNode(vertex));
         }
         bool hasPathTo(const T& vertex) {
@@ -181,6 +181,24 @@ namespace my_algorithm {
                 std::cout << std::endl;
             }
         }
+    };
+
+    template<typename T>
+    class GraphDFS: public DFS<Graph<T>, T> {
+    public:
+        GraphDFS(Graph<T>& graph, const T& vertex): DFS<Graph<T>, T>(graph, vertex) {};
+    };
+
+    template<typename T>
+    class GraphPathsDFS: public PathsDFS<Graph<T>, T> {
+    public:
+        GraphPathsDFS(Graph<T>& graph, const T& vertex): PathsDFS<Graph<T>, T>(graph, vertex) {};
+    };
+
+    template<typename T>
+    class GraphPathsBFS: public PathsBFS<Graph<T>, T> {
+    public:
+        GraphPathsBFS(Graph<T>& graph, const T& vertex): PathsBFS<Graph<T>, T>(graph, vertex) {};
     };
 }
 

@@ -24,6 +24,8 @@ namespace data_structures {
     protected:
         RBTree<T, GraphAdjSet<T>> _tree;
         size_t _edge_count;
+        void _copy(Graph<T> &graph);
+        bool _equal(Graph<T> &graph);
     public:
         Graph();
         Graph(Graph<T> &graph);
@@ -34,7 +36,8 @@ namespace data_structures {
         size_t selfLoopsCount();
         RBTreeNode<TreeElement<T, GraphAdjSet<T>>>* getNode(const T& vertex);
         std::vector<T> adjVertex(const T& vertex);
-        std::vector<RBTreeNode<TreeElement<T, GraphAdjSet<T>>>*> adjVertexNodes(const T& vertex);
+        std::vector<Node*> adjVertexNodes(const T& vertex);
+        std::vector<Node*> getAllNodes();
         size_t degree(const T& vertex);
         size_t maxDegree();
         size_t avgDegree();
@@ -67,21 +70,9 @@ namespace data_structures {
         _edge_count = 0;
     }
 
-    // keys in GraphAdjSet are pointers, we can't copy them by default method
     template <typename T> inline
     Graph<T>::Graph(Graph<T> &graph) {
-        _tree = RBTree<T, GraphAdjSet<T>>();
-        auto nodes = graph._tree.getAllNodes();
-        for (auto node: nodes) {
-            _tree.add(node->element.key);
-        }
-        for (auto node: nodes) {
-            auto new_node = _tree.getNode(node->element.key);
-            auto adj_vertex = node->element.value.adjVertex();
-            for (auto v: adj_vertex) {
-                new_node->element.value.addEdge(_tree.getNode(v));
-            }
-        }
+        _copy(graph);
     }
 
     template <typename T> inline
@@ -89,7 +80,7 @@ namespace data_structures {
 
     // keys in GraphAdjSet are pointers, we can't copy them by default method
     template <typename T> inline
-    Graph<T>& Graph<T>::operator=(Graph<T> &graph) {
+    void Graph<T>::_copy(Graph<T> &graph){
         _tree = RBTree<T, GraphAdjSet<T>>();
         auto nodes = graph._tree.getAllNodes();
         for (auto node: nodes) {
@@ -102,12 +93,11 @@ namespace data_structures {
                 new_node->element.value.addEdge(_tree.getNode(v));
             }
         }
-        return *this;
     }
 
-    // todo: waiting for completing, keys in GraphAdjSet are pointers, we can't compare them by default method
+    // keys in GraphAdjSet are pointers, we can't copy them by default method
     template <typename T> inline
-    bool Graph<T>::operator==(Graph<T> &graph) {
+    bool Graph<T>::_equal(Graph<T> &graph){
         auto nodes1 = _tree.getAllNodes();
         std::sort(nodes1.begin(), nodes1.end(), [](Node* n1, Node* n2) {
             return n1->element.key < n2->element.key;
@@ -126,7 +116,7 @@ namespace data_structures {
             if (
                 node1->element.key != node2->element.key ||
                 node1->element.value != node2->element.value
-            ) {
+                ) {
                 return false;
             }
         }
@@ -134,8 +124,19 @@ namespace data_structures {
     }
 
     template <typename T> inline
+    Graph<T>& Graph<T>::operator=(Graph<T> &graph) {
+        _copy(graph);
+        return *this;
+    }
+
+    template <typename T> inline
+    bool Graph<T>::operator==(Graph<T> &graph) {
+        return _equal(graph);
+    }
+
+    template <typename T> inline
     bool Graph<T>::operator!=(Graph<T> &graph) {
-        return !(*this == graph);
+        return !(_equal(graph));
     }
 
     template <typename T> inline
@@ -176,6 +177,11 @@ namespace data_structures {
     template <typename T> inline
     std::vector<RBTreeNode<TreeElement<T, GraphAdjSet<T>>>*> Graph<T>::adjVertexNodes(const T &vertex){
         return _tree.get(vertex).adjVertexNodes();
+    }
+
+    template <typename T> inline
+    std::vector<RBTreeNode<TreeElement<T, GraphAdjSet<T>>>*> Graph<T>::getAllNodes(){
+        return _tree.getAllNodes();
     }
 
     template <typename T> inline

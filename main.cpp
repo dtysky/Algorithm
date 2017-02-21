@@ -16,7 +16,7 @@
 //#include "merge_sort.test.h"
 //#include "quick_sort.test.h"
 //#include "heap_sort.test.h"
-#include "grapha_algorithm.test.h"
+#include "digraph_algorithm.test.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -36,6 +36,6 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testRadixSort();
 //    printf("\nheap\n");
 //    my_algorithm::testHeapSort();
-    my_algorithm::testGraphAlgorithm();
+    my_algorithm::testDiraphAlgorithm();
     return 0;
 }
