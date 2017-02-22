@@ -90,7 +90,47 @@ namespace my_algorithm {
         for (auto &v: a_topo.order()) {
             cout << v << " ";
         }
-        cout << endl;
+        cout << endl << endl;
+
+
+        Digraph<int> graph1;
+        for (int i = 0; i <= 12; i++) {
+            graph1.addVertex(i);
+        }
+
+        graph1.addEdge(0, 1)
+            .addEdge(0, 5)
+            .addEdge(2, 0)
+            .addEdge(2, 3)
+            .addEdge(3, 2)
+            .addEdge(3, 5)
+            .addEdge(4, 2)
+            .addEdge(4, 3)
+            .addEdge(5, 4)
+            .addEdge(6, 0)
+            .addEdge(6, 4)
+            .addEdge(6, 9)
+            .addEdge(7, 6)
+            .addEdge(7, 8)
+            .addEdge(8, 7)
+            .addEdge(8, 9)
+            .addEdge(9, 10)
+            .addEdge(9, 11)
+            .addEdge(10, 12)
+            .addEdge(11, 4)
+            .addEdge(11, 12)
+            .addEdge(12, 9);
+
+        cout << "<---- DigraphSCCKosaraju ---->" << endl;
+        cout << graph1 << endl;
+        cout << "<---- scc ---->" << endl;
+        auto a_scc = DigraphSCCKosaraju<int>(graph1);
+        for (auto &ccs: a_scc.scc()) {
+            for (auto &v: ccs) {
+                cout << v << " ";
+            }
+            cout << endl;
+        }
     }
 }
 

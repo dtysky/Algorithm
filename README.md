@@ -25,6 +25,7 @@ Build with CPP.
 15. AVLTree: AVL tree based on pointer.
 16. HashTable: Separate chaining hash table based on array and symbol table.
 17. Graph: Undirected graph based on red black tree(vertex) and symbol table(adjacent vertex set).
+18. Digraph: Directed graph based on red black tree(vertex) and symbol table(adjacent vertex set).
 
 ## Algorithm
 
@@ -40,3 +41,8 @@ Build with CPP.
 10. heapSort: heap sort, time-O(n * log(n)), space-O(n).
 11. binarySearch: binary search, time-O(log(n)), space-O(1).
 12. GraphDFS, GraphPathsDFS, GraphPathsBFS: algorithms for searching in graphs.
+13. DigraphDFS, DigraphPathsDFS, DigraphPathsBFS: algorithms for searching in graphs.
+14. DigraphFindCycle: finding the cycle in an digraph.  
+15. DigraphDFO: depth-first-order algorithm for digraph.   
+16. DigraphTopological: topological sorting for an non-cycle digraph.
+17. DigraphSCCKosaraju: finding all strongly connected components in a digraph.

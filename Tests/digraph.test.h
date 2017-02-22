@@ -75,11 +75,13 @@ namespace data_structures {
         cout << graph.hasEdge("ee", "a") << endl;
         cout << endl;
 
+        cout << "<---- Copy ---->" << endl;
         auto graph1 = graph;
         cout << graph1;
         cout << (graph == graph1) << endl;
         cout << endl;
 
+        cout << "<---- Delete ---->" << endl;
         graph.deleteEdge("e", "e")
             .deleteEdge("e", "a")
             .deleteEdge("b", "a")
@@ -116,7 +118,12 @@ namespace data_structures {
         cout << graph.edgeCount() << endl;
         cout << endl;
 
-        cout << (graph == graph1) << endl;
+        cout << (graph == graph1) << endl << endl;
+
+        cout << "<---- Reverse ---->" << endl;
+        Digraph<std::string> reversed_graph;
+        graph1.reverse(reversed_graph);
+        cout << graph1 << endl << "↓" << endl << endl << reversed_graph << endl;
     }
 }
 

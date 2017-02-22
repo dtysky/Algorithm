@@ -31,6 +31,7 @@ namespace data_structures {
         Graph(Graph<T> &graph);
         virtual ~Graph();
         bool isEmpty();
+        Graph<T>& clear();
         size_t vertexCount();
         size_t edgeCount();
         size_t selfLoopsCount();
@@ -142,6 +143,12 @@ namespace data_structures {
     template <typename T> inline
     bool Graph<T>::isEmpty() {
         return vertexCount() == 0;
+    }
+
+    template <typename T> inline
+    Graph<T>& Graph<T>::clear(){
+        _tree.clear();
+        return *this;
     }
 
     template <typename T> inline

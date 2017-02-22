@@ -191,6 +191,57 @@ namespace my_algorithm {
             return result;
         }
     };
+
+    template <typename T>
+    class DigraphSCCKosaraju {
+        typedef RBTreeNode<TreeElement<T, GraphAdjSet<T>>> Node;
+    protected:
+        std::vector<Node*> _marked_nodes;
+        std::vector<std::vector<Node*>> _scc_nodes;
+        void _dfs(Node* vertex, size_t index) {
+            auto adj_set = vertex->element.value.adjVertexNodes();
+            _marked_nodes.push_back(vertex);
+            _scc_nodes[index].push_back(vertex);
+            for (auto v: adj_set) {
+                if (isInVector<Node*>(_marked_nodes, v)) {
+                    continue;
+                }
+                _dfs(v, index);
+            }
+        }
+    public:
+        DigraphSCCKosaraju(Digraph<T>& graph) {
+            _marked_nodes = {};
+            Digraph<T> reversed_graph;
+            graph.reverse(reversed_graph);
+            auto vertexes = DigraphDFO<T>(reversed_graph).reversePost();
+            size_t index = 0;
+            for (auto &vertex: vertexes) {
+                auto node = graph.getNode(vertex);
+                if (isInVector<Node*>(_marked_nodes, node)) {
+                    continue;
+                }
+                _scc_nodes.push_back({});
+                _dfs(node, index);
+                index++;
+            }
+        }
+        std::vector<std::vector<Node*>> sccNodes() {
+            return _scc_nodes;
+        }
+        std::vector<std::vector<T>> scc() {
+            std::vector<std::vector<T>> result;
+            size_t i = 0;
+            for (auto &nodes: _scc_nodes) {
+                result.push_back({});
+                for (auto &node: nodes) {
+                    result[i].push_back(node->element.key);
+                }
+                i++;
+            }
+            return result;
+        }
+    };
 }
 
 #endif //ALGORITHM_DIGRAPH_ALGORITHM_H

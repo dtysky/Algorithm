@@ -35,13 +35,13 @@ namespace my_algorithm {
         std::vector<Node*> _marked_nodes;
         size_t _count;
         void _dfs(Node* vertex) {
+            _marked_nodes.push_back(vertex);
+            _count++;
             auto adj_set = vertex->element.value.adjVertexNodes();
             for (auto v: adj_set) {
                 if (isInVector<Node*>(_marked_nodes, v)) {
                     continue;
                 }
-                _marked_nodes.push_back(v);
-                _count++;
                 _dfs(v);
             }
         }
@@ -76,12 +76,12 @@ namespace my_algorithm {
         std::vector<Node*> _marked_nodes;
         SymbolTable<T, Path> _paths;
         void _dfs(Node* vertex, Path& path) {
+            _marked_nodes.push_back(vertex);
             auto adj_set = vertex->element.value.adjVertexNodes();
             for (auto v: adj_set) {
                 if (isInVector<Node*>(_marked_nodes, v)) {
                     continue;
                 }
-                _marked_nodes.push_back(v);
                 auto new_path = Path(path);
                 new_path.push_back(v);
                 _paths.set(v->element.key, new_path);
@@ -135,12 +135,12 @@ namespace my_algorithm {
             _paths.set(start->element.key, Path());
             while (!_queue.isEmpty()) {
                 auto vertex = _queue.dequeue();
+                _marked_nodes.push_back(vertex);
                 auto adj_set = vertex->element.value.adjVertexNodes();
                 for (auto v: adj_set) {
                     if (isInVector<Node*>(_marked_nodes, v)) {
                         continue;
                     }
-                    _marked_nodes.push_back(v);
                     _queue.enqueue(v);
                     if (!_paths.has(v->element.key)) {
                         _paths.set(v->element.key, _paths.get(vertex->element.key));

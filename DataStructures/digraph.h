@@ -23,7 +23,7 @@ namespace data_structures {
         virtual ~Digraph();
         Digraph<T>& addEdge(const T& v, const T& w);
         Digraph<T>& deleteEdge(const T& v, const T& w);
-        Digraph<T> reserve(const Digraph& graph);
+        void reverse(Digraph<T>& res_graph);
         friend std::ostream &operator<<(std::ostream &out, Digraph<T> &graph) {
             auto nodes = graph._tree.getAllNodes();
             for (auto node: nodes) {
@@ -58,6 +58,21 @@ namespace data_structures {
             this->_edge_count--;
         }
         return *this;
+    }
+
+    template <typename T> inline
+    void Digraph<T>::reverse(Digraph<T>& res_graph){
+        res_graph.clear();
+        auto nodes = this->_tree.getAllNodes();
+        for (auto &node: nodes) {
+            res_graph.addVertex(node->element.key);
+        }
+        for (auto &node: nodes) {
+            auto adj_set = node->element.value.adjVertexNodes();
+            for (auto &v: adj_set) {
+                res_graph.addEdge(v->element.key, node->element.key);
+            }
+        }
     }
 }
 

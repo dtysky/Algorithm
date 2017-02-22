@@ -113,5 +113,8 @@ namespace data_structures {
         cout << endl;
 
         cout << (graph == graph1) << endl;
+
+        graph1.clear();
+        cout << graph1 << endl;
     }
 }
