@@ -115,8 +115,6 @@ namespace data_structures {
     bool GraphAdjSet<T>::hasEdge(Node *node){
         return _table.has(node);
     }
-
-
 }
 
 
