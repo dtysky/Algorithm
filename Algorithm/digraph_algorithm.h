@@ -78,6 +78,8 @@ namespace my_algorithm {
     public:
         DigraphFindCycle(Digraph<T>& graph) {
             _has_cycle = false;
+            _marked_nodes.clear();
+            _onstack_nodes.clear();
             auto nodes = graph.getAllNodes();
             for (auto start_node: nodes) {
                 if (_has_cycle) {
@@ -129,6 +131,10 @@ namespace my_algorithm {
 
     public:
         DigraphDFO(Digraph<T>& graph) {
+            _marked_nodes.clear();
+            _pre_nodes.clear();
+            _post_nodes.clear();
+            _reserve_post_nodes.clear();
             auto nodes = graph.getAllNodes();
             for (auto start_node: nodes) {
                 if (!isInVector<Node*>(_marked_nodes, start_node)) {
@@ -176,6 +182,7 @@ namespace my_algorithm {
         std::vector<Node*> _nodes;
     public:
         DigraphTopological(Digraph<T>& graph) {
+            _nodes.clear();
             if (!DigraphFindCycle<T>(graph).hasCycle()) {
                 _nodes = DigraphDFO<T>(graph).reversePostNodes();
             }
@@ -211,7 +218,8 @@ namespace my_algorithm {
         }
     public:
         DigraphSCCKosaraju(Digraph<T>& graph) {
-            _marked_nodes = {};
+            _marked_nodes.clear();
+            _scc_nodes.clear();
             Digraph<T> reversed_graph;
             graph.reverse(reversed_graph);
             auto vertexes = DigraphDFO<T>(reversed_graph).reversePost();

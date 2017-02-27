@@ -16,7 +16,7 @@
 //#include "merge_sort.test.h"
 //#include "quick_sort.test.h"
 //#include "heap_sort.test.h"
-#include "weighted_graph.test.h"
+#include "weighted_graph_algorithm.test.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -36,6 +36,6 @@ int main(int argc, const char * argv[]) {
 //    my_algorithm::testRadixSort();
 //    printf("\nheap\n");
 //    my_algorithm::testHeapSort();
-    data_structures::testWeightGraph();
+    my_algorithm::testWeightGraphAlgorithm();
     return 0;
 }

@@ -48,6 +48,7 @@ namespace my_algorithm {
     public:
         DFS(G& graph, const T& vertex) {
             _count = 0;
+            _marked_nodes.clear();
             _dfs(graph.getNode(vertex));
         }
         bool marked(const T& vertex) {
@@ -90,6 +91,8 @@ namespace my_algorithm {
         }
     public:
         PathsDFS(G& graph, const T& vertex) {
+            _marked_nodes.clear();
+            _paths.clear();
             auto new_path = Path();
             _dfs(graph.getNode(vertex), new_path);
         }
@@ -153,6 +156,8 @@ namespace my_algorithm {
         }
     public:
         PathsBFS(G& graph, const T& vertex) {
+            _marked_nodes.clear();
+            _paths.clear();
             _bfs(graph.getNode(vertex));
         }
         bool hasPathTo(const T& vertex) {

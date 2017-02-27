@@ -88,8 +88,7 @@ namespace data_structures {
         cout << (graph == graph1) << endl;
         cout << endl;
 
-        graph.deleteEdge("e", "e")
-            .deleteEdge("e", "a")
+        graph.deleteEdge("e", "a")
             .deleteEdge("b", "a")
             .deleteEdge("c", "a")
             .deleteEdge("d", "e")

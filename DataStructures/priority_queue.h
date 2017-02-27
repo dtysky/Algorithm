@@ -105,8 +105,14 @@ namespace data_structures {
             _list.insertToHeader(element);
             return *this;
         }
-        for (auto node = _list.begin(); node->next() != _list.end() ; node = node->next()) {
-            if (!_less(node->next()->element, element)) {
+
+        if (_less(element, _list.begin()->element)) {
+            _list.insertToHeader(element);
+            return *this;
+        }
+
+        for (auto node = _list.begin(); node->next() != _list.end(); node = node->next()) {
+            if (_less(element, node->next()->element)) {
                 _list.insertAfterNode(node, element);
                 return *this;
             }

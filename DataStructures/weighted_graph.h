@@ -36,7 +36,8 @@ namespace data_structures {
         size_t vertexCount();
         size_t edgeCount();
         size_t selfLoopsCount();
-        RBTreeNode<TreeElement<T, WeightedGraphAdjSet<T, Weight>>>* getNode(const T& vertex);
+        Node* rootNode();
+        Node* getNode(const T& vertex);
         std::vector<T> adjVertex(const T& vertex);
         std::vector<Node*> adjVertexNodes(const T& vertex);
         std::vector<Node*> getAllNodes();
@@ -174,6 +175,11 @@ namespace data_structures {
     }
 
     template <typename T, typename Weight> inline
+    RBTreeNode<TreeElement<T, WeightedGraphAdjSet<T, Weight>>>* WeightedGraph<T, Weight>::rootNode(){
+        return _tree.root();
+    }
+
+    template <typename T, typename Weight> inline
     RBTreeNode<TreeElement<T, WeightedGraphAdjSet<T, Weight>>>* WeightedGraph<T, Weight>::getNode(const T &vertex){
         return _tree.getNode(vertex);
     }
@@ -196,12 +202,17 @@ namespace data_structures {
     template <typename T, typename Weight> inline
     std::vector<WeightedGraphEdge<RBTreeNode<TreeElement<T, WeightedGraphAdjSet<T, Weight>>>, Weight>> WeightedGraph<T, Weight>::getAllEdges(){
         std::vector<Edge> result;
+        std::vector<Node*> existed_nodes;
         auto nodes = _tree.getAllNodes();
         for (auto node: nodes) {
             auto adj_edges = node->element.value.adjEdges();
             for (auto e: adj_edges) {
+                if (isInVector<Node*>(existed_nodes, e.to)) {
+                    continue;
+                }
                 result.push_back(e);
             }
+            existed_nodes.push_back(node);
         }
         return result;
     }
@@ -259,6 +270,9 @@ namespace data_structures {
 
     template <typename T, typename Weight> inline
     WeightedGraph<T, Weight>& WeightedGraph<T, Weight>::addEdge(const T &v, const T &w, Weight weight){
+        if (v == w) {
+            return *this;
+        }
         auto vp = _tree.getNode(v);
         auto wp = _tree.getNode(w);
         if (vp->element.value.addEdge(wp, weight)) {

@@ -45,6 +45,7 @@ namespace data_structures {
         RBTree& set(const Key& key, const Value &value);
         Value get(const Key& key);
         Value del(const Key& key);
+        RBTreeNode<TreeElement<Key, Value>>* root();
         RBTreeNode<TreeElement<Key, Value>>* getNode(const Key& key);
         std::vector<RBTreeNode<TreeElement<Key, Value>>*> getAllNodes();
         Key select(const size_t k);
@@ -463,6 +464,10 @@ namespace data_structures {
         return result;
     }
 
+    template<typename Key, typename Value> inline
+    RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::root(){
+        return _root;
+    }
 
     template<typename Key, typename Value> inline
     RBTreeNode<TreeElement<Key, Value>>* RBTree<Key, Value>::getNode(const Key &key){
