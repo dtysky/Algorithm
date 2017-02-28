@@ -26,6 +26,7 @@ Build with CPP.
 16. HashTable: Separate chaining hash table based on array and symbol table.
 17. Graph: Undirected graph based on red black tree(vertex) and symbol table(adjacent vertex set).
 18. Digraph: Directed graph based on red black tree(vertex) and symbol table(adjacent vertex set).
+19. WeightedGraph: Weighted graph based on red black tree(vertex) and symbol table(adjacent vertex set).
 
 ## Algorithm
 
@@ -42,7 +43,10 @@ Build with CPP.
 11. binarySearch: binary search, time-O(log(n)), space-O(1).
 12. GraphDFS, GraphPathsDFS, GraphPathsBFS: algorithms for searching in graphs.
 13. DigraphDFS, DigraphPathsDFS, DigraphPathsBFS: algorithms for searching in graphs.
-14. DigraphFindCycle: finding the cycle in an digraph.  
+14. DigraphFindCycle: find the cycle in an digraph.  
 15. DigraphDFO: depth-first-order algorithm for digraph.   
 16. DigraphTopological: topological sorting for an non-cycle digraph.
-17. DigraphSCCKosaraju: finding all strongly connected components in a digraph.
+17. DigraphSCCKosaraju: find all strongly connected components in a digraph.
+18. UnionFind: a tool class to solve problems about dynamic connectivity.  
+19. WeightedGraphMSTPrim: find the Minimum Spanning Tree for a weighted graph with prim algorithm.  
+20. WeightedGraphMSTKruskal: find the Minimum Spanning Tree for a weighted graph with kruskal algorithm.

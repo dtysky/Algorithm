@@ -47,11 +47,18 @@ namespace my_algorithm {
         cout << graph << endl;
 
         cout << "<---- WeightedGraphMSTPrim ---->" << endl;
-        auto a_mst = WeightedGraphMSTPrim<int, int>(graph);
-        for (auto &edge: a_mst.edges()) {
+        auto a_mst_prim = WeightedGraphMSTPrim<int, int>(graph);
+        for (auto &edge: a_mst_prim.edges()) {
             cout << edge << endl;
         }
-        cout << a_mst.weight() << endl;
+        cout << a_mst_prim.weight() << endl << endl;
+
+        cout << "<---- WeightedGraphMSTKruskal ---->" << endl;
+        auto a_mst_kruskal = WeightedGraphMSTKruskal<int, int>(graph);
+        for (auto &edge: a_mst_kruskal.edges()) {
+            cout << edge << endl;
+        }
+        cout << a_mst_kruskal.weight() << endl;
     }
 }
 

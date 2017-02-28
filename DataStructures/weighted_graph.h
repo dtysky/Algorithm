@@ -13,6 +13,7 @@
 #include <iostream>
 #include "red_black_tree.h"
 #include "weighted_graph_adj_set.h"
+#include "priority_queue.h"
 #include <vector>
 #include <algorithm>
 
@@ -42,6 +43,7 @@ namespace data_structures {
         std::vector<Node*> adjVertexNodes(const T& vertex);
         std::vector<Node*> getAllNodes();
         std::vector<Edge> getAllEdges();
+        PriorityQueue<Edge> getSortedEdges();
         size_t degree(const T& vertex);
         size_t maxDegree();
         size_t avgDegree();
@@ -211,6 +213,24 @@ namespace data_structures {
                     continue;
                 }
                 result.push_back(e);
+            }
+            existed_nodes.push_back(node);
+        }
+        return result;
+    }
+
+    template <typename T, typename Weight> inline
+    PriorityQueue<WeightedGraphEdge<RBTreeNode<TreeElement<T, WeightedGraphAdjSet<T, Weight>>>, Weight>> WeightedGraph<T, Weight>::getSortedEdges() {
+        PriorityQueue<Edge> result;
+        std::vector<Node*> existed_nodes;
+        auto nodes = _tree.getAllNodes();
+        for (auto node: nodes) {
+            auto adj_edges = node->element.value.adjEdges();
+            for (auto e: adj_edges) {
+                if (isInVector<Node*>(existed_nodes, e.to)) {
+                    continue;
+                }
+                result.enqueue(e);
             }
             existed_nodes.push_back(node);
         }

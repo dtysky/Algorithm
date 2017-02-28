@@ -12,6 +12,7 @@
 #include <cstdio>
 #include "weighted_graph.h"
 #include "priority_queue.h"
+#include "union_find.h"
 
 
 namespace my_algorithm {
@@ -49,7 +50,7 @@ namespace my_algorithm {
             _marked_nodes.clear();
             _edges_queue.clear();
             auto count = 0;
-            auto size = graph.vertexCount();
+            auto size = graph.vertexCount() - 1;
             _visit(graph.rootNode());
             while (!_edges_queue.isEmpty()) {
                 auto edge = _edges_queue.dequeueMinN();
@@ -61,7 +62,7 @@ namespace my_algorithm {
                 _tree.push_back(edge);
                 count++;
                 _weight += edge.weight;
-                if (count == size - 1) {
+                if (count == size) {
                     return;
                 }
                 if (!markedFrom) {
@@ -70,6 +71,45 @@ namespace my_algorithm {
                 if (!markedTo) {
                     _visit(edge.to);
                 }
+            }
+        }
+        std::vector<Edge> edges() {
+            return _tree;
+        }
+        Weight weight() {
+            return _weight;
+        }
+    };
+
+    // only works on connected graph
+    template <typename T, typename Weight>
+    class WeightedGraphMSTKruskal {
+        typedef RBTreeNode<TreeElement<T, WeightedGraphAdjSet<T, Weight>>> Node;
+        typedef WeightedGraphEdge<Node, Weight> Edge;
+    protected:
+        UnionFind<Node*> _uf;
+        PriorityQueue<Edge> _edges_queue;
+        std::vector<Edge> _tree;
+        Weight _weight;
+
+    public:
+        WeightedGraphMSTKruskal(WeightedGraph<T, Weight>& graph) {
+            _uf = UnionFind<Node*>();
+            _edges_queue = graph.getSortedEdges();
+            auto count = 0;
+            auto size = graph.vertexCount() - 1;
+            while (!_edges_queue.isEmpty()) {
+                auto edge = _edges_queue.dequeueMinN();
+                if (_uf.connected(edge.from, edge.to)) {
+                    continue;
+                }
+                _tree.push_back(edge);
+                count++;
+                _weight += edge.weight;
+                if (count == size) {
+                    return;
+                }
+                _uf.un(edge.from, edge.to);
             }
         }
         std::vector<Edge> edges() {
