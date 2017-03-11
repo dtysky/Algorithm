@@ -1,12 +1,14 @@
 # Algorithm
 
 
-Algorithm and DataStructures exercises.
+Algorithm and data structures exercises.
 
-Build with CPP.
+Build with Cpp and Ruby.
 
 
 ## DataStructures
+
+### Cpp
 
 1. ListNode: node for single linked list.  
 2. LinkedList: single linked list based on pointer.  
@@ -27,8 +29,13 @@ Build with CPP.
 17. Graph: Undirected graph based on red black tree(vertex) and symbol table(adjacent vertex set).
 18. Digraph: Directed graph based on red black tree(vertex) and symbol table(adjacent vertex set).
 19. WeightedGraph: Weighted graph based on red black tree(vertex) and symbol table(adjacent vertex set).
+20. WeightedDigraph: Weighted directed graph based on red black tree(vertex) and symbol table(adjacent vertex set).
+
+### Ruby
 
 ## Algorithm
+
+### Cpp
 
 1. BucketSort: bucket sort, time-O(num_max + num_size), space-O(num_max).  
 2. RadixSort: radix sort, time-O(num_msd(num_size)), space-O(num_size * num_radix).  
@@ -50,3 +57,5 @@ Build with CPP.
 18. UnionFind: a tool class to solve problems about dynamic connectivity.  
 19. WeightedGraphMSTPrim: find the Minimum Spanning Tree for a weighted graph with prim algorithm.  
 20. WeightedGraphMSTKruskal: find the Minimum Spanning Tree for a weighted graph with kruskal algorithm.
+
+### Ruby

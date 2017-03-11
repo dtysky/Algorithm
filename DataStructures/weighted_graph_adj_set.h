@@ -63,12 +63,6 @@ namespace data_structures {
         bool operator<=(const WeightedGraphEdge<Node, Weight> &edge) const {
             return weight <= edge.weight;
         }
-        bool equals(const WeightedGraphEdge<Node, Weight> &edge) {
-            return weight == edge.weight && (
-                (from == edge.from && to == edge.to) ||
-                (from == edge.to && to == edge.from)
-            );
-        }
         friend std::ostream &operator<<(std::ostream &out, WeightedGraphEdge<Node, Weight> &edge) {
             out << edge.from->element.key << " <-> " << edge.to->element.key << ": " << edge.weight;
             return out;
