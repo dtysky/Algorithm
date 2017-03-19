@@ -57,5 +57,7 @@ Build with Cpp and Ruby.
 18. UnionFind: a tool class to solve problems about dynamic connectivity.  
 19. WeightedGraphMSTPrim: find the Minimum Spanning Tree for a weighted graph with prim algorithm.  
 20. WeightedGraphMSTKruskal: find the Minimum Spanning Tree for a weighted graph with kruskal algorithm.
+21. WeightedDigraphSPDijkstra: find the shortest path for a connected weighted digraph which has no negative weight with dijkstra algorithm.
+21. WeightedDigraphSPAcyclic: find the shortest path for a weighted DAG with a simple and fast algorithm.
 
 ### Ruby
