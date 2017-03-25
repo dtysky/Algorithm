@@ -33,6 +33,8 @@ Build with Cpp and Ruby.
 
 ### Ruby
 
+1. Aplhabet: alphabet based on array.
+
 ## Algorithm
 
 ### Cpp
