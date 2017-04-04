@@ -1,3 +1,8 @@
+=begin
+  Author: Dai Tianyu(dtysky<dtysky@outlook.com>)
+  Github: https://github.com/dtysky
+  Created: 2017/3/25
+=end
 require 'test/unit'
 require './alphabet'
 
@@ -6,7 +11,7 @@ class MyTest < Test::Unit::TestCase
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
-    @ab = Alphabet.new 'dtysky'
+    @ab = MyString::Alphabet.new 'dtysky'
   end
 
   # Called after every test method runs. Can be used to tear
