@@ -20,7 +20,8 @@ module MyString
     end
 
     def to_index char
-      @table.index char
+      index = @table.index char
+      index == nil ? -1 : index
     end
 
     def contains char
