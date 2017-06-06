@@ -38,9 +38,8 @@ end
 # @return {ListNode}
 def add_two_numbers(l1, l2)
   sum = l1.val + l2.val
-  carry = sum > 9 ? 1 : 0
-  next_d = carry == 1 ? sum - 10 : sum
-  res = ListNode.new next_d
+  carry = sum / 10
+  res = ListNode.new sum % 10
   res_copy = res
   n1 = l1.next
   n2 = l2.next
@@ -58,9 +57,8 @@ def add_two_numbers(l1, l2)
       n2 = n2.next
     end
 
-    carry = sum > 9 ? 1 : 0
-    next_d = carry == 1 ? sum - 10 : sum
-    res.next = ListNode.new next_d
+    carry = sum / 10
+    res.next = ListNode.new sum % 10
     res = res.next
   end
 
