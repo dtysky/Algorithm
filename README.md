@@ -65,3 +65,10 @@ Build with Cpp and Ruby.
 ### Ruby
 
 1. Sorting: sortings for string, includes msd, lsd, q3w.
+
+### LeetCode
+
+1. add_two_numbers
+2. longest_palindrome
+3. minimum_time_difference
+4. sum
